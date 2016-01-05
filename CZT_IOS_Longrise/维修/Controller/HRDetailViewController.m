@@ -121,8 +121,8 @@
     [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appsearchrecord" params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
         [hud hide:YES afterDelay:0];
-        
-        if (nil != result) {
+         NSDictionary *dic = result;
+        if ([dic[@"restate"] isEqualToString:@"1"]) {
             NSString *json = [Util objectToJson:result];
 //            NSLog(@"健康档案详情%@",json);
             HRDetailModel *model = [[HRDetailModel alloc]initWithString:json error:nil];
@@ -132,7 +132,7 @@
             evaModel = serviceitemModel.belcipcarownerevaluate;
             
             //手动解析repairname
-            NSDictionary *dic = result;
+           
             NSArray *data = [dic objectForKey:@"data"];
             NSDictionary *dataDic = data[0];
             NSArray *seviceItems = [dataDic objectForKey:@"serviceitems"];

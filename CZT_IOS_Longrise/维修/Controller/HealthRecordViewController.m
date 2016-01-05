@@ -35,6 +35,7 @@
     self.title = @"健康档案";
     page = 1;
     hrDataArray = [NSMutableArray array];
+//    hrDataArray = [NSMutableArray arrayWithObjects:@"", nil];
     bean = [NSMutableDictionary dictionary];
     
     table = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -71,10 +72,10 @@
     NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
     NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
     NSString *token = [bigDic objectForKey:@"token"];
-   // NSString *userflag = [userdic objectForKey:@"userflag"];
+    NSString *userflag = [userdic objectForKey:@"userflag"];
     NSString *areaid = [Globle getInstance].areaid;
     
-    [bean setValue:@"huxl" forKey:@"userflag"];
+    [bean setValue:userflag forKey:@"userflag"];
     [bean setValue:token forKey:@"token"];
     [bean setValue:[NSNumber numberWithInteger:page] forKey:@"pagenum"];
     [bean setValue:@"5" forKey:@"pagesize"];
@@ -155,7 +156,11 @@
     HealthRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HealthRecordCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     HRDataModel *model = hrDataArray[indexPath.row];
-    [cell setUIWithInfo:model];
+    
+    if (nil != model) {
+//        [cell setUIWithInfo:model];
+    }
+    
     return cell;
     
 }
@@ -195,10 +200,10 @@
     /**
      * 正向传值，当model不为空时，将model.Id和头部视图model传给push的控制器
      */
-    if (nil != model.Id ) {
-        vc.model = model;
-        vc.Id = model.Id;
-    }
+//    if (nil != model.Id ) {
+//        vc.model = model;
+//        vc.Id = model.Id;
+//    }
     
     UIBarButtonItem *returnButtonItem = [[UIBarButtonItem alloc] init];
     returnButtonItem.title = @"";

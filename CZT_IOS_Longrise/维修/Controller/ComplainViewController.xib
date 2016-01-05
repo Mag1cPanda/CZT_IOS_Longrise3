@@ -67,6 +67,9 @@
                     <state key="normal" title="提交投诉">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="submibComplain:" destination="-1" eventType="touchUpInside" id="drl-ql-PNg"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" id="anh-i4-iHz" customClass="CWStarRateView">
                     <rect key="frame" x="0.0" y="100" width="320" height="1"/>

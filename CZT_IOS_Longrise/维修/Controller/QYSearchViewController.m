@@ -10,6 +10,7 @@
 #import "QYDetailViewController.h"
 #import "QYTableViewCell.h"
 #import "ResultModel.h"
+#import "QYModel.h"
 @interface QYSearchViewController ()
 <UISearchBarDelegate,
 UITableViewDataSource,
@@ -18,6 +19,9 @@ UITableViewDelegate>
     UITableView *searchTable;
     NSMutableArray *qySearchData;
     UISearchBar *qySearch;
+    NSMutableDictionary *enterpriseBean;
+    NSInteger enterprisePage;
+    QYModel *qyModel;
 }
 @end
 
@@ -30,6 +34,8 @@ UITableViewDelegate>
     self.title = @"找企业";
     self.view.backgroundColor = [UIColor whiteColor];
     qySearchData = [NSMutableArray array];
+    enterpriseBean = [NSMutableDictionary dictionary];
+    enterprisePage = 1;
     
     qySearch = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth,30)];
     qySearch.placeholder = @"请输入关键字";
@@ -51,27 +57,44 @@ UITableViewDelegate>
     
     [searchTable registerNib:[UINib nibWithNibName:@"QYTableViewCell" bundle:nil] forCellReuseIdentifier:@"QYTableViewCell"];
     
-    for (ResultModel *model in self.qyDataArray) {
-        
-        if ([model.name rangeOfString:self.searchString].length != 0) {
-            [qySearchData addObject:model];
-        }
-    }
-    [searchTable reloadData];
+    [self loadEnterPriseSearchData];
 }
+
+
+#pragma mark - 加载企业搜索数据
+-(void)loadEnterPriseSearchData{
+    
+    [enterpriseBean setValue:@"420100000000000000" forKey:@"areaid"];
+    [enterpriseBean setValue:_searchString forKey:@"companyname"];//留空
+    [enterpriseBean setValue:[NSNumber numberWithInteger:enterprisePage] forKey:@"pagenum"];
+    [enterpriseBean setValue:@"10" forKey:@"pagesize"];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"正在加载";
+    
+    NSLog(@"搜索企业Bean%@",enterpriseBean);
+    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxSericeURL,businessapp];
+    
+    [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appsearchfixcompany" params:enterpriseBean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+        
+        [hud hide:YES afterDelay:0];
+        if (nil != result) {
+            NSString *json = [Util objectToJson:result];
+            NSLog(@"企业搜索数据%@",json);
+            qyModel = [[QYModel alloc]initWithString:json error:nil];
+            [qySearchData addObjectsFromArray:qyModel.data];
+            [searchTable reloadData];
+        }
+    } ];
+}
+
 
 #pragma mark - searchBar Delegate
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     
+    _searchString = searchBar.text;
     [qySearchData removeAllObjects];
-    for (ResultModel *model in self.qyDataArray) {
-       
-        if ([model.name rangeOfString:searchBar.text].length != 0) {
-            [qySearchData addObject:model];
-             NSLog(@"model.name%@",model.name);
-        }
-    }
-    [searchTable reloadData];
+    [self loadEnterPriseSearchData];
 }
 
 #pragma mark - tableViewDelegate

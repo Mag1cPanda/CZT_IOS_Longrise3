@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HRDetailHeaderView.h"
 #import "HRDataModel.h"
+#import "HRDetailDataModel.h"
 
 @interface ComplainViewController : UIViewController
 
@@ -18,4 +19,6 @@
 
 //头部视图数据
 @property (nonatomic, strong) HRDataModel *model;
+//参数数据模型
+@property (nonatomic, strong) HRDetailDataModel *dataModel;
 @end

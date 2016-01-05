@@ -44,6 +44,7 @@
 @property (nonatomic, copy) NSString *securitydate;
 @property (nonatomic, copy) NSString *lcipcompanyid;
 @property (nonatomic, copy) NSString *faultreason;
+@property (nonatomic, copy) NSString *caruser;
 
 @property (nonatomic, strong) NSArray<SeviceItemsModel> *serviceitems;
 @end

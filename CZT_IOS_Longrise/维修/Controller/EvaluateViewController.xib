@@ -7,12 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EvaluateViewController">
             <connections>
-                <outlet property="box1" destination="0cY-cS-fq9" id="eFi-r7-oTg"/>
-                <outlet property="box2" destination="qkb-p3-eNl" id="Xdi-XM-yGY"/>
-                <outlet property="box3" destination="3gH-PM-hQa" id="p3w-mX-rOk"/>
                 <outlet property="evaTextView" destination="QMN-4A-Xcu" id="2Vd-f8-kps"/>
                 <outlet property="headerView" destination="Zhd-8f-BAH" id="coz-Bc-EVA"/>
-                <outlet property="radioG" destination="vto-Xj-zEp" id="cQt-Sy-mvL"/>
+                <outlet property="ratioBackView" destination="9rk-ko-TtT" id="quX-z4-ltX"/>
                 <outlet property="starView1" destination="QWi-OS-dAS" id="p7P-oK-5fK"/>
                 <outlet property="starView2" destination="eJx-IO-0dw" id="Pdc-JV-9Qa"/>
                 <outlet property="starView3" destination="BDV-04-RGg" id="ksJ-YH-yQh"/>
@@ -158,6 +155,9 @@
                     <state key="normal" title="提交评价">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="submibEvaluate:" destination="-1" eventType="touchUpInside" id="Pdi-vF-qM0"/>
+                    </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="QMN-4A-Xcu">
                     <rect key="frame" x="10" y="349" width="300" height="90"/>
@@ -171,40 +171,20 @@
                         <outlet property="delegate" destination="-1" id="gsR-K1-ShJ"/>
                     </connections>
                 </textView>
-                <view contentMode="scaleToFill" id="vto-Xj-zEp" customClass="RadioGroup">
-                    <rect key="frame" x="17" y="139" width="293" height="40"/>
+                <view contentMode="scaleToFill" id="9rk-ko-TtT">
+                    <rect key="frame" x="92" y="144" width="210" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" id="0cY-cS-fq9" customClass="RadioBox">
-                            <rect key="frame" x="68" y="0.0" width="70" height="27"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        </view>
-                        <view contentMode="scaleToFill" id="qkb-p3-eNl" customClass="RadioBox">
-                            <rect key="frame" x="138" y="0.0" width="70" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        </view>
-                        <view contentMode="scaleToFill" id="3gH-PM-hQa" customClass="RadioBox">
-                            <rect key="frame" x="208" y="0.0" width="70" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总体评价：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rXQ-1O-QIm">
-                            <rect key="frame" x="0.0" y="0.0" width="75" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
                     <animations/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总体评价：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jEV-0s-wiE">
+                    <rect key="frame" x="17" y="148" width="75" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
