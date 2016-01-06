@@ -1513,18 +1513,7 @@
 			children = (
 				6F4825161C29571300BCE7F6 /* CarModel.h */,
 				6F4825171C29571300BCE7F6 /* CarModel.m */,
-				6F4825181C29571300BCE7F6 /* DetailDataModel.h */,
-				6F4825191C29571300BCE7F6 /* DetailDataModel.m */,
-				6F48251A1C29571300BCE7F6 /* DetailEvaluateModel.h */,
-				6F48251B1C29571300BCE7F6 /* DetailEvaluateModel.m */,
-				6F48251C1C29571300BCE7F6 /* DetailInfoModel.h */,
-				6F48251D1C29571300BCE7F6 /* DetailInfoModel.m */,
-				6F48251E1C29571300BCE7F6 /* DetailModel.h */,
-				6F48251F1C29571300BCE7F6 /* DetailModel.m */,
-				6F4825201C29571300BCE7F6 /* EvaluateModel.h */,
-				6F4825211C29571300BCE7F6 /* EvaluateModel.m */,
-				6F4825221C29571300BCE7F6 /* EvaluateResultModel.h */,
-				6F4825231C29571300BCE7F6 /* EvaluateResultModel.m */,
+				85EEC3AC1C3CB8D7001F61A9 /* 企业详情Model */,
 				6F4825241C29571300BCE7F6 /* HealthRecordModel.h */,
 				6F4825251C29571300BCE7F6 /* HealthRecordModel.m */,
 				6F4825261C29571300BCE7F6 /* HRDataModel.h */,
@@ -1739,6 +1728,25 @@
 				6FEDFA761C2C22D9005D0CBA /* WXTableViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		85EEC3AC1C3CB8D7001F61A9 /* 企业详情Model */ = {
+			isa = PBXGroup;
+			children = (
+				6F48251E1C29571300BCE7F6 /* DetailModel.h */,
+				6F48251F1C29571300BCE7F6 /* DetailModel.m */,
+				6F4825181C29571300BCE7F6 /* DetailDataModel.h */,
+				6F4825191C29571300BCE7F6 /* DetailDataModel.m */,
+				6F48251A1C29571300BCE7F6 /* DetailEvaluateModel.h */,
+				6F48251B1C29571300BCE7F6 /* DetailEvaluateModel.m */,
+				6F48251C1C29571300BCE7F6 /* DetailInfoModel.h */,
+				6F48251D1C29571300BCE7F6 /* DetailInfoModel.m */,
+				6F4825201C29571300BCE7F6 /* EvaluateModel.h */,
+				6F4825211C29571300BCE7F6 /* EvaluateModel.m */,
+				6F4825221C29571300BCE7F6 /* EvaluateResultModel.h */,
+				6F4825231C29571300BCE7F6 /* EvaluateResultModel.m */,
+			);
+			name = "企业详情Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

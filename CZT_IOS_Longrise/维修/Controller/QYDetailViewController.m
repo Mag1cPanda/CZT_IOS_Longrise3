@@ -64,10 +64,7 @@
     
     [table registerNib:[UINib nibWithNibName:@"SectionTwoViewCell" bundle:nil] forCellReuseIdentifier:@"SectionTwoViewCell"];
     
-//    [AppDelegate storyBoradAutoLay:self.view];
-    
     [self loadEnterpriseDetailInfoData];
-//    [self loadEnterpriseEvaluateData];
     
 }
 
@@ -98,14 +95,20 @@
         
         [hud hide:YES afterDelay:0];
         
-        NSLog(@"DetailResult%@",[Util objectToJson:result]);
+//        NSLog(@"DetailResult%@",[Util objectToJson:result]);
+        NSLog(@"DetailResult%@",result[@"redes"]);
         if (nil != result) {
             DetailModel *model = [[DetailModel alloc]initWithString:[Util objectToJson:result] error:nil];
+            NSLog(@"DetailModel %@",model);
             /**
              *  头视图和主营范围模型
              */
             infoModel = model.data.companyinfo;
-            [header setUIWithInfo:infoModel];
+            
+            if (nil != infoModel) {
+                [header setUIWithInfo:infoModel];
+            }
+            
             
             DetailEvaluateModel *evaModel = model.data.companyevaluate;
             /**
@@ -120,23 +123,6 @@
 }
 
 
--(void)loadEnterpriseEvaluateData{
-    
-    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
-    [bean setValue:@"420100000000000000" forKey:@"areaid"];
-    [bean setValue:@"659696779d124f77806bac4e3c08f558" forKey:@"lcipcompanyid"];
-//    [bean setValue:@"883ed81fa64d4e45ba2db65f30d0d1da" forKey:@"lcipcompanyid"];
-    
-    
-    [bean setValue:@"1" forKey:@"pagenum"];
-    [bean setValue:@"2" forKey:@"pagesize"];
-    
-    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxSericeURL ServiceName:@"appsearchfixcomevaluate" params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
-        
-//        NSLog(@"EvaluateResult%@",[Util objectToJson:result]);
-//        NSLog(@"EvaluateResult%@",result);
-    }];
-}
 
 
 #pragma mark - tabelView Delegate
@@ -159,8 +145,11 @@
     if (indexPath.section == 0) {
         SectionOneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SectionOneCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        [cell setUIWithInfo:infoModel];
+        
+        if (nil != infoModel) {
+            [cell setUIWithInfo:infoModel];
+        }
+        
         return cell;
         
     }
@@ -168,7 +157,11 @@
         SectionTwoViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SectionTwoViewCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         EvaluateResultModel *model = evaluateArray[indexPath.row];
-        [cell setUIWithInfo:model];
+        
+        if (nil != model) {
+            [cell setUIWithInfo:model];
+        }
+        
         return cell;
 
     }
@@ -188,10 +181,12 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1) {
         SectionTwoHeaderView *twoHeader = [[NSBundle mainBundle] loadNibNamed:@"SectionTwoHeaderView" owner:nil options:nil][0];
-        twoHeader.total.text = [NSString stringWithFormat:@"评价(%@)",infoModel.peoplenumber];
-        twoHeader.good.text = [NSString stringWithFormat:@"好评(%@)",infoModel.ratenum];
-        twoHeader.middle.text = [NSString stringWithFormat:@"中评(%@)",infoModel.middlenum];
-        twoHeader.bad.text = [NSString stringWithFormat:@"差评(%@)",infoModel.badnum];
+        if (nil != infoModel) {
+            twoHeader.total.text = [NSString stringWithFormat:@"评价(%@)",infoModel.peoplenumber];
+            twoHeader.good.text = [NSString stringWithFormat:@"好评(%@)",infoModel.ratenum];
+            twoHeader.middle.text = [NSString stringWithFormat:@"中评(%@)",infoModel.middlenum];
+            twoHeader.bad.text = [NSString stringWithFormat:@"差评(%@)",infoModel.badnum];
+        }
         
         return twoHeader;
     }

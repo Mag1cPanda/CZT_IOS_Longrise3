@@ -7,7 +7,7 @@
 //
 
 #import "JSONModel.h"
-#import "resultModel.h"
+#import "ResultModel.h"
 @interface QYModel : JSONModel
 @property (nonatomic, strong) NSArray<ResultModel> *data;
 @end
