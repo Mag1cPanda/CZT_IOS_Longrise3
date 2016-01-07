@@ -80,11 +80,11 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSMutableDictionary *bean = [NSMutableDictionary dictionary];
     //只有这一组有数据
-    NSLog(@"areaid%@",_areaId);
-    NSLog(@"comid%@",_companyId);
+    NSLog(@"areaid -> %@",_areaId);
+    NSLog(@"comid -> %@",_companyId);
     
     [bean setValue:@"420100000000000000" forKey:@"areaid"];
-    [bean setValue:@"659696779d124f77806bac4e3c08f558" forKey:@"lcipcompanyid"];
+    [bean setValue:@"481dd183c79a479b9e4f0eb71385e746" forKey:@"lcipcompanyid"];
     [bean setValue:@"1" forKey:@"pagenum"];
     [bean setValue:@"2" forKey:@"pagesize"];
     
@@ -99,7 +99,6 @@
         
         if (nil != result) {
             DetailModel *model = [[DetailModel alloc]initWithString:[Util objectToJson:result] error:nil];
-            NSLog(@"DetailModel %@",model);
             /**
              *  头视图和主营范围模型
              */
@@ -205,14 +204,7 @@
         return 100*SCALE;
     }
     else{
-
-        if ([imgCount[indexPath.row] integerValue] > 0) {
-            imgHeight = 60;
-        }
-        else{
-            imgHeight = 0;
-        }
-        return (130+imgHeight)*SCALE;
+        return 130*SCALE;
     }
 }
 

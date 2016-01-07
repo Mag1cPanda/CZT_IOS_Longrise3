@@ -308,7 +308,6 @@
         insName = dic[@"ins"];
     }
     
-    
 }
 
 
@@ -324,6 +323,7 @@
         vc.VINCode = _vinCode.text;
         vc.engineNumber = _engineNum.text;
         [self.navigationController pushViewController:vc animated:YES];
+        
     }
 
 }

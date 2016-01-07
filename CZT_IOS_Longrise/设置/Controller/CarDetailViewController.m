@@ -86,7 +86,6 @@
             
             model = [[CarDetailInfoModel alloc]initWithString:[Util objectToJson:result] error:nil];
             NSLog(@"%@",model);
-           
             
             [table reloadData];
             

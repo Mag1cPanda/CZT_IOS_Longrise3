@@ -101,12 +101,12 @@
     NSMutableDictionary *bean = [NSMutableDictionary dictionary];
     
     NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
-    //    NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
+    NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
     NSString *token = [bigDic objectForKey:@"token"];
-    //    NSString *userflag = [userdic objectForKey:@"userflag"];
+    NSString *userflag = [userdic objectForKey:@"userflag"];
     NSString *areaid = [Globle getInstance].areaid;
     
-    [bean setValue:@"huxl" forKey:@"userflag"];
+    [bean setValue:userflag forKey:@"userflag"];
     [bean setValue:token forKey:@"token"];
     [bean setValue:areaid forKey:@"areaid"];
     [bean setValue:_Id forKey:@"id"];

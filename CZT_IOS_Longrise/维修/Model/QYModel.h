@@ -10,4 +10,5 @@
 #import "ResultModel.h"
 @interface QYModel : JSONModel
 @property (nonatomic, strong) NSArray<ResultModel> *data;
+@property (nonatomic, copy) NSString *count;
 @end

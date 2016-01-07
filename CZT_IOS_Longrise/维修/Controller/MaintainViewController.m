@@ -276,7 +276,7 @@ LoginControllerClose>
     [enterpriseBean setValue:@"420100000000000000" forKey:@"areaid"];
     [enterpriseBean setValue:@"" forKey:@"companyname"];//留空
     [enterpriseBean setValue:[NSNumber numberWithInteger:enterPrisePage] forKey:@"pagenum"];
-    [enterpriseBean setValue:@"5" forKey:@"pagesize"];
+    [enterpriseBean setValue:@"10" forKey:@"pagesize"];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在加载";
@@ -290,6 +290,7 @@ LoginControllerClose>
             NSString *json = [Util objectToJson:result];
             NSLog(@"企业数据%@",json);
             qyModel = [[QYModel alloc]initWithString:json error:nil];
+            enterPriseCount = [qyModel.count integerValue];
             [qyDataArray addObjectsFromArray:qyModel.data];
             [qyTable reloadData];
         }
@@ -310,12 +311,13 @@ LoginControllerClose>
 -(void)loadMoreEnterPriseData{
     
     enterPrisePage ++;
-    if (enterPrisePage>4) {
+    NSInteger totlaPage = enterPriseCount/10 + 1;
+    if (enterPrisePage>totlaPage) {
         qyTable.mj_footer.hidden = YES;
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText = @"没有更多数据啦";
-        [hud hide:YES afterDelay:2.0];
+        [hud hide:YES afterDelay:1.0];
     }
     else{
         [enterpriseBean setValue:[NSNumber numberWithInteger:enterPrisePage] forKey:@"pagenum"];
@@ -348,12 +350,12 @@ LoginControllerClose>
     [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appsearchrepaircarlist" params:carBean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
         [hud hide:YES afterDelay:0];
-        NSLog(@"result%@",result);
+        
         if (nil != result) {
             NSString *json = [Util objectToJson:result];
-            NSLog(@"车辆数据%@",json);
+            NSLog(@"维修记录数据%@",json);
             wxModel= [[WXModel alloc]initWithString:json error:nil];
-            NSLog(@"车辆模型个数%ld",wxModel.data.count);
+            NSLog(@"维修记录模型个数%ld",wxModel.data.count);
             [wxDataArray addObjectsFromArray:wxModel.data];
             [wxTable reloadData];
         }
@@ -374,12 +376,13 @@ LoginControllerClose>
 -(void)loadMoreCarData{
 
     carPage ++;
-    if (carPage>4) {
+    NSInteger totalPage = carCount/5 + 1;
+    if (carPage>totalPage) {
         wxTable.mj_footer.hidden = YES;
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText = @"没有更多数据啦";
-        [hud hide:YES afterDelay:2.0];
+        [hud hide:YES afterDelay:1.0];
     }
     else{
         [carBean setValue:[NSNumber numberWithInteger:carPage] forKey:@"pagenum"];

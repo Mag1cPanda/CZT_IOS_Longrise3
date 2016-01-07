@@ -21,7 +21,7 @@
 */
 
 -(void)setUIWithInfo:(DetailInfoModel *)model{
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.lcipcompanyphoto]];
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.companyphoto]];
     self.nameLab.text = model.name;
     self.addressLab.text = model.address;
     

@@ -68,7 +68,7 @@
     UINib *nib1 = [UINib nibWithNibName:@"WXTableViewCell" bundle:nil];
     [table registerNib:nib1 forCellReuseIdentifier:@"WXTableViewCell"];
     
-  //  [self loadCarData];
+    [self loadCarData];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -112,12 +112,11 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在加载";
     
-    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxBaseServiceURL,businessapp];
+    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxBaseServiceURL,baseapp];
     NSLog(@"url%@",url);
     [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appsearchcarlist" params:carBean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
         [hud hide:YES afterDelay:0];
-//        NSLog(@"result%@",result);
         if (nil != result) {
             NSDictionary *bigDic = result;
             NSLog(@"%@",bigDic);
@@ -135,7 +134,6 @@
 -(void)refreshCarData{
     
     [carDataArray removeAllObjects];
-    [table reloadData];
     carPage = 1;
     [carBean setValue:[NSNumber numberWithInteger:carPage] forKey:@"pagenum"];
     [self loadCarData];

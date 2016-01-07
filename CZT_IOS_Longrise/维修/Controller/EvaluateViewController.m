@@ -80,14 +80,14 @@
 - (IBAction)submibEvaluate:(id)sender {
     
     NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
-    //    NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
+    NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
     NSString *token = [bigDic objectForKey:@"token"];
-    //    NSString *userflag = [userdic objectForKey:@"userflag"];
+    NSString *userflag = [userdic objectForKey:@"userflag"];
     //    NSString *areaid = [Globle getInstance].areaid;
     
     NSMutableDictionary *bean = [NSMutableDictionary dictionary];
     
-    [bean setValue:@"huxl" forKey:@"userflag"];
+    [bean setValue:userflag forKey:@"userflag"];
     [bean setValue:token forKey:@"token"];
     NSString *indexStr = [NSString stringWithFormat:@"%ld",_group.selectedIndex];
     [bean setValue:indexStr forKey:@"evaluatetotle"];
