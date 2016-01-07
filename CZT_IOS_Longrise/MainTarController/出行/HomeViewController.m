@@ -450,7 +450,7 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前城市赞不支持出行业务。" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前城市暂不支持出行业务。" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
         [alert show];
     }
     
