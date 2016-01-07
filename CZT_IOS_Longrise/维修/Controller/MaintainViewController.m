@@ -39,8 +39,11 @@ LoginControllerClose>
     NSMutableArray *wxDataArray;
     
     NSInteger enterPrisePage;
-    NSInteger carPage;
+    NSInteger enterPriseCount;
     NSMutableDictionary *enterpriseBean;
+    
+    NSInteger carPage;
+    NSInteger carCount;
     NSMutableDictionary *carBean;
     
     QYModel *qyModel;
@@ -327,14 +330,14 @@ LoginControllerClose>
     NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
     NSString *token = [bigDic objectForKey:@"token"];
     NSString *userflag = [userdic objectForKey:@"userflag"];
-    NSString *areaid = [Globle getInstance].areaid;
+//    NSString *areaid = [Globle getInstance].areaid;
     
-    [carBean setValue:@"huxl" forKey:@"userflag"];
+    [carBean setValue:userflag forKey:@"userflag"];
     [carBean setValue:token forKey:@"token"];
     [carBean setValue:[NSNumber numberWithInteger:carPage] forKey:@"pagenum"];
     [carBean setValue:@"5" forKey:@"pagesize"];
     [carBean setValue:@"" forKey:@"carno"];
-    [carBean setValue:areaid forKey:@"areaid"];
+    [carBean setValue:@"420100000000000000" forKey:@"areaid"];
     
     NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxSericeURL,businessapp];
     
@@ -342,7 +345,7 @@ LoginControllerClose>
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在加载";
-    [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appsearchrepairrecordlist" params:carBean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+    [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appsearchrepaircarlist" params:carBean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
         [hud hide:YES afterDelay:0];
         NSLog(@"result%@",result);

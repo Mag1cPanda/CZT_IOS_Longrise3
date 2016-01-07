@@ -96,7 +96,7 @@
         [hud hide:YES afterDelay:0];
         
 //        NSLog(@"DetailResult%@",[Util objectToJson:result]);
-        NSLog(@"DetailResult%@",result[@"redes"]);
+        
         if (nil != result) {
             DetailModel *model = [[DetailModel alloc]initWithString:[Util objectToJson:result] error:nil];
             NSLog(@"DetailModel %@",model);
@@ -135,7 +135,10 @@
         return 1;
     }
     else{
-        return evaluateArray.count;
+        if (0 != evaluateArray.count) {
+            return evaluateArray.count;
+        }
+        else return 2;
     }
     
 }
@@ -156,12 +159,12 @@
     else{
         SectionTwoViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SectionTwoViewCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        EvaluateResultModel *model = evaluateArray[indexPath.row];
         
-        if (nil != model) {
+        if (evaluateArray.count > indexPath.row) {
+            EvaluateResultModel *model = evaluateArray[indexPath.row];
             [cell setUIWithInfo:model];
         }
-        
+
         return cell;
 
     }

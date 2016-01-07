@@ -22,7 +22,7 @@
 @property (nonatomic, copy) NSString *businessrange;
 @property (nonatomic, copy) NSString *lcipusertableid;
 @property (nonatomic, copy) NSString *companycode;
-@property (nonatomic, copy) NSString *lcipcompanyphoto;
+@property (nonatomic, copy) NSString *companyphoto;
 @property (nonatomic, copy) NSString *peoplenumber;
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *levels;

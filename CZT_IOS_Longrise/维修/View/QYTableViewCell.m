@@ -13,7 +13,7 @@
 
 -(void)setUIWithInfo:(ResultModel *)model{
     
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:model.lcipcompanyphoto]];
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:model.companyphoto]];
     self.nameLab.text = model.name;
     self.address.text = [NSString stringWithFormat:@"地址：%@",model.address];
     

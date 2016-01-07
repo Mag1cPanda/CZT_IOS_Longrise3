@@ -9,7 +9,8 @@
 #import "JSONModel.h"
 #import "DetailDataModel.h"
 @interface DetailModel : JSONModel
-
+@property (nonatomic, strong) NSString *restate;
+@property (nonatomic, strong) NSString *redes;
 @property (nonatomic, strong) DetailDataModel *data;
 
 @end
