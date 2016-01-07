@@ -26,19 +26,16 @@
     self.title = @"事故责任协议书";
     
     [self setWebViewStatus];
-    
-    
-    
-    fvAlert = [[FVCustomAlertView alloc]init];
-    [fvAlert showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
-    
-   [self setPromptBackViewStatus];
+
+    [self setPromptBackViewStatus];
     
 }
 
 
 -(void)setPromptBackViewStatus
 {
+    fvAlert = [[FVCustomAlertView alloc]init];
+    [fvAlert showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
     self.promptImageView.userInteractionEnabled = YES;
     self.responsWebView.backgroundColor = [UIColor clearColor];
     self.responsWebView.scalesPageToFit =YES;

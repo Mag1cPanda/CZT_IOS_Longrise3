@@ -16,9 +16,11 @@
 #import "Globle.h"
 #import "InfimationModel.h"
 #import "ResponsViewController.h"
+#import "FVCustomAlertView.h"
 @interface ChooseASController ()<UITextViewDelegate,UIAlertViewDelegate>
 {
     UITextView *destextView;
+    FVCustomAlertView *fvalertView;
 }
 
 @property (strong, nonatomic) NSArray *dataSource;
@@ -61,57 +63,67 @@
 
 - (IBAction)sureNextButton:(id)sender {
     
-
-    if (self.showView1.tag == 0 && self.showView2.tag == 0 && self.showView3.tag == 0 && self.showView4.tag == 0 && self.showView5.tag == 0 && self.showView6.tag == 0 && self.showView7.tag == 0 && self.showView8.tag == 0 && self.showView9.tag == 0 ) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请选择事故类型" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-        [alert show];
-    }
-    else
-    {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-           [self startLoadData]; 
-        });
-        
-    }
- 
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        if (self.showView1.tag == 0 && self.showView2.tag == 0 && self.showView3.tag == 0 && self.showView4.tag == 0 && self.showView5.tag == 0 && self.showView6.tag == 0 && self.showView7.tag == 0 && self.showView8.tag == 0 && self.showView9.tag == 0 ) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请选择事故类型" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            [alert show];
+        }
+        else
+        {
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                fvalertView = [[FVCustomAlertView alloc]init];
+                [fvalertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:0];
+                [self startLoadData];
+//            });
+            
+        }
+    });
+   
+    self.sureButton.userInteractionEnabled =  NO;
 }
 
 #pragma mark  - 加载数据
 -(void)startLoadData
 {
+   
     NSMutableDictionary *bean = [[NSMutableDictionary alloc] init];
     NSDictionary *userinfo = [[Globle getInstance].loginInfoDic objectForKey:@"userinfo"];
     [bean setValue:userinfo[@"userflag"] forKey:@"userflag"];
     [bean setValue:[Globle getInstance].loginInfoDic[@"token"] forKey:@"token"];
     [bean setValue:@"1" forKey:@"pagenum"];
     [bean setValue:@"100" forKey:@"pagesize"];
-    
-    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxSericeURL ServiceName:[NSString stringWithFormat:@"%@/appsearchcarlist",businessapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+   
+    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxBaseServiceURL ServiceName:[NSString stringWithFormat:@"%@/appsearchcarlist",businessapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
        
         NSLog(@"result = %@",result[@"result"]);
-        
-        if(result[@"result"] == nil)
-        {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FillInfomation" bundle:nil];
-            FillInformationController *fillController = [storyboard instantiateViewControllerWithIdentifier:@"fillinfomationID"];
-            fillController.hidesBottomBarWhenPushed = YES;
-            fillController.appcaseno = self.appcaseno;
-            [self.navigationController pushViewController:fillController animated:YES];
-        }
-        else
-        {
-        
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChooseCar" bundle:nil];
-            ChooseCarViewController *araVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseCarStoryboard"];
-            araVC.hidesBottomBarWhenPushed = YES;
-            araVC.CarDict = result[@"result"];
-            araVC.appcaseno = self.appcaseno;
-            araVC.describeData = self.describeData;
-            araVC.describeString = destextView.text;
-            [self.navigationController pushViewController:araVC animated:YES];
-        
-        
-        }
+       
+            if(result[@"result"] == nil)
+            {
+                [fvalertView dismiss];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FillInfomation" bundle:nil];
+                FillInformationController *fillController = [storyboard instantiateViewControllerWithIdentifier:@"fillinfomationID"];
+                fillController.hidesBottomBarWhenPushed = YES;
+                fillController.appcaseno = self.appcaseno;
+                fillController.describeData = self.describeData;
+                fillController.describeString = destextView.text;
+                [self.navigationController pushViewController:fillController animated:YES];
+            }
+            else
+            {
+                
+                [fvalertView dismiss];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChooseCar" bundle:nil];
+                ChooseCarViewController *araVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseCarStoryboard"];
+                araVC.hidesBottomBarWhenPushed = YES;
+                araVC.CarDict = result[@"result"];
+                araVC.appcaseno = self.appcaseno;
+                araVC.describeData = self.describeData;
+                araVC.describeString = destextView.text;
+                [self.navigationController pushViewController:araVC animated:YES];
+                
+                
+            }
+
     }];
 
 

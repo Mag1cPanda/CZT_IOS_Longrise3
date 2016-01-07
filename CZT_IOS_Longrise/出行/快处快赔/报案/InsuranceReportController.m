@@ -29,23 +29,20 @@ extern NSNumber *caseDutyType;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
+    self.title = @"保险报案";
     
-    
+    NSLog(@"case = %ld",caseDict.count);
+    NSLog(@"only = %ld",onlyCaseDict.count);
+    NSLog(@"hest = %ld",self.historyCaseDict.count);
 }
 
-
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter]removeObserver:NotficationNameForInsurance];
-}
 #pragma mark -  保险报案
 - (IBAction)reportCase:(id)sender {
     
-    if (caseDict) {
+    if (caseDict != nil) {
         if ([caseDutyType isEqualToNumber:[NSNumber numberWithInt:1]]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您是无责任方，暂不允许报案！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
+            falseAlert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您是无责任方，暂不允许报案！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [falseAlert show];
         }
         else
         {
@@ -53,15 +50,14 @@ extern NSNumber *caseDutyType;
         }
         
     }
-    else if (onlyCaseDict)
+    else if (onlyCaseDict != nil)
     {
         [self upCaseInormationCompany:onlyCaseDict];
     }
-    else if (self.historyCaseDict)
+    else if (self.historyCaseDict != nil)
     {
         [self upCaseInormationCompany:self.historyCaseDict];
     }
-    
     
     
 }
@@ -79,15 +75,25 @@ extern NSNumber *caseDutyType;
         [fvalertView dismiss];
         NSLog(@"保险报案  %@",result);
         NSLog(@"resdes = %@",result[@"redes"]);
-        if ([result[@"redes"] isEqualToString:@"成功"]) {
-            suessAlert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已报案，请耐心等待" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [suessAlert show];
+        if (result != nil)
+        {
+            if ([result[@"restate"] isEqualToString:@"0"]) {
+                suessAlert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已报案，请耐心等待" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [suessAlert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"报案失败，请检查您的网络！！！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show];
+            }
         }
         else
         {
-            falseAlert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"报案失败，请检查您的网络！！！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [falseAlert show];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"报案失败，请检查您的网络！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
         }
+       
+        
     } ];
 }
 
@@ -97,12 +103,11 @@ extern NSNumber *caseDutyType;
     {
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-//    else if (alertView == falseAlert)
-//    {
-//        
-//    }
-}
-- (void)didReceiveMemoryWarning {
+    else if (alertView == falseAlert)
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

@@ -120,7 +120,7 @@
     [bean setValue:token forKey:@"token"];
     [bean setValue:@"appcartype" forKey:@"codetype"];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxSericeURL,baseapp];
+    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxBaseServiceURL,baseapp];
 
     [[Globle getInstance].service requestWithServiceIP:url  ServiceName:@"appgetcodevalue" params:bean httpMethod:@"POST"resultIsDictionary:YES completeBlock:^(id result) {
 
@@ -181,8 +181,9 @@
     NSMutableDictionary *bean = [NSMutableDictionary dictionary];
     [bean setValue:userflag forKey:@"userflag"];
     [bean setValue:token forKey:@"token"];
+    NSLog(@"-------------%@",token);
     [bean setValue:@"1100" forKey:@"areaid"];
-    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxSericeURL,baseapp];
+    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxBaseServiceURL,baseapp];
     
     [[Globle getInstance].service requestWithServiceIP:url  ServiceName:@"appsearchincompanylist" params:bean httpMethod:@"POST"resultIsDictionary:YES completeBlock:^(id result) {
         
@@ -220,7 +221,7 @@
         NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
         NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
         NSString *token = [bigDic objectForKey:@"token"];
-      //  NSLog(@"%@",token);
+      //  NSLog(@"---------------%@",token);
         NSString *userflag = [userdic objectForKey:@"userflag"];
         NSString *carNo = [NSString stringWithFormat:@"%@%@",carNumber,_carNum.text];
         for (NSDictionary *dic in insCode) {
@@ -248,7 +249,9 @@
                 NSDictionary *bigDic = result;
               //  NSLog(@"dic=   %@",bigDic);
                 if ([bigDic[@"restate"]isEqualToString:@"1"]) {
-                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆添加成功" message:@"是否需要现在验证车辆信息" delegate:self cancelButtonTitle:@"稍后验证" otherButtonTitles: @"立即验证",nil];
+//                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆添加成功" message:@"是否需要现在验证车辆信息" delegate:self cancelButtonTitle:@"稍后验证" otherButtonTitles: @"立即验证",nil];
+//                    [alert show];
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"车辆添加成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                     [alert show];
                 }else if ([bigDic[@"restate"]isEqualToString:@"-9"]){
                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆添加失败" message:@"请输入正确的车牌号!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];

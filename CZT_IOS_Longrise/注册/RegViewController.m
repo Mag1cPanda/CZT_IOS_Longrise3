@@ -101,6 +101,16 @@
         }
         
         NSString *str = nil;
+        if (![self checkRationality:self.userName.text])
+        {
+            str = @"请您根据正确的规则注册用户名";
+        }
+        
+        if (![self checkRationality:self.passWordText.text])
+        {
+            str = @"请您根据正确的规则输入注册密码";
+        }
+        
         if(userNameStr == nil || [@"" isEqualToString:userNameStr])
         {
             str = @"用户名不能为空";
@@ -168,6 +178,8 @@
                 {
                     //成功
                     issucess = true;
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:str delegate:self cancelButtonTitle:@"请耐心等待消息的发送！" otherButtonTitles: nil];
+                    [alert show];      
                 }
                 else
                 {
@@ -193,7 +205,7 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:str delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
             [alert show];
         }
-        
+        self.getCodeBtn.enabled = YES;
     }];
 }
 
@@ -203,15 +215,15 @@
     if (count == 1)
     {
         [timer invalidate];
-        self.getCodeBtn.userInteractionEnabled = YES;
+        self.leftTimeLabel.hidden = YES;
         [self.getCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     }
     else
     {
         count--;
         NSString *title = [NSString stringWithFormat:@"剩余%d秒",count];
-        self.getCodeBtn.userInteractionEnabled = NO;
-        [self.getCodeBtn setTitle:title forState:UIControlStateNormal];
+        self.leftTimeLabel.hidden = NO;
+        self.leftTimeLabel.text = title;
     }
 }
 
@@ -321,6 +333,15 @@ replacementString:(NSString *)string
 {
     tempField = textField;
     return YES;
+}
+
+#pragma mark - 正则验证用户名和密码
+- (BOOL)checkRationality:(NSString *)rationalityString
+{
+    NSString *pattern = @"^[A-Za-z0-9]{6,16}$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",pattern];
+    BOOL isMatch = [predicate evaluateWithObject:rationalityString];
+    return isMatch;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -15,6 +15,8 @@
 #import "UISelectListView.h"
 #import "Globle.h"
 #import "IQKeyboardManager.h"
+#import "FVCustomAlertView.h"
+
 
 
 @interface FillInformationController ()<UISelectListViewDelegate,UIAlertViewDelegate>
@@ -70,9 +72,9 @@
     self.title = @"填写信息";
     self.view.backgroundColor = BackColor;
     
-        //设置数据
+    //设置数据
     [self setData];
-
+    
     
     [self setCompanyData];
     
@@ -80,9 +82,9 @@
     
     //toolbar的样式
     [self setKeyBoard];
-
-
-
+    
+    
+    
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -93,6 +95,8 @@
 
 - (void)setShowView
 {
+    FVCustomAlertView *fvalertView = [[FVCustomAlertView alloc]init];
+    [fvalertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:0];
     self.thirdView.frame = CGRectMake(0, 0, 300, 345);
     self.backScrollView.contentSize = CGSizeMake(0, self.dataSource.count * 370);
     CGFloat pading = 20;
@@ -110,11 +114,11 @@
             make.width.mas_equalTo(self.backScrollView.mas_width);
         }];
     }
-    
+    [fvalertView dismiss];
 }
 - (void)setData
 {
-
+    
     
     self.deletCar.layer.borderColor=NavColor.CGColor;
     self.deletCar.layer.borderWidth = 1;
@@ -148,18 +152,27 @@
 #pragma mark - 查询公司名
 -(void)setCompanyData
 {
-
+    
     //投保公司
     NSMutableDictionary *bean1 = [[NSMutableDictionary alloc] init];
     [bean1 setValue:[Globle getInstance].loadDataName forKey:@"username"];
     [bean1 setValue:[Globle getInstance].loadDataPass forKey:@"password"];
     [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/zdsearchallinscompanylist",kckpzcslrest] params:bean1 httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
-        [self setSeletViewCompanyData:result[@"data"]];
+        
+        if (result != nil)
+        {
+            [self setSeletViewCompanyData:result[@"data"]];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"查询投保公司失败，请检查您的网络！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+        }
         
     } ];
     
-   
+    
 }
 
 
@@ -196,13 +209,13 @@
     
     
     [self JudgmentInformation];
-
+    
 }
 
 #pragma mark - 添加或者删除第三者车
 - (IBAction)delegateCar:(id)sender {
     
-
+    
     NSString *str = [self.deletCar titleLabel].text;
     
     if ([str isEqualToString:@"添加第三者车"])
@@ -266,20 +279,10 @@
     //加载显示的View
     [self setShowView];
     
-    NSString *cityStr = [self.reciveCarNumber substringToIndex:1];
-    NSString *numberStr = [self.reciveCarNumber substringFromIndex:1];
-    NSDictionary *dict = [[NSDictionary alloc]init];
-    for (int  i = 0; i < self.carCitiesData.count; i++) {
-        dict = self.carCitiesData[i];
-        NSLog(@"dict = %@",dict);
-        if ([cityStr isEqualToString:dict[@"cities"]]) {
-            carCitiesSelectIndex = i;
-        }
-    }
+    //车辆的省市
+    [self loadUIInfomations];
     
-    if (self.reciveCarNumber) {
-        self.carNumber.text = numberStr;
-    }
+   
     
     CGFloat top = 8;
     CGFloat left = 5;
@@ -302,10 +305,9 @@
     self.thirdCarBackViewLine.image = backLine;
     self.thirdPartyPhoneNumber.background = backLine;
     self.thirdPartyDriverNumber.background = backLine;
-
     
-    NSDictionary *userinfo = [[Globle getInstance].loginInfoDic objectForKey:@"userinfo"];
-    self.phoneNumber.text = userinfo[@"mobilephone"];
+    
+   
     
     //本方 车牌号
     self.carView.userInteractionEnabled = YES;
@@ -316,7 +318,7 @@
     [carSelectCities addArray:self.carCitiesData forKey:@"cities"];
     
     if (self.reciveCarNumber) {
-       [carSelectCities setSelectIndex:carCitiesSelectIndex];
+        [carSelectCities setSelectIndex:carCitiesSelectIndex];
     }
     
     carSelectCities.backgroundColor = [UIColor whiteColor];
@@ -376,12 +378,34 @@
     [thirdSelectCompany setDropWidth:50];
     [self.thirdPartyCompanyView addSubview:thirdSelectCompany];
     
-
+    
     
 }
 
 
-
+- (void)loadUIInfomations
+{
+    NSString *cityStr = [self.reciveCarNumber substringToIndex:1];
+    NSString *numberStr = [self.reciveCarNumber substringFromIndex:1];
+    NSDictionary *dict = [[NSDictionary alloc]init];
+    for (int  i = 0; i < self.carCitiesData.count; i++) {
+        dict = self.carCitiesData[i];
+        NSLog(@"dict = %@",dict);
+        if ([cityStr isEqualToString:dict[@"cities"]]) {
+            carCitiesSelectIndex = i;
+        }
+    }
+    
+    if (self.reciveCarNumber) {
+        self.carNumber.text = numberStr;
+    }
+    if (self.moreHistoryToResponsDict != nil)
+    {
+        
+    }
+    NSDictionary *userinfo = [[Globle getInstance].loginInfoDic objectForKey:@"userinfo"];
+    self.phoneNumber.text = userinfo[@"mobilephone"];
+}
 
 
 #pragma mark - 跳转下一步
@@ -401,6 +425,14 @@
             if (self.phoneNumber.text.length != 11 || self.otherPartyPhoneNumber.text.length != 11 || self.thirdPartyPhoneNumber.text.length != 11)
             {
                 [self judgmentPhoneNumberCount];
+            }
+            else if ([self.phoneNumber.text isEqualToString:self.otherPartyPhoneNumber.text] && [self.phoneNumber.text isEqualToString:self.thirdPartyPhoneNumber.text])
+            {
+                [self infomationNoticeShowAlertViewMessage:@"手机号码不能相同，请您更改！！！"];
+            }
+            else if ([self.carNumber.text isEqualToString:self.otherCarNumber.text] && [self.carNumber.text isEqualToString:self.thirdCarNumber.text])
+            {
+                [self infomationNoticeShowAlertViewMessage:@"车牌号不能相同，请您更改！！！"];
             }
             else
             {
@@ -428,6 +460,14 @@
             {
                 [self judgmentPhoneNumberCount];
             }
+            else if ([self.phoneNumber.text isEqualToString:self.otherPartyPhoneNumber.text])
+            {
+                [self infomationNoticeShowAlertViewMessage:@"手机号码不能相同，请您更改！！！"];
+            }
+            else if ([self.carNumber.text isEqualToString:self.otherCarNumber.text])
+            {
+                [self infomationNoticeShowAlertViewMessage:@"车牌号不能相同，请您更改！！！"];
+            }
             else
             {
                 self.nextStep.enabled = YES;
@@ -441,9 +481,9 @@
             
         }
     }
-   
-
-   
+    
+    
+    
     
 }
 
@@ -522,7 +562,7 @@
     else if (!self.otherPartyDriverNumber.text.length) {
         [self infomationNoticeShowAlertViewMessage:@"对方车主驾驶证号不能为空！！！！"];
     }
-  
+    
 }
 - (void)dataCountThirdJudgment
 {
@@ -542,7 +582,7 @@
     else if (!self.thirdPartyDriverNumber.text.length) {
         [self infomationNoticeShowAlertViewMessage:@"第三方车主驾驶证号不能为空！！！"];
     }
-   
+    
 }
 
 - (void)infomationNoticeShowAlertViewMessage:(NSString *)message
@@ -565,6 +605,7 @@
         {
             [self infomationNoticeShowAlertViewMessage:@"您的电话号码不是11位，请仔细检查！！！"];
         }
+        
     }
     else
     {
@@ -580,6 +621,7 @@
         {
             [self infomationNoticeShowAlertViewMessage:@"第三方车主的电话号码不是11位，请仔细检查！！！"];
         }
+       
     }
     
     

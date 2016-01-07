@@ -37,7 +37,7 @@
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img17" translatesAutoresizingMaskIntoConstraints="NO" id="1SX-bp-0ro">
-                    <rect key="frame" x="39" y="231" width="328" height="142"/>
+                    <rect key="frame" x="39" y="225" width="328" height="142"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -45,11 +45,11 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KiE-U7-zT2">
-                    <rect key="frame" x="8" y="447" width="359" height="34"/>
+                    <rect key="frame" x="8" y="441" width="359" height="40"/>
                     <animations/>
                     <color key="backgroundColor" red="0.025680668092823988" green="0.77544075407602642" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="34" id="m5b-LT-3mr"/>
+                        <constraint firstAttribute="height" constant="40" id="m5b-LT-3mr"/>
                         <constraint firstAttribute="height" constant="38" id="mhy-Ck-oN1"/>
                     </constraints>
                     <state key="normal" title="放弃指导定责">
@@ -90,12 +90,19 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img19" translatesAutoresizingMaskIntoConstraints="NO" id="wro-Go-tEv">
-                            <rect key="frame" x="175" y="32" width="96" height="23"/>
+                            <rect key="frame" x="172" y="32" width="103" height="23"/>
                             <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="23" id="A9G-0t-gvd"/>
+                                <constraint firstAttribute="width" constant="103" id="EaV-If-V5K"/>
+                            </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您确定放弃交警协助定吗？如果放弃此次事故则被视为无效事故。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGM-Nl-BiO">
-                            <rect key="frame" x="118" y="74" width="210" height="61"/>
+                            <rect key="frame" x="118" y="75" width="210" height="85"/>
                             <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="85" id="9tO-lB-FQk"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -147,6 +154,8 @@
                     <color key="backgroundColor" red="0.76862745099999996" green="0.91764705879999997" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="wro-Go-tEv" secondAttribute="bottom" constant="225" id="A0C-lU-yWp"/>
+                        <constraint firstItem="VGM-Nl-BiO" firstAttribute="top" secondItem="wro-Go-tEv" secondAttribute="bottom" constant="20" id="As6-zu-fSw"/>
+                        <constraint firstItem="wro-Go-tEv" firstAttribute="centerX" secondItem="VGM-Nl-BiO" secondAttribute="centerX" id="FcO-uu-dt0"/>
                         <constraint firstItem="bnp-5z-VXt" firstAttribute="leading" secondItem="vn8-Gy-N4l" secondAttribute="leading" constant="20" id="Gbf-Hj-eGK"/>
                         <constraint firstAttribute="bottom" secondItem="MBM-4o-V3H" secondAttribute="bottom" constant="10" id="GqF-B8-w2M"/>
                         <constraint firstItem="piZ-Y5-9HM" firstAttribute="leading" secondItem="MBM-4o-V3H" secondAttribute="trailing" constant="15" id="IRA-xu-0m3"/>
@@ -168,6 +177,10 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="YDV-Cc-wUE"/>
+                            <exclude reference="M5d-UC-K9T"/>
+                            <exclude reference="A0C-lU-yWp"/>
+                            <exclude reference="Ti1-Ny-K0n"/>
+                            <exclude reference="ToR-xI-bZK"/>
                         </mask>
                     </variation>
                 </view>
@@ -182,7 +195,7 @@
                                 <constraint firstAttribute="width" constant="85" id="yrA-z1-csf"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img19" translatesAutoresizingMaskIntoConstraints="NO" id="P94-vi-mst">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img19" translatesAutoresizingMaskIntoConstraints="NO" id="P94-vi-mst">
                             <rect key="frame" x="172" y="32" width="103" height="23"/>
                             <animations/>
                             <constraints>
@@ -190,13 +203,6 @@
                                 <constraint firstAttribute="width" constant="103" id="zbs-6K-Y8J"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交警给您发来事故指导责任意见，请接收。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LiU-tK-RwK">
-                            <rect key="frame" x="118" y="99" width="210" height="41"/>
-                            <animations/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Pz-KJ-x8j">
                             <rect key="frame" x="10" y="230" width="335" height="40"/>
                             <animations/>
@@ -209,6 +215,13 @@
                                 <action selector="resultSure:" destination="-1" eventType="touchUpInside" id="VSi-a5-zIQ"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交警给您发来事故指导责任意见，请接收。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LiU-tK-RwK">
+                            <rect key="frame" x="118" y="99" width="210" height="41"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" red="0.76862745099999996" green="0.91764705879999997" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -235,6 +248,7 @@
                         <mask key="constraints">
                             <exclude reference="SSK-o2-Nz5"/>
                             <exclude reference="wbK-so-OBm"/>
+                            <exclude reference="5XI-ic-Zlc"/>
                             <exclude reference="cec-6b-nHW"/>
                             <exclude reference="lzt-dN-ohd"/>
                         </mask>

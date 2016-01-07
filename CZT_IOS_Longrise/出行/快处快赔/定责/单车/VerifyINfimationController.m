@@ -90,7 +90,7 @@ NSMutableDictionary *onlyCaseDict;
         
         [fvalertView dismiss];
         
-        if (![result[@"redes"]isEqualToString:@"成功"]) {
+        if (![result[@"restate"]isEqualToString:@"0"]) {
             
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"事故信息上传失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];

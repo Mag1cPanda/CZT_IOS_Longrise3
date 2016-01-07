@@ -54,8 +54,8 @@
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hiH-pu-xjj">
                             <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
                             <animations/>
-                            <state key="normal" title="              拍照取证" backgroundImage="item_bg-on">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="              拍照取证" backgroundImage="item_bg">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="item_icon01" translatesAutoresizingMaskIntoConstraints="NO" id="gCB-aj-zhs">
@@ -194,7 +194,6 @@
     </objects>
     <resources>
         <image name="item_bg" width="620" height="207"/>
-        <image name="item_bg-on" width="620" height="207"/>
         <image name="item_icon01" width="263" height="199"/>
         <image name="item_icon02" width="267" height="198"/>
         <image name="item_icon03" width="269" height="198"/>

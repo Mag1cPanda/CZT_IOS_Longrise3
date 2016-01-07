@@ -48,17 +48,23 @@
 //周市委：http://192.168.4.224:88/LCIP/restservices/baseapp/
 
 //http://192.168.4.188:83/LCIP/restservices/businessapp/方法名/quary  业务
-//http://192.168.4.191:85/APPBASE/restservices/appbase/方法名/quary 基础
-#define ServiceURL [NSString stringWithFormat:@"%@",@"http://192.168.3.148:86/KCKP/restservices/"]
+//http://202.43.147.36:71/restservices/appbase/方法名/quary 基础
+//#define ServiceURL [NSString stringWithFormat:@"%@",@"http://192.168.3.148:86/KCKP/restservices/"]
+
+
+#define ServiceURL [NSString stringWithFormat:@"%@",@"http://203.86.8.92:8046/restservices/"]
 
 #define UpdateURL [NSString stringWithFormat:@"%@",@"http://192.168.3.229:86/KCKP/restservices/"]
 
 //业务服务
-#define WXServiceURL [NSString stringWithFormat:@"%@",@"http://192.168.4.188:83/LCIP/restservices/"]
+//#define WXServiceURL [NSString stringWithFormat:@"%@",@"http://192.168.4.188:83/LCIP/restservices/"]
+
+//业务服务
+#define WXServiceURL [NSString stringWithFormat:@"%@",@"http://202.43.147.36:71/restservices/"]
 
 //基础服务
-#define WXBaseServiceURL [NSString stringWithFormat:@"%@",@"http://192.168.4.188:85/APPBASE/restservices/"]
-//#define WXBaseServiceURL [NSString stringWithFormat:@"%@",@"http://202.43.147.35/restservices/"]
+#define WXBaseServiceURL [NSString stringWithFormat:@"%@",@"http://202.43.147.36:71/restservices/"]
+
 
 //事故类型的通知名称
 #define NotificationNameForCaseType @"caseTypeNotice"
@@ -96,7 +102,8 @@
 
 //维修业务
 #define lciprest @"lciprest"
-#define baseapp @"baseapp"
+//#define baseapp @"baseapp"
+#define baseapp @"appbase"
 #define businessapp @"businessapp"
 #define lcipministryrest @"lcipministryrest"
 #define businessapprests @"businessapprests"

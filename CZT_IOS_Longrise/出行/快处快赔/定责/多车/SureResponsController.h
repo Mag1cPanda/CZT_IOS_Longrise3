@@ -28,6 +28,9 @@
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (weak, nonatomic) IBOutlet UITableView *sureTabView;
 
+//判断有无争议调用的接口
+@property (copy, nonatomic) NSString *checkType;
+
 //对方 重发验证码View
 
 @property (weak, nonatomic) IBOutlet UIView *otherSendView;

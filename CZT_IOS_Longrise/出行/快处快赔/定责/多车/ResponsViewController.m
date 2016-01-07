@@ -17,7 +17,7 @@
 
 @interface ResponsViewController ()<CustomAlertViewDelegate>
 {
-    NSMutableString *descriType;
+    int descriType;
     
 }
 
@@ -89,13 +89,11 @@
     CGColorRef colorref = CGColorCreate(colorSpace,(CGFloat[]){ 61/255.0, 166/255.0, 265/255.0, 1 });
     [self.controversy.layer setBorderColor:colorref];
     
+    //责任类型的转换
+    descriType = [self accidenttype:self.describeData[0]];
+    
     self.ietms = [[NSBundle mainBundle]loadNibNamed:@"ResponsCell" owner:self options:nil];
-    descriType = [[NSMutableString alloc]init];
-    for (int i = 0; i < self.describeData.count; i++) {
-        [descriType appendString:self.describeData[i]];
-        [descriType appendString:@" "];
-        
-    }
+    
     [self.allRespons setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
     [self.otherUnResponsBtn setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
     
@@ -106,7 +104,7 @@
     [self.thirdAllResponsBtn setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
     [self.thirdUnResponsBtn setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
     [self.thirdSameResponsBtn setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -226,10 +224,11 @@
         SureResponsController *sureResVC = [[SureResponsController alloc] init];
         sureResVC.hidesBottomBarWhenPushed = YES;
         sureResVC.dataSource = self.dataSource;
+        sureResVC.checkType = @"0";
         [self unConversitionpassInfomation:sureResVC];
         [self.navigationController pushViewController:sureResVC animated:YES];
     }
-   
+    
     
 }
 - (void)upCaseInformation
@@ -242,7 +241,7 @@
     
     NSString *imagelon = [NSString stringWithFormat:@"%f",[Globle getInstance].imagelon];
     NSString *imagelat = [NSString stringWithFormat:@"%f",[Globle getInstance].imagelat];
-    
+    NSNumber *desDuty = [NSNumber numberWithInt:descriType];
     
     NSMutableDictionary *bean2 = [[NSMutableDictionary alloc] init];
     [bean2 setValue:self.appcaseno forKey:@"appcaseno"];
@@ -252,7 +251,7 @@
     [bean2 setValue:imagelat forKey:@"caselat"];
     [bean2 setValue:[Globle getInstance].imageaddress forKey:@"caseaddress"];
     [bean2 setValue:[self currentDate] forKey:@"casedate"];
-    [bean2 setValue:descriType forKey:@"accidenttype"];
+    [bean2 setValue:desDuty forKey:@"accidenttype"];
     [bean2 setValue:self.describeString forKey:@"accidentdes"];
     [bean2 setValue:[Globle getInstance].areaid forKey:@"areaid"];
     [bean2 setValue:[self carseData] forKey:@"casecarlist"];
@@ -268,23 +267,32 @@
         [fvalertView dismiss];
         NSLog(@"有争议  %@",result);
         NSLog(@"sheng  %@",result[@"redes"]);
-        if (![result[@"redes"]isEqualToString:@"成功"]) {
-        
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"上传案件信息失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
+        if (result != nil)
+        {
+            if (![result[@"restate"]isEqualToString:@"0"]) {
+                
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"上传案件信息失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+            else
+            {
+                DutyViewController *DVC = [[DutyViewController alloc]init];
+                DVC.usInfoDict = usdict;
+                DVC.otherInfoDict = otherdict;
+                DVC.thirdInfoDict = thirddict;
+                [self conversitionPassInfomation:DVC];
+                [self.navigationController pushViewController:DVC animated:YES];
+                
+                
+                
+            }
         }
         else
         {
-            DutyViewController *DVC = [[DutyViewController alloc]init];
-            DVC.usInfoDict = usdict;
-            DVC.otherInfoDict = otherdict;
-            DVC.thirdInfoDict = thirddict;
-            [self conversitionPassInfomation:DVC];
-            [self.navigationController pushViewController:DVC animated:YES];
-            
-            
-
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"上传案件信息失败！，请检查您的网络！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
         }
+        
     } ];
     
 }
@@ -303,7 +311,7 @@
     [usCarListDict setValue:self.usUserName forKey:@"carownname"];
     [usCarListDict setValue:self.usPhoneNumber forKey:@"carownphone"];
     [usCarListDict setValue:self.usDriverNumber forKey:@"driverno"];
-
+    
     
     //对方
     NSMutableDictionary *otherCarListDict = [[NSMutableDictionary alloc]init];
@@ -313,7 +321,7 @@
     [otherCarListDict setValue:self.otherUserName forKey:@"carownname"];
     [otherCarListDict setValue:self.otherPhoneNumber forKey:@"carownphone"];
     [otherCarListDict setValue:self.otherDriverNumber forKey:@"driverno"];
-
+    
     
     //其他
     NSMutableDictionary *thirdCarListDict = [[NSMutableDictionary alloc]init];
@@ -355,7 +363,7 @@
     }
     else
     {
-       self.usRespons = @"全责";
+        self.usRespons = @"全责";
         [self.allRespons setImage:[UIImage imageNamed:@"cellSelect_fill"] forState:UIControlStateNormal];
         [self.unRespons setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
         [self.sameRespons setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
@@ -406,12 +414,12 @@
     }
     else
     {
-         self.usRespons = @"同责";
+        self.usRespons = @"同责";
         [self.allRespons setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
         [self.unRespons setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
         [self.sameRespons setImage:[UIImage imageNamed:@"cellSelect_fill"] forState:UIControlStateNormal];
     }
-   
+    
 }
 //对方责任认定
 - (IBAction)otherAllRespons:(id)sender {
@@ -426,12 +434,12 @@
 
 - (IBAction)otherUnRespons:(id)sender {
     if (self.dataSource.count == 3) {
-         self.otherRespons = @"无责";
+        self.otherRespons = @"无责";
         [self.otherUnResponsBtn setImage:[UIImage imageNamed:@"cellSelect_fill"] forState:UIControlStateNormal];
         [self.otherAllResponsBtn setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
         [self.otherSameResponsBtn setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
     }
-   
+    
 }
 
 - (IBAction)otherSameRespons:(id)sender {
@@ -441,18 +449,18 @@
         [self.otherAllResponsBtn setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
         [self.otherSameResponsBtn setImage:[UIImage imageNamed:@"cellSelect_fill"] forState:UIControlStateNormal];
     }
-   
+    
 }
 
 //其他责任认定
 - (IBAction)thirdAllRespons:(id)sender {
     if (self.dataSource.count == 3) {
-         self.thirdRespons = @"全责";
+        self.thirdRespons = @"全责";
         [self.thirdAllResponsBtn setImage:[UIImage imageNamed:@"cellSelect_fill"] forState:UIControlStateNormal];
         [self.thirdUnResponsBtn setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
         [self.thirdSameResponsBtn setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
     }
-   
+    
 }
 
 - (IBAction)thirdUnRespons:(id)sender {
@@ -462,7 +470,7 @@
         [self.thirdUnResponsBtn setImage:[UIImage imageNamed:@"cellSelect_fill"] forState:UIControlStateNormal];
         [self.thirdSameResponsBtn setImage:[UIImage imageNamed:@"cellUnSelect_fill"] forState:UIControlStateNormal];
     }
-   
+    
 }
 
 - (IBAction)thirdSameRespons:(id)sender {
@@ -547,6 +555,48 @@
     VC.thirdSureRespons = self.thirdRespons;
     VC.thirdCompanyCode = self.thirdCompanyCode;
 }
+
+- (int )accidenttype:(NSString *)respons
+{
+    int type;
+    if ([respons isEqualToString:@"追尾的"]) {
+        type =0;
+    }
+    else if ([respons isEqualToString:@"逆行的"])
+    {
+        type = 1;
+    }
+    else if ([respons isEqualToString:@"倒车的"])
+    {
+        type = 2;
+    }
+    else if ([respons isEqualToString:@"溜车的"])
+    {
+        type = 3;
+    }
+    else if ([respons isEqualToString:@"开车门的"])
+    {
+        type = 4;
+    }
+    else if ([respons isEqualToString:@"违反交通信号的"])
+    {
+        type = 5;
+    }
+    else if ([respons isEqualToString:@"未按规定让行的"])
+    {
+        type = 6;
+    }
+    else if ([respons isEqualToString:@"并线的"])
+    {
+        type = 7;
+    }
+    else if ([respons isEqualToString:@"全部责任的其他情形"])
+    {
+        type = 8;
+    }
+    return type;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     

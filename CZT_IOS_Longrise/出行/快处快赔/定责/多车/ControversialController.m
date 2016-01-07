@@ -225,19 +225,28 @@
             NSDictionary *dic = result;
             NSString *restate = dic[@"restate"];
             //  NSLog(@"%@",dic);
-            if ([restate isEqualToString:@"0"]) {
-                
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已通知交警现场处理！！！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alert show];
-                NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
-                [self.navigationController popToViewController:[navigationArray objectAtIndex:1] animated:YES];
-                
+            if (result != nil)
+            {
+                if ([restate isEqualToString:@"0"]) {
+                    
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已通知交警现场处理！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alert show];
+                    NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
+                    [self.navigationController popToViewController:[navigationArray objectAtIndex:1] animated:YES];
+                    
+                }
+                else
+                {
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"通知交警现场处理失败，请重新发送！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alert show];
+                }
             }
             else
             {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"通知交警现场处理失败，请重新发送！！！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"通知交警现场处理失败，请重新发送！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
             }
+            
         } ];
     }
    

@@ -30,6 +30,9 @@
     //投保公司
     UISelectListView *thirdSelectCompany;
 }
+
+@property (strong, nonatomic) NSMutableDictionary *moreHistoryToResponsDict;
+
 //案件号
 @property (copy, nonatomic) NSString *appcaseno;
 //事故选择

@@ -45,4 +45,6 @@
 //案件号
 @property (copy, nonatomic) NSString *appcaseno;
 
+@property (strong, nonatomic) NSMutableDictionary *onlyHistoryToResponsDict;
+
 @end

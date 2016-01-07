@@ -17,6 +17,8 @@
 #import "InsuranceReportController.h"
 #import "CZT_IOS_Longrise.pch"
 #import "FVCustomAlertView.h"
+#import "WaitPayViewController.h"
+#import "JudgeViewController.h"
 
 @interface HistoryCaseViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,CellPush>{
     FVCustomAlertView *alertView;
@@ -105,12 +107,12 @@
                     if (htModel.state != 7) {
                         [_dataList addObject:htModel];
                     }
-                   // NSLog(@"dic=========%@",dic);
+                    // NSLog(@"dic=========%@",dic);
                 }
-                 [_htTableView reloadData];
+                [_htTableView reloadData];
             }else{
-                NSLog(@"历史记录为空");
-                NSLog(@"%@",dic[@"redes"]);
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"没有历史记录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
             }
             
         }else{
@@ -144,75 +146,83 @@
     HistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"historyCell" forIndexPath:indexPath];
 
     cell.delegate = self;
-    HistoryModel *model = _dataList[indexPath.row];
-   // cell.caseHandleState.tag = 1000 + indexPath.section;
-   // NSLog(@"model============%@",model);
-    if (model.casetype == 0) {
-        cell.caseType.text = @"单车";
-    }else if (model.casetype == 1){
-        cell.caseType.text = @"双车";
-    }else if (model.casetype == 2){
-        cell.caseType.text = @"多车";
+    if (_dataList.count > indexPath.row) {
+        
+        HistoryModel *model = _dataList[indexPath.row];
+        // cell.caseHandleState.tag = 1000 + indexPath.section;
+        // NSLog(@"model============%@",model);
+        if (model.casetype == 0) {
+            cell.caseType.text = @"单车";
+        }else if (model.casetype == 1){
+            cell.caseType.text = @"双车";
+        }else if (model.casetype == 2){
+            cell.caseType.text = @"多车";
+        }
+        cell.state = model.state;
+        cell.casenumber = model.casenumber;
+        cell.casecarno = model.casecarno;
+        cell.appcaseno = model.appcaseno;
+        cell.casedate = model.casedate;
+        cell.inscomcode = model.inscomcode;
+        cell.casetype = model.casetype;
+        if (model.state == 1) {
+            cell.caseState.text = @"待定责";
+            [cell.caseHandleState setTitle:@"处理" forState:UIControlStateNormal];
+            cell.caseHandleState.backgroundColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
+        }else if (model.state == 2){
+            cell.caseState.text = @"待保险报案";
+            [cell.caseHandleState setTitle:@"处理" forState:UIControlStateNormal];
+            cell.caseHandleState.backgroundColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
+        }else if (model.state == 3){
+            cell.caseState.text = @"待理赔";
+            [cell.caseHandleState setTitle:@"处理" forState:UIControlStateNormal];
+            cell.caseHandleState.backgroundColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
+        }else if (model.state == 4){
+            cell.caseState.text = @"待评价";
+            [cell.caseHandleState setTitle:@"处理" forState:UIControlStateNormal];
+            cell.caseHandleState.backgroundColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
+        }else if (model.state == 5){
+            cell.caseState.text = @"完成";
+            [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
+            cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
+        }else if (model.state == 6){
+            cell.caseState.text = @"撤销案件";
+            [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
+            cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
+        }else{
+            cell.caseState.text = @"完成";
+            [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
+            cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
+        }
+        NSArray *array = [model.casehaptime componentsSeparatedByString:@"."];
+        NSString *timeStr = array[0];
+        cell.caseHapTime.text = timeStr;
     }
-    cell.state = model.state;
-    cell.casenumber = model.casenumber;
-    cell.casecarno = model.casecarno;
-    cell.appcaseno = model.appcaseno;
-    cell.casedate = model.casedate;
-    cell.inscomcode = model.inscomcode;
-    cell.casetype = model.casetype;
-    if (model.state == 1) {
-        cell.caseState.text = @"待定责";
-        [cell.caseHandleState setTitle:@"处理" forState:UIControlStateNormal];
-        cell.caseHandleState.backgroundColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
-    }else if (model.state == 2){
-        cell.caseState.text = @"待保险报案";
-        [cell.caseHandleState setTitle:@"处理" forState:UIControlStateNormal];
-        cell.caseHandleState.backgroundColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
-    }else if (model.state == 3){
-        cell.caseState.text = @"待理赔";
-        [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
-        cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
-    }else if (model.state == 4){
-        cell.caseState.text = @"待评价";
-        [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
-        cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
-    }else if (model.state == 5){
-        cell.caseState.text = @"完成";
-        [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
-        cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
-    }else if (model.state == 6){
-        cell.caseState.text = @"撤销案件";
-        [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
-         cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
-    }else{
-        cell.caseState.text = @"完成";
-        [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
-        cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
-    }
-    NSArray *array = [model.casehaptime componentsSeparatedByString:@"."];
-    NSString *timeStr = array[0];
-    cell.caseHapTime.text = timeStr;
+    
     return cell;
 
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   //  NSLog(@"-----------%ld",indexPath.row);
-    [tableView deselectRowAtIndexPath:indexPath animated:NO]; 
-    HistoryModel *model = _dataList[indexPath.row];
-    CaseDetailViewController *CDVC = [[CaseDetailViewController alloc]init];
-    CDVC.casetype = model.casetype;
-    CDVC.casehaptime = model.casehaptime;
-    CDVC.accidentplace = model.accidentplace;
-    CDVC.casenumber = model.casenumber;
-    CDVC.casecarno = model.casecarno;
-    CDVC.casedate = model.casedate;
-    CDVC.insreporttel = model.insreporttel;
-    CDVC.appphone = _telephone;
-//    NSLog(@"%@",model.instel);
-    CDVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:CDVC animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (_dataList.count > indexPath.row) {
+        HistoryModel *model = _dataList[indexPath.row];
+        CaseDetailViewController *CDVC = [[CaseDetailViewController alloc]init];
+        CDVC.casetype = model.casetype;
+        CDVC.casehaptime = model.casehaptime;
+        CDVC.accidentplace = model.accidentplace;
+        CDVC.casenumber = model.casenumber;
+        CDVC.casecarno = model.casecarno;
+        CDVC.casedate = model.casedate;
+        CDVC.insreporttel = model.insreporttel;
+        CDVC.appphone = _telephone;
+        CDVC.appcaseno = model.appcaseno;
+        //    NSLog(@"%@",model.instel);
+        CDVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:CDVC animated:YES];
+    }
+    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -244,7 +254,13 @@
         SGCLViewController *SGL = [[SGCLViewController alloc]init];
         SGL.currentMark = 1;
         SGL.appcaseno = appcaseno;
-        SGL.type = casetype;
+        if (casetype == 0) {
+            SGL.type = 1;
+            
+        }else{
+            
+            SGL.type = 2;
+        }
         SGL.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:SGL animated:YES];
         
@@ -337,12 +353,14 @@
 
         
     }else if (caseState == 3){
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"等待理赔！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请等待理赔！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         
     }else if (caseState == 4){
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"案件已完成！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
+        JudgeViewController *JVC = [[JudgeViewController alloc]init];
+        JVC.appcaseno = appcaseno;
+        JVC.casecarno = casecarno;
+        [self.navigationController pushViewController:JVC animated:YES];
         
     }else if (caseState == 5){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"案件已完成！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];

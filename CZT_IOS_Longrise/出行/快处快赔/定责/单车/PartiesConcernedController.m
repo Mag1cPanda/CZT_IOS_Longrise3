@@ -11,6 +11,7 @@
 #import "Globle.h"
 #import "VerifyINfimationController.h"
 
+
 @interface PartiesConcernedController ()<UIAlertViewDelegate>
 {
     NSString *cities;
@@ -65,6 +66,11 @@
 #pragma mark 投保公司
 -(void)loadCompany
 {
+    
+    if (self.onlyHistoryToResponsDict != nil)
+    {
+        
+    }
     NSDictionary *userinfo = [[Globle getInstance].loginInfoDic objectForKey:@"userinfo"];
     self.phoneNumber.text = userinfo[@"mobilephone"];
     

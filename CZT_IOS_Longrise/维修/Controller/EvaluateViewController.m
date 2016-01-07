@@ -8,12 +8,11 @@
 
 #import "EvaluateViewController.h"
 #import "AppDelegate.h"
-#import "SRSelectGroup.h"
 
 @interface EvaluateViewController ()<UITextViewDelegate,CWStarRateViewDelegate>
 {
     HRDetailHeaderView *header;
-    SRSelectGroup *group;
+    
 }
 @end
 
@@ -24,9 +23,9 @@
     // Do any additional setup after loading the view.
     [AppDelegate storyBoradAutoLay:self.view];
     
-    group = [[SRSelectGroup alloc]initWithFrame:_ratioBackView.bounds];
-    NSLog(@"selectedIndex -> %ld",group.selectedIndex);
-    [_ratioBackView addSubview:group];
+    _group = [[SRSelectGroup alloc]initWithFrame:_ratioBackView.bounds];
+    NSLog(@"selectedIndex -> %ld",_group.selectedIndex);
+    [_ratioBackView addSubview:_group];
     
     _starView1.allowIncompleteStar = NO;
     _starView2.allowIncompleteStar = NO;
@@ -90,7 +89,7 @@
     
     [bean setValue:@"huxl" forKey:@"userflag"];
     [bean setValue:token forKey:@"token"];
-    NSString *indexStr = [NSString stringWithFormat:@"%ld",group.selectedIndex];
+    NSString *indexStr = [NSString stringWithFormat:@"%ld",_group.selectedIndex];
     [bean setValue:indexStr forKey:@"evaluatetotle"];
     
     NSString *star1Score = [NSString stringWithFormat:@"%f",_starView1.scorePercent] ;

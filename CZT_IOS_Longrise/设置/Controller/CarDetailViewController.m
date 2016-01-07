@@ -76,7 +76,7 @@
     [bean setValue:token forKey:@"token"];
     [bean setValue:_Id forKey:@"id"];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxSericeURL,baseapp];
+    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxBaseServiceURL,baseapp];
     
     [[Globle getInstance].service requestWithServiceIP:url  ServiceName:@"appcarviewdetil" params:bean httpMethod:@"POST"resultIsDictionary:YES completeBlock:^(id result) {
         

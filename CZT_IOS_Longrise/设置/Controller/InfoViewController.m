@@ -67,7 +67,7 @@ UITableViewDelegate>
     [bean setValue:token forKey:@"token"];
 
     
-    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxSericeURL,baseapp];
+    NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxBaseServiceURL,baseapp];
     
     [[Globle getInstance].service requestWithServiceIP:url  ServiceName:@"appsearchpersoninfo" params:bean httpMethod:@"POST"resultIsDictionary:YES completeBlock:^(id result) {
         

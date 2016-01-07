@@ -11,8 +11,11 @@
 #import "HRDetailHeaderView.h"
 #import "HRDataModel.h"
 #import "HRDetailDataModel.h"
-
+#import "SRSelectGroup.h"
 @interface EvaluateViewController : UIViewController
+
+@property (nonatomic, strong) SRSelectGroup *group;
+
 @property (weak, nonatomic) IBOutlet HRDetailHeaderView *headerView;
 
 @property (weak, nonatomic) IBOutlet UIView *ratioBackView;

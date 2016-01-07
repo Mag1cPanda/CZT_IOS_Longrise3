@@ -54,6 +54,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *agreementBtn;
 //确认
 @property (weak, nonatomic) IBOutlet UIButton *okBtn;
-
+//剩余时间
+@property (weak, nonatomic) IBOutlet UILabel *leftTimeLabel;
 
 @end

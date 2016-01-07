@@ -119,7 +119,6 @@
 		5807B42D1C07DA7500E7A701 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5807B42C1C07DA7500E7A701 /* main.m */; };
 		5807B4301C07DA7500E7A701 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5807B42F1C07DA7500E7A701 /* AppDelegate.mm */; };
 		5807B4331C07DA7500E7A701 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5807B4321C07DA7500E7A701 /* ViewController.m */; };
-		5807B4361C07DA7500E7A701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5807B4341C07DA7500E7A701 /* Main.storyboard */; };
 		5807B4381C07DA7500E7A701 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5807B4371C07DA7500E7A701 /* Images.xcassets */; };
 		5807B43B1C07DA7500E7A701 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5807B4391C07DA7500E7A701 /* LaunchScreen.xib */; };
 		5807B4471C07DA7500E7A701 /* CZT_IOS_LongriseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5807B4461C07DA7500E7A701 /* CZT_IOS_LongriseTests.m */; };
@@ -176,6 +175,10 @@
 		58FC7F121C1D4B1B00E31CB7 /* FVCustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FC7F111C1D4B1B00E31CB7 /* FVCustomAlertView.m */; };
 		58FE1F4F1C0B445F00CF0C2F /* OneCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FE1F4E1C0B445F00CF0C2F /* OneCarViewController.xib */; };
 		58FEF26E1C113A5B00B32D25 /* UISelectListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FEF26D1C113A5B00B32D25 /* UISelectListView.m */; };
+		6F0C14CB1C3CEA5400FEA2BC /* JudgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C14C61C3CEA5400FEA2BC /* JudgeViewController.m */; };
+		6F0C14CC1C3CEA5400FEA2BC /* JudgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0C14C71C3CEA5400FEA2BC /* JudgeViewController.xib */; };
+		6F0C14CD1C3CEA5400FEA2BC /* WaitPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C14C91C3CEA5400FEA2BC /* WaitPayViewController.m */; };
+		6F0C14CE1C3CEA5400FEA2BC /* WaitPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0C14CA1C3CEA5400FEA2BC /* WaitPayViewController.xib */; };
 		6F1DA3801C3A5BD1005BCADF /* FirstGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1DA37E1C3A5BD1005BCADF /* FirstGuideViewController.xib */; };
 		6F1DA3811C3A5BD1005BCADF /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1DA37F1C3A5BD1005BCADF /* SecondViewController.xib */; };
 		6F3E6CC41C326088004FD9CC /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E6CC21C326088004FD9CC /* ForgotPasswordViewController.m */; };
@@ -255,6 +258,15 @@
 		6FFD0CFF1C3121AF00A78CF1 /* VerOtherSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFD0CF21C3121AF00A78CF1 /* VerOtherSectionCell.xib */; };
 		6FFD0D001C3121AF00A78CF1 /* VerSectionOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFD0CF41C3121AF00A78CF1 /* VerSectionOneCell.m */; };
 		6FFD0D011C3121AF00A78CF1 /* VerSectionOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFD0CF51C3121AF00A78CF1 /* VerSectionOneCell.xib */; };
+		8517E0521C3DF28D008443AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8517E0511C3DF28D008443AE /* Main.storyboard */; };
+		8517E05F1C3DF3AC008443AE /* QRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8517E0561C3DF3AC008443AE /* QRadioButton.m */; };
+		8517E0601C3DF3AC008443AE /* radio_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E0571C3DF3AC008443AE /* radio_checked.png */; };
+		8517E0611C3DF3AC008443AE /* radio_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E0581C3DF3AC008443AE /* radio_checked@2x.png */; };
+		8517E0621C3DF3AC008443AE /* radio_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E0591C3DF3AC008443AE /* radio_unchecked.png */; };
+		8517E0631C3DF3AC008443AE /* radio_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E05A1C3DF3AC008443AE /* radio_unchecked@2x.png */; };
+		8517E0641C3DF3AC008443AE /* Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E05B1C3DF3AC008443AE /* Select.png */; };
+		8517E0651C3DF3AC008443AE /* SRSelectGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8517E05D1C3DF3AC008443AE /* SRSelectGroup.m */; };
+		8517E0661C3DF3AC008443AE /* UnSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E05E1C3DF3AC008443AE /* UnSelect.png */; };
 		85305F631C2A85AE00964D5E /* UILabel+StringFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 85305F5F1C2A85AE00964D5E /* UILabel+StringFrame.m */; };
 		85305F641C2A85AE00964D5E /* UISelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85305F611C2A85AE00964D5E /* UISelectCell.m */; };
 		85305F651C2A85AE00964D5E /* UISelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85305F621C2A85AE00964D5E /* UISelectCell.xib */; };
@@ -271,14 +283,6 @@
 		85537A161C3BA5E600B940BE /* HealthRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85537A151C3BA5E600B940BE /* HealthRecordViewController.m */; };
 		85537A181C3BA62300B940BE /* HRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85537A171C3BA62300B940BE /* HRDetailViewController.m */; };
 		85537A1A1C3BA65100B940BE /* QYSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85537A191C3BA65100B940BE /* QYSearchViewController.m */; };
-		85537A271C3BA6B000B940BE /* QRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 85537A1E1C3BA6B000B940BE /* QRadioButton.m */; };
-		85537A281C3BA6B000B940BE /* radio_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 85537A1F1C3BA6B000B940BE /* radio_checked.png */; };
-		85537A291C3BA6B000B940BE /* radio_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85537A201C3BA6B000B940BE /* radio_checked@2x.png */; };
-		85537A2A1C3BA6B000B940BE /* radio_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 85537A211C3BA6B000B940BE /* radio_unchecked.png */; };
-		85537A2B1C3BA6B000B940BE /* radio_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85537A221C3BA6B000B940BE /* radio_unchecked@2x.png */; };
-		85537A2C1C3BA6B000B940BE /* Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 85537A231C3BA6B000B940BE /* Select.png */; };
-		85537A2D1C3BA6B000B940BE /* SRSelectGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 85537A251C3BA6B000B940BE /* SRSelectGroup.m */; };
-		85537A2E1C3BA6B000B940BE /* UnSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = 85537A261C3BA6B000B940BE /* UnSelect.png */; };
 		8580B32B1C23E7FC00070C83 /* WXSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8580B32A1C23E7FC00070C83 /* WXSearchViewController.m */; };
 		85B2C60C1C20FF7700C28C03 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B2C60B1C20FF7700C28C03 /* libcurl.a */; };
 		85B2C60E1C20FF7C00C28C03 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B2C60D1C20FF7C00C28C03 /* libmp3lame.a */; };
@@ -508,7 +512,6 @@
 		5807B42F1C07DA7500E7A701 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		5807B4311C07DA7500E7A701 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		5807B4321C07DA7500E7A701 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		5807B4351C07DA7500E7A701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5807B4371C07DA7500E7A701 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5807B43A1C07DA7500E7A701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5807B4401C07DA7500E7A701 /* CZT_IOS_LongriseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CZT_IOS_LongriseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -602,6 +605,12 @@
 		58FE1F4E1C0B445F00CF0C2F /* OneCarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneCarViewController.xib; sourceTree = "<group>"; };
 		58FEF26C1C113A5B00B32D25 /* UISelectListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISelectListView.h; sourceTree = "<group>"; };
 		58FEF26D1C113A5B00B32D25 /* UISelectListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISelectListView.m; sourceTree = "<group>"; };
+		6F0C14C51C3CEA5400FEA2BC /* JudgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JudgeViewController.h; sourceTree = "<group>"; };
+		6F0C14C61C3CEA5400FEA2BC /* JudgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JudgeViewController.m; sourceTree = "<group>"; };
+		6F0C14C71C3CEA5400FEA2BC /* JudgeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JudgeViewController.xib; sourceTree = "<group>"; };
+		6F0C14C81C3CEA5400FEA2BC /* WaitPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitPayViewController.h; sourceTree = "<group>"; };
+		6F0C14C91C3CEA5400FEA2BC /* WaitPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitPayViewController.m; sourceTree = "<group>"; };
+		6F0C14CA1C3CEA5400FEA2BC /* WaitPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitPayViewController.xib; sourceTree = "<group>"; };
 		6F1DA37E1C3A5BD1005BCADF /* FirstGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstGuideViewController.xib; sourceTree = "<group>"; };
 		6F1DA37F1C3A5BD1005BCADF /* SecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
 		6F3E6CC11C326088004FD9CC /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
@@ -739,6 +748,17 @@
 		6FFD0CF31C3121AF00A78CF1 /* VerSectionOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerSectionOneCell.h; sourceTree = "<group>"; };
 		6FFD0CF41C3121AF00A78CF1 /* VerSectionOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerSectionOneCell.m; sourceTree = "<group>"; };
 		6FFD0CF51C3121AF00A78CF1 /* VerSectionOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerSectionOneCell.xib; sourceTree = "<group>"; };
+		8517E0511C3DF28D008443AE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8517E0551C3DF3AC008443AE /* QRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRadioButton.h; sourceTree = "<group>"; };
+		8517E0561C3DF3AC008443AE /* QRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRadioButton.m; sourceTree = "<group>"; };
+		8517E0571C3DF3AC008443AE /* radio_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_checked.png; sourceTree = "<group>"; };
+		8517E0581C3DF3AC008443AE /* radio_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_checked@2x.png"; sourceTree = "<group>"; };
+		8517E0591C3DF3AC008443AE /* radio_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_unchecked.png; sourceTree = "<group>"; };
+		8517E05A1C3DF3AC008443AE /* radio_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_unchecked@2x.png"; sourceTree = "<group>"; };
+		8517E05B1C3DF3AC008443AE /* Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Select.png; sourceTree = "<group>"; };
+		8517E05C1C3DF3AC008443AE /* SRSelectGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSelectGroup.h; sourceTree = "<group>"; };
+		8517E05D1C3DF3AC008443AE /* SRSelectGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSelectGroup.m; sourceTree = "<group>"; };
+		8517E05E1C3DF3AC008443AE /* UnSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnSelect.png; sourceTree = "<group>"; };
 		85305F5E1C2A85AD00964D5E /* UILabel+StringFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+StringFrame.h"; sourceTree = "<group>"; };
 		85305F5F1C2A85AE00964D5E /* UILabel+StringFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+StringFrame.m"; sourceTree = "<group>"; };
 		85305F601C2A85AE00964D5E /* UISelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISelectCell.h; sourceTree = "<group>"; };
@@ -763,16 +783,6 @@
 		85537A151C3BA5E600B940BE /* HealthRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthRecordViewController.m; sourceTree = "<group>"; };
 		85537A171C3BA62300B940BE /* HRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRDetailViewController.m; sourceTree = "<group>"; };
 		85537A191C3BA65100B940BE /* QYSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSearchViewController.m; sourceTree = "<group>"; };
-		85537A1D1C3BA6B000B940BE /* QRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRadioButton.h; sourceTree = "<group>"; };
-		85537A1E1C3BA6B000B940BE /* QRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRadioButton.m; sourceTree = "<group>"; };
-		85537A1F1C3BA6B000B940BE /* radio_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_checked.png; sourceTree = "<group>"; };
-		85537A201C3BA6B000B940BE /* radio_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_checked@2x.png"; sourceTree = "<group>"; };
-		85537A211C3BA6B000B940BE /* radio_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_unchecked.png; sourceTree = "<group>"; };
-		85537A221C3BA6B000B940BE /* radio_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_unchecked@2x.png"; sourceTree = "<group>"; };
-		85537A231C3BA6B000B940BE /* Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Select.png; sourceTree = "<group>"; };
-		85537A241C3BA6B000B940BE /* SRSelectGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSelectGroup.h; sourceTree = "<group>"; };
-		85537A251C3BA6B000B940BE /* SRSelectGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSelectGroup.m; sourceTree = "<group>"; };
-		85537A261C3BA6B000B940BE /* UnSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnSelect.png; sourceTree = "<group>"; };
 		8580B3031C23B0A200070C83 /* QYSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSearchViewController.h; sourceTree = "<group>"; };
 		8580B3291C23E7FC00070C83 /* WXSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSearchViewController.h; sourceTree = "<group>"; };
 		8580B32A1C23E7FC00070C83 /* WXSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSearchViewController.m; sourceTree = "<group>"; };
@@ -1128,9 +1138,9 @@
 				5807B4501C07DB8100E7A701 /* MainTabbarController */,
 				5807B42E1C07DA7500E7A701 /* AppDelegate.h */,
 				5807B42F1C07DA7500E7A701 /* AppDelegate.mm */,
+				8517E0511C3DF28D008443AE /* Main.storyboard */,
 				5807B4311C07DA7500E7A701 /* ViewController.h */,
 				5807B4321C07DA7500E7A701 /* ViewController.m */,
-				5807B4341C07DA7500E7A701 /* Main.storyboard */,
 				5807B4371C07DA7500E7A701 /* Images.xcassets */,
 				5807B4391C07DA7500E7A701 /* LaunchScreen.xib */,
 				5807B42A1C07DA7500E7A701 /* Supporting Files */,
@@ -1374,6 +1384,12 @@
 				6F4825A71C296C0300BCE7F6 /* HistoryCaseViewController.h */,
 				6F4825A81C296C0300BCE7F6 /* HistoryCaseViewController.m */,
 				6F4825A91C296C0300BCE7F6 /* HistoryCaseViewController.xib */,
+				6F0C14C51C3CEA5400FEA2BC /* JudgeViewController.h */,
+				6F0C14C61C3CEA5400FEA2BC /* JudgeViewController.m */,
+				6F0C14C71C3CEA5400FEA2BC /* JudgeViewController.xib */,
+				6F0C14C81C3CEA5400FEA2BC /* WaitPayViewController.h */,
+				6F0C14C91C3CEA5400FEA2BC /* WaitPayViewController.m */,
+				6F0C14CA1C3CEA5400FEA2BC /* WaitPayViewController.xib */,
 				6F4825711C296BD300BCE7F6 /* AccidentCar.storyboard */,
 				6F4825721C296BD300BCE7F6 /* AccidentCarViewController.h */,
 				6F4825731C296BD300BCE7F6 /* AccidentCarViewController.m */,
@@ -1633,27 +1649,27 @@
 			path = ImageHelper;
 			sourceTree = "<group>";
 		};
-		85537A1B1C3BA6B000B940BE /* SRSelectGroup */ = {
+		8517E0531C3DF3AC008443AE /* SRSelectGroup */ = {
 			isa = PBXGroup;
 			children = (
-				85537A1C1C3BA6B000B940BE /* QRadioButton */,
-				85537A231C3BA6B000B940BE /* Select.png */,
-				85537A241C3BA6B000B940BE /* SRSelectGroup.h */,
-				85537A251C3BA6B000B940BE /* SRSelectGroup.m */,
-				85537A261C3BA6B000B940BE /* UnSelect.png */,
+				8517E0541C3DF3AC008443AE /* QRadioButton */,
+				8517E05B1C3DF3AC008443AE /* Select.png */,
+				8517E05C1C3DF3AC008443AE /* SRSelectGroup.h */,
+				8517E05D1C3DF3AC008443AE /* SRSelectGroup.m */,
+				8517E05E1C3DF3AC008443AE /* UnSelect.png */,
 			);
 			path = SRSelectGroup;
 			sourceTree = "<group>";
 		};
-		85537A1C1C3BA6B000B940BE /* QRadioButton */ = {
+		8517E0541C3DF3AC008443AE /* QRadioButton */ = {
 			isa = PBXGroup;
 			children = (
-				85537A1D1C3BA6B000B940BE /* QRadioButton.h */,
-				85537A1E1C3BA6B000B940BE /* QRadioButton.m */,
-				85537A1F1C3BA6B000B940BE /* radio_checked.png */,
-				85537A201C3BA6B000B940BE /* radio_checked@2x.png */,
-				85537A211C3BA6B000B940BE /* radio_unchecked.png */,
-				85537A221C3BA6B000B940BE /* radio_unchecked@2x.png */,
+				8517E0551C3DF3AC008443AE /* QRadioButton.h */,
+				8517E0561C3DF3AC008443AE /* QRadioButton.m */,
+				8517E0571C3DF3AC008443AE /* radio_checked.png */,
+				8517E0581C3DF3AC008443AE /* radio_checked@2x.png */,
+				8517E0591C3DF3AC008443AE /* radio_unchecked.png */,
+				8517E05A1C3DF3AC008443AE /* radio_unchecked@2x.png */,
 			);
 			path = QRadioButton;
 			sourceTree = "<group>";
@@ -1688,7 +1704,7 @@
 		85C000621C1BCD7B009787B0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				85537A1B1C3BA6B000B940BE /* SRSelectGroup */,
+				8517E0531C3DF3AC008443AE /* SRSelectGroup */,
 				58046ECA1C203FBE00F59365 /* CWStarRateView.h */,
 				58046ECB1C203FBE00F59365 /* CWStarRateView.m */,
 				58046EE71C203FBE00F59365 /* star_gray@2x.png */,
@@ -1834,12 +1850,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8517E0621C3DF3AC008443AE /* radio_unchecked.png in Resources */,
 				58DC346E1C15456600644E3C /* UserGuideViewController.xib in Resources */,
 				85537A121C3BA5B100B940BE /* ComplainViewController.xib in Resources */,
 				85537A141C3BA5B100B940BE /* EvaluateViewController.xib in Resources */,
 				58046EF21C203FBE00F59365 /* HRDetailHeaderView.xib in Resources */,
 				6FFD0CF71C3121AF00A78CF1 /* CarDetailCell.xib in Resources */,
 				585730411C316B290017A6AE /* FirstGuide.storyboard in Resources */,
+				8517E0521C3DF28D008443AE /* Main.storyboard in Resources */,
 				58FE1F4F1C0B445F00CF0C2F /* OneCarViewController.xib in Resources */,
 				58046EEE1C203FBE00F59365 /* HeaderView.xib in Resources */,
 				6F1DA3801C3A5BD1005BCADF /* FirstGuideViewController.xib in Resources */,
@@ -1847,7 +1865,6 @@
 				6F1DA3811C3A5BD1005BCADF /* SecondViewController.xib in Resources */,
 				58A87ECD1C12F7B300366379 /* FinishViewController.xib in Resources */,
 				58046F401C2040AC00F59365 /* Filecell.xib in Resources */,
-				85537A291C3BA6B000B940BE /* radio_checked@2x.png in Resources */,
 				58DB21E01C12E1800070080C /* MoreCarViewController.xib in Resources */,
 				58046EFF1C203FBE00F59365 /* star_gray@2x.png in Resources */,
 				58046F481C2040AC00F59365 /* IMViewController.xib in Resources */,
@@ -1860,13 +1877,14 @@
 				6F4825AB1C296C0300BCE7F6 /* HistoryCaseViewController.xib in Resources */,
 				6FEDFA781C2C22D9005D0CBA /* WXTableViewCell.xib in Resources */,
 				4C8825911C22D37C0081C932 /* ChooseCar.storyboard in Resources */,
-				5807B4361C07DA7500E7A701 /* Main.storyboard in Resources */,
+				8517E0661C3DF3AC008443AE /* UnSelect.png in Resources */,
 				4CC9402C1C21468200878430 /* ChooseCarViewCell.xib in Resources */,
 				58039FD61C09A8470093079E /* PZQZViewController.xib in Resources */,
+				6F0C14CC1C3CEA5400FEA2BC /* JudgeViewController.xib in Resources */,
 				58DB21EF1C12E9D20070080C /* WXTSViewController.xib in Resources */,
 				5807B43B1C07DA7500E7A701 /* LaunchScreen.xib in Resources */,
-				85537A2C1C3BA6B000B940BE /* Select.png in Resources */,
 				85305F6C1C2A992C00964D5E /* SectionTwoHeaderView.xib in Resources */,
+				8517E0641C3DF3AC008443AE /* Select.png in Resources */,
 				58046F4C1C2040AC00F59365 /* ResponsCell.xib in Resources */,
 				6F4825A61C296BD300BCE7F6 /* insuranceViewController.xib in Resources */,
 				6F3E6CC51C326088004FD9CC /* ForgotPasswordViewController.xib in Resources */,
@@ -1889,15 +1907,15 @@
 				58DC347C1C15464300644E3C /* TrafficSituationViewController.xib in Resources */,
 				58DC34861C15469800644E3C /* BreakRulesViewController.xib in Resources */,
 				6F4825931C296BD300BCE7F6 /* AccidentCar.storyboard in Resources */,
-				85537A281C3BA6B000B940BE /* radio_checked.png in Resources */,
 				855127201C2546B9001D2778 /* LoginViewController.xib in Resources */,
 				6F4825951C296BD300BCE7F6 /* AccidentCarViewController.xib in Resources */,
 				5819AF931C193C6800BAE34F /* HomeTableViewCell.xib in Resources */,
+				8517E0601C3DF3AC008443AE /* radio_checked.png in Resources */,
 				4CFB25451C22AC9100058216 /* ChooseAS.storyboard in Resources */,
 				6F4825141C2953EA00BCE7F6 /* TakePhotoViewController.xib in Resources */,
 				580205271C24F0A900497F47 /* RegViewController.xib in Resources */,
+				8517E0611C3DF3AC008443AE /* radio_checked@2x.png in Resources */,
 				6FFD0CFA1C3121AF00A78CF1 /* InfoSectionOneCell.xib in Resources */,
-				85537A2A1C3BA6B000B940BE /* radio_unchecked.png in Resources */,
 				58046EF61C203FBE00F59365 /* HRDetailSectionTwoCell.xib in Resources */,
 				58046EFA1C203FBE00F59365 /* QYTableViewCell.xib in Resources */,
 				58046F411C2040AC00F59365 /* FillInfomation.storyboard in Resources */,
@@ -1906,14 +1924,14 @@
 				58046F341C2040AC00F59365 /* ARAView.storyboard in Resources */,
 				58046EF01C203FBE00F59365 /* HealthRecordCell.xib in Resources */,
 				58046FD31C2047BE00F59365 /* IQKeyboardManager.bundle in Resources */,
+				6F0C14CE1C3CEA5400FEA2BC /* WaitPayViewController.xib in Resources */,
 				58046EFE1C203FBE00F59365 /* SectionTwoViewCell.xib in Resources */,
-				85537A2B1C3BA6B000B940BE /* radio_unchecked@2x.png in Resources */,
 				6F4825981C296BD300BCE7F6 /* AccidentPhotoTableViewCell.xib in Resources */,
 				58046F3F1C2040AC00F59365 /* DutyViewController.xib in Resources */,
 				6FFD0CFC1C3121AF00A78CF1 /* InfoSectionTwoCell.xib in Resources */,
-				85537A2E1C3BA6B000B940BE /* UnSelect.png in Resources */,
 				58046F501C2040AC00F59365 /* SignViewController.xib in Resources */,
 				4CFB25471C22B50F00058216 /* ChooseAS.xib in Resources */,
+				8517E0631C3DF3AC008443AE /* radio_unchecked@2x.png in Resources */,
 				58046F5A1C2040CE00F59365 /* Parties.storyboard in Resources */,
 				58046E821C203EB000F59365 /* Insurance.storyboard in Resources */,
 				58DB21F11C12E9D20070080C /* WXTSViewController2.xib in Resources */,
@@ -2007,7 +2025,7 @@
 				58046EF91C203FBE00F59365 /* QYTableViewCell.m in Sources */,
 				58046F5D1C2040CE00F59365 /* VerifyINfimationController.m in Sources */,
 				5807B4A81C08006900E7A701 /* QueryParameter.m in Sources */,
-				85537A271C3BA6B000B940BE /* QRadioButton.m in Sources */,
+				6F0C14CB1C3CEA5400FEA2BC /* JudgeViewController.m in Sources */,
 				6F4825701C29573B00BCE7F6 /* PersonInfoModel.m in Sources */,
 				58046FB21C20456A00F59365 /* SDWebImageDownloaderOperation.m in Sources */,
 				58046F351C2040AC00F59365 /* ARAViewController.m in Sources */,
@@ -2078,6 +2096,7 @@
 				4C8825921C22D37C0081C932 /* ChooseCarViewController.m in Sources */,
 				85537A161C3BA5E600B940BE /* HealthRecordViewController.m in Sources */,
 				6F48255C1C29571300BCE7F6 /* JSONModelClassProperty.m in Sources */,
+				8517E05F1C3DF3AC008443AE /* QRadioButton.m in Sources */,
 				4CC9402B1C21468200878430 /* ChooseCarViewCell.m in Sources */,
 				58046EFD1C203FBE00F59365 /* SectionTwoViewCell.m in Sources */,
 				855127241C255CB9001D2778 /* SetInsModel.m in Sources */,
@@ -2113,12 +2132,12 @@
 				6F4825501C29571300BCE7F6 /* DetailDataModel.m in Sources */,
 				58046EEC1C203FBE00F59365 /* CWStarRateView.m in Sources */,
 				6FFD0CF91C3121AF00A78CF1 /* InfoSectionOneCell.m in Sources */,
+				6F0C14CD1C3CEA5400FEA2BC /* WaitPayViewController.m in Sources */,
 				58046E9C1C203FA200F59365 /* HMSegmentedControl.m in Sources */,
 				5807B4601C07DEBD00E7A701 /* HomeViewController.m in Sources */,
 				6FFD0CF81C3121AF00A78CF1 /* CustomTextField.m in Sources */,
 				58046FB51C20456A00F59365 /* UIButton+WebCache.m in Sources */,
 				6F48255A1C29571300BCE7F6 /* JSONModel.m in Sources */,
-				85537A2D1C3BA6B000B940BE /* SRSelectGroup.m in Sources */,
 				85537A131C3BA5B100B940BE /* EvaluateViewController.m in Sources */,
 				5807B4941C08006400E7A701 /* NSString+NSStringMD5.m in Sources */,
 				5807B4561C07DC5700E7A701 /* NavViewController.m in Sources */,
@@ -2141,6 +2160,7 @@
 				58046F6B1C20420B00F59365 /* Message.m in Sources */,
 				58046E9F1C203FA200F59365 /* QYDetailViewController.m in Sources */,
 				58039FD91C09AFD20093079E /* PhoneViewController.m in Sources */,
+				8517E0651C3DF3AC008443AE /* SRSelectGroup.m in Sources */,
 				58039FE81C09B18C0093079E /* TakePhoneFactory.m in Sources */,
 				4C8825961C22F11E0081C932 /* PZQZViewController.m in Sources */,
 				6F4825611C29571300BCE7F6 /* JSONModel+networking.m in Sources */,
@@ -2184,14 +2204,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5807B4341C07DA7500E7A701 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5807B4351C07DA7500E7A701 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5807B4391C07DA7500E7A701 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2298,10 +2310,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/chengsan/Desktop/未命名文件夹",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CZT_IOS_Longrise/CZT_IOS_Longrise.pch";
 				INFOPLIST_FILE = CZT_IOS_Longrise/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -2339,10 +2348,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/chengsan/Desktop/未命名文件夹",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CZT_IOS_Longrise/CZT_IOS_Longrise.pch";
 				INFOPLIST_FILE = CZT_IOS_Longrise/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

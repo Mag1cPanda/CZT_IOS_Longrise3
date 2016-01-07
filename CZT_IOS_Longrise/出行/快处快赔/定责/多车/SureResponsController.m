@@ -34,6 +34,7 @@ NSNumber *caseDutyType;
     int otherDutyType; //责任类型
     int thirdDutyType; //责任类型
     FVCustomAlertView *fvalertView;
+    UIAlertView *sendCodeView;
 }
 @property (strong, nonatomic) UIImage *usSignName;
 @property (strong, nonatomic) UIImage *otherSignName;
@@ -73,7 +74,7 @@ NSNumber *caseDutyType;
     
     //设置需要传递的参数
     [self saveInfomations];
-   
+    
     //设置发送验证码的button
     [self setVerificationButton];
     
@@ -92,14 +93,14 @@ NSNumber *caseDutyType;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-//    static NSString *ID = @"SureResponsCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-//    if (cell == nil) {
-//        
-//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-//    }
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    cell.backgroundColor = BackColor;
+    //    static NSString *ID = @"SureResponsCell";
+    //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    //    if (cell == nil) {
+    //
+    //        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    //    }
+    //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //    cell.backgroundColor = BackColor;
     if (indexPath.row == 0) {
         static NSString *ID = @"SureResponsCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
@@ -177,9 +178,10 @@ NSNumber *caseDutyType;
 #pragma mark 发送验证码
 - (void)otherSendVification:(UIButton *)btn {
     
-
+    
+    
     [self startLoadData:btn];
-
+    
     
 }
 
@@ -187,6 +189,8 @@ NSNumber *caseDutyType;
 
 -(void)startLoadData:(UIButton *)btn
 {
+    FVCustomAlertView *fvView = [[FVCustomAlertView alloc]init];
+    [fvView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:0];
     NSMutableDictionary *bean = [[NSMutableDictionary alloc] init];
     if (btn == otherCode) {
         [bean setValue:self.otherPhoneNumbers forKey:@"phonenumber"];
@@ -198,25 +202,43 @@ NSNumber *caseDutyType;
     [bean setValue:[Globle getInstance].loadDataName forKey:@"username"];
     [bean setValue:[Globle getInstance].loadDataPass forKey:@"password"];
     [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/kckpAppSendVercode",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
-        NSDictionary *dic = result;
-        if (![dic[@"restate"]isEqualToString:@"0"]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"验证码发送失败，请重新发送" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
+        [fvView dismiss];
+        if (result != nil)
+        {
+            if ([result[@"restate"]isEqualToString:@"1"]) {
+                
+                [self showAlertMessage:@"验证码发送失败，请重新发送"];
+                [otherCode stop];
+                [thirdCode stop];
+            }
+            else
+            {
+                sendCodeView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"验证码发送成功！" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+                [sendCodeView show];
+                [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerSendCode) userInfo:nil repeats:NO];
+            }
+        }
+        else
+        {
+            [self showAlertMessage:@"验证码发送失败，请检查您的网络,重新发送验证码！"];
             [otherCode stop];
             [thirdCode stop];
         }
+       
         
     } ];
     
     
 }
+- (void)timerSendCode
+{
+    [sendCodeView dismissWithClickedButtonIndex:0 animated:NO];
+}
 
-
-#pragma mark 签名信息代理
+#pragma mark 签名信息
 -(void)passSignImage:(UIImage *)signImage
 {
     signImage = [self imageWithImage:signImage scaledToSize:CGSizeMake(160, 90)];
-    
     if (choseCount == 0) {
         self.selfbtn.backgroundColor = [UIColor clearColor];
         [self.selfbtn setTitle:@"" forState:UIControlStateNormal];
@@ -242,8 +264,8 @@ NSNumber *caseDutyType;
     }
     
     
+    
 }
-
 //图片缩放
 -(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
 {
@@ -263,11 +285,10 @@ NSNumber *caseDutyType;
     // Return the new image.
     return newImage;
 }
-
-#pragma mark -
-#pragma mark - 上传签名
 - (void)vificationSign:(UIImage *)usSignImage Type:(NSInteger)typeCount
 {
+    FVCustomAlertView *fvView = [[FVCustomAlertView alloc]init];
+    [fvView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:0];
     NSData *_data = UIImageJPEGRepresentation(usSignImage, 0.9);
     NSString * encodedImageStr = [_data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     encodedImageStr = [encodedImageStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];  //去除掉首尾的空白字符和换行字符
@@ -283,17 +304,26 @@ NSNumber *caseDutyType;
     [bean setValue:[Globle getInstance].loadDataPass forKey:@"password"];
     [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/kckpAppUploadFile",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
-        if (typeCount == 0) {
-          self.usSignUrl = result[@"data"][@"fileurl"];
-        }
-        else if (typeCount == 1)
+        if (result != nil)
         {
-            self.otherSignUrl = result[@"data"][@"fileurl"];
+            if (typeCount == 0) {
+                self.usSignUrl = result[@"data"][@"fileurl"];
+            }
+            else if (typeCount == 1)
+            {
+                self.otherSignUrl = result[@"data"][@"fileurl"];
+            }
+            else if (typeCount == 2)
+            {
+                self.thirdSignUrl = result[@"data"][@"fileurl"];
+            }
+            [fvView dismiss];
         }
-        else if (typeCount == 2)
+        else
         {
-            self.thirdSignUrl = result[@"data"][@"fileurl"];
+            [self showAlertMessage:@"签名图片失败，请检查您的网络，重新签名！"];
         }
+         
         
     } ];
 }
@@ -329,49 +359,98 @@ NSNumber *caseDutyType;
 #pragma mark 确认事故 生成协议书
 - (IBAction)generateAgreement:(id)sender {
     
-
+    
     [self upAgreementInformation];
-
+    
 }
 
 #pragma mark 生成事故协议书
 
 - (void)upAgreementInformation
 {
-    
-    if (!self.otherVerificationCode.text.length) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"验证码验证不能为空！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
+    if (self.dataSource.count == 2)
+    {
+        if (!self.otherVerificationCode.text.length) {
+            
+            [self showAlertMessage:@"对方验证码验证不能为空！"];
+        }
+        else if (!self.usSignUrl)
+        {
+            [self showAlertMessage:@"本方签名信息不能为空！"];
+        }
+        else if (!self.otherSignUrl)
+        {
+            [self showAlertMessage:@"对方签名信息不能为空！"];
+        }
+        else
+        {
+            [self checkVerificationCode];
+            
+        }
     }
     else
     {
-        NSMutableDictionary *bean = [[NSMutableDictionary alloc] init];
-        [bean setValue:self.otherPhoneNumbers forKey:@"phonenumber"];
-        [bean setValue:self.otherVerificationCode.text forKey:@"validatecode"];
-        
-        NSMutableDictionary *bean1 = [[NSMutableDictionary alloc] init];
-        [bean1 setValue:bean forKey:@"userbean"];
-        [bean1 setValue:[Globle getInstance].loadDataName forKey:@"username"];
-        [bean1 setValue:[Globle getInstance].loadDataPass forKey:@"password"];
-        [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/kckpAppValCode",kckpzcslrest] params:bean1 httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
-            NSDictionary *dic = result;
+        if (!self.otherVerificationCode.text.length) {
             
-            if (![dic[@"restate"]isEqualToString:@"0"]) {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"验证码验证失败，请重新发送" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alert show];
+            [self showAlertMessage:@"对方验证码验证不能为空！"];
+            
+        }
+        else if (!self.thirdVificationCode.text.length)
+        {
+            [self showAlertMessage:@"第三方验证码验证不能为空！"];
+        }
+        else if (!self.usSignUrl)
+        {
+            [self showAlertMessage:@"本方签名信息不能为空！"];
+        }
+        else if (!self.otherSignUrl)
+        {
+            [self showAlertMessage:@"对方签名信息不能为空！"];
+        }
+        else if (!self.thirdSignUrl)
+        {
+            [self showAlertMessage:@"第三方签名信息不能为空！"];
+        }
+        else
+        {
+            [self checkVerificationCode];
+            
+        }
+    }
+}
+- (void)checkVerificationCode
+{
+    
+    NSMutableDictionary *bean = [[NSMutableDictionary alloc] init];
+    [bean setValue:self.otherPhoneNumbers forKey:@"phonenumber"];
+    [bean setValue:self.otherVerificationCode.text forKey:@"validatecode"];
+    
+    NSMutableDictionary *bean1 = [[NSMutableDictionary alloc] init];
+    [bean1 setValue:bean forKey:@"userbean"];
+    [bean1 setValue:[Globle getInstance].loadDataName forKey:@"username"];
+    [bean1 setValue:[Globle getInstance].loadDataPass forKey:@"password"];
+    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/kckpAppValCode",kckpzcslrest] params:bean1 httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+        
+        NSLog(@"验证码 == %@",result);
+        if (result != nil)
+        {
+            if ([result[@"restate"]isEqualToString:@"0"]) {
+                
+                
+                [self upCaseInformation];
             }
             else
             {
-               [self upCaseInformation]; 
+                [self showAlertMessage:@"验证码验证失败，请重新发送！"];
             }
-            
-        } ];
+        }
+        else
+        {
+            [self showAlertMessage:@"验证码验证失败，请检查您的网络，重新发送验证码！"];
+        }
+       
         
-        
-    }
-
-    
-    
+    } ];
 }
 - (void)upCaseInformation
 {
@@ -382,47 +461,70 @@ NSNumber *caseDutyType;
     NSString *imagelat = [NSString stringWithFormat:@"%f",[Globle getInstance].imagelat];
     NSNumber *desDuty = [NSNumber numberWithInt:descriType];
     
-    NSMutableDictionary *bean2 = [[NSMutableDictionary alloc] init];
-    [bean2 setValue:self.appcaseno forKey:@"appcaseno"];
-    [bean2 setValue:self.CarNumber forKey:@"casecarno"];
-    [bean2 setValue:self.PhoneNumber forKey:@"casetelephoe"];
-    [bean2 setValue:imagelon forKey:@"caselon"];
-    [bean2 setValue:imagelat forKey:@"caselat"];
-    [bean2 setValue:[Globle getInstance].imageaddress forKey:@"caseaddress"];
-    [bean2 setValue:deviceID forKey:@"fastsingleno"];
-    [bean2 setValue:[self currentDate] forKey:@"sibmitdate"];
-    [bean2 setValue:desDuty forKey:@"accidenttype"];
-    [bean2 setValue:self.describeString forKey:@"accidentdes"];
-    [bean2 setValue:[Globle getInstance].areaid forKey:@"areaid"];
-    [bean2 setValue:[self carseData] forKey:@"casecarlist"];
-    [bean2 setValue:[Globle getInstance].loadDataName forKey:@"username"];
-    [bean2 setValue:[Globle getInstance].loadDataPass forKey:@"password"];
-    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/zdsubmitcasefastsingle",kckpzcslrest] params:bean2 httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+    
+    if ([self.checkType isEqualToString:@"0"])
+    {
+        NSMutableDictionary *bean2 = [[NSMutableDictionary alloc] init];
+        [bean2 setValue:self.appcaseno forKey:@"appcaseno"];
+        [bean2 setValue:self.CarNumber forKey:@"casecarno"];
+        [bean2 setValue:self.PhoneNumber forKey:@"casetelephoe"];
+        [bean2 setValue:imagelon forKey:@"caselon"];
+        [bean2 setValue:imagelat forKey:@"caselat"];
+        [bean2 setValue:[Globle getInstance].imageaddress forKey:@"caseaddress"];
+        [bean2 setValue:deviceID forKey:@"fastsingleno"];
+        [bean2 setValue:[self currentDate] forKey:@"sibmitdate"];
+        [bean2 setValue:desDuty forKey:@"accidenttype"];
+        [bean2 setValue:self.describeString forKey:@"accidentdes"];
+        [bean2 setValue:[Globle getInstance].areaid forKey:@"areaid"];
+        [bean2 setValue:[self carseData] forKey:@"casecarlist"];
+        [bean2 setValue:[Globle getInstance].loadDataName forKey:@"username"];
+        [bean2 setValue:[Globle getInstance].loadDataPass forKey:@"password"];
+        [self checkTypeCaseData:bean2 Interface:@"zdsubmitcasefastsingle"];
+    }
+    else
+    {
+        NSMutableDictionary *bean2 = [[NSMutableDictionary alloc] init];
+        [bean2 setValue:self.appcaseno forKey:@"appcaseno"];
+        [bean2 setValue:[self carseData] forKey:@"casecarlist"];
+        [bean2 setValue:[Globle getInstance].loadDataName forKey:@"username"];
+        [bean2 setValue:[Globle getInstance].loadDataPass forKey:@"password"];
+        [self checkTypeCaseData:bean2 Interface:@"zdsubmitcasefastsingleconfirm"];
+        
+    }
+    
+    
+    //保险报案数据
+    [self reprotCaseData];
+}
+- (void)checkTypeCaseData:(NSMutableDictionary *)bean2 Interface:(NSString *)interface
+{
+    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/%@",kckpzcslrest,interface] params:bean2 httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
         NSLog(@"sheng  %@",result);
         NSLog(@"sheng  %@",result[@"redes"]);
         
         [fvalertView dismiss];
-        
-        NSDictionary *dic = result;
-        
-        if (![dic[@"restate"]isEqualToString:@"0"]) {
-
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"生成事故协议书失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
+        if (result != nil)
+        {
+            if (![result[@"restate"]isEqualToString:@"0"]) {
+                
+                [self showAlertMessage:@"生成事故协议书失败！"];
+            }
+            else
+            {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ARAView" bundle:nil];
+                ARAViewController *araVC = [storyboard instantiateViewControllerWithIdentifier:@"AraRespons"];
+                araVC.hidesBottomBarWhenPushed = YES;
+                araVC.ARVWebString = result[@"data"][@"url"];
+                [self.navigationController pushViewController:araVC animated:YES];
+            }
         }
         else
         {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ARAView" bundle:nil];
-            ARAViewController *araVC = [storyboard instantiateViewControllerWithIdentifier:@"AraRespons"];
-            araVC.hidesBottomBarWhenPushed = YES;
-            araVC.ARVWebString = result[@"data"][@"url"];
-            [self.navigationController pushViewController:araVC animated:YES];
+            [self showAlertMessage:@"生成事故协议书失败，请检查您的网络！"];
         }
-    }];
-    
-    //保险报案数据
-    [self reprotCaseData];
+        
+    } ];
 }
 
 #pragma mark 保险报案数据
@@ -447,7 +549,6 @@ NSNumber *caseDutyType;
     [caseDict setValue:[Globle getInstance].loadDataPass forKey:@"password"];
     
 }
-
 #pragma mark casecarlist:    对象数组
 - (NSMutableArray *)carseData
 {
@@ -506,7 +607,7 @@ NSNumber *caseDutyType;
 
 -(void)loadData
 {
-
+    
     //本方
     self.usName.text = self.UserName;
     self.usCarNumber.text = self.CarNumber;
@@ -716,9 +817,10 @@ NSNumber *caseDutyType;
             
         }];
     }
-
+    
 }
 
+#pragma mark - 签名
 - (UIView *)footSighButton
 {
     UIView *backView = [[UIView alloc]init];
@@ -736,7 +838,7 @@ NSNumber *caseDutyType;
     [self.selfbtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(backView).with.offset(10);
         make.centerY.equalTo(backView.mas_centerY);
-        make.bottom.equalTo(backView).with.offset(10);
+        make.bottom.equalTo(backView).with.offset(-5);
         make.top.equalTo(backView).with.offset(10);
         
     }];
@@ -790,10 +892,15 @@ NSNumber *caseDutyType;
         }];
     }
     
-    
-    
-    
     return backView;
+}
+#pragma mark - 提示的AlertView
+- (void)showAlertMessage:(NSString *)message
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alert show];
+    
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

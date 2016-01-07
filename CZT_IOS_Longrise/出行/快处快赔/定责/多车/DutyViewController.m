@@ -42,14 +42,36 @@ extern NSString * monitorIP;  //监听IP
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"指导定责";
+//    //隐藏导航栏底部黑条
+//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+//    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStyleDone target:self action:@selector(backClicked:)]];
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame = CGRectMake(0, 0, 30, 30);
+    [backBtn setImage:[UIImage imageNamed:@"public_back"] forState:UIControlStateNormal];
+    backBtn.highlighted = NO;
+    [backBtn addTarget:self action:@selector(backClicked:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:backBtn];
+    [self.navigationItem setLeftBarButtonItem:item];
+    
+    self.navigationItem.hidesBackButton = YES;
     [self initCurl];
     [self go];
     // Do any additional setup after loading the view from its nib.
 }
+#pragma mark － 导航栏返回按钮点击事件
+-(void)backClicked:(id)sender{
+    self.navigationController.navigationBar.alpha = 0.5;
+    _imageView.hidden = YES;
+    _giveUpGuideButton.hidden = YES;
+    _backgroundImageView.hidden = YES;
+    _giveUpWarnView.hidden = NO;
+    _noGiveUpButton.hidden = NO;
+    _giveupButton.hidden = NO;
+    _bacView.hidden = NO;
+}
 
-#pragma mark -
+
 #pragma mark - 初始化curl及监听事件
 -(void)initCurl
 {
@@ -233,6 +255,12 @@ size_t icomet_callback1(char *ptr, size_t size, size_t nmemb, void *userdata)
     controVC.otherCompanyCode = self.otherCompanyCode;
     controVC.thirdCompanyCode = self.thirdCompanyCode;
     [self.navigationController pushViewController:controVC animated:YES];
+    NSArray *tempVCA = [self.navigationController viewControllers];
+    for (UIViewController *tempVC in tempVCA) {
+        if ([tempVC isKindOfClass:[DutyViewController class]]) {
+            [tempVC removeFromParentViewController];
+        }
+    }
     
 }
 

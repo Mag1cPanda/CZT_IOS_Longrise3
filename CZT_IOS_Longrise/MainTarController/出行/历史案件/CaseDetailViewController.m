@@ -14,6 +14,7 @@
 #import "chatViewController.h"
 #import "CZT_IOS_Longrise.pch"
 #import "FVCustomAlertView.h"
+#import "WaitPayViewController.h"
 
 @interface CaseDetailViewController ()<UIAlertViewDelegate>{
     FVCustomAlertView *alertView;
@@ -202,8 +203,53 @@
 }
 
 -(void)tapPay:(UITapGestureRecognizer *)tap{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"暂无理赔信息!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    [alert show];
+    
+    alertView = [[FVCustomAlertView alloc]init];
+    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:alertView];
+    
+    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
+    [bean setValue:_appcaseno forKey:@"appcaseno"];
+    [bean setValue:@"3" forKey:@"msgtype"];
+    [bean setValue:[Globle getInstance].loadDataName forKey:@"username"];
+    [bean setValue:[Globle getInstance].loadDataPass forKey:@"password"];
+    
+    [[Globle getInstance].service requestWithServiceIP:ServiceURL ServiceName:[NSString stringWithFormat:@"%@/zdsearchunreceivemsg",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+        if (nil != result) {
+            NSDictionary *bigDic = result;
+            if ([bigDic[@"restate"]isEqualToString:@"0"]) {
+                
+                if (nil != bigDic) {
+                    NSDictionary *dic = bigDic[@"data"];
+                    if (nil != dic) {
+                        NSDictionary *msgDic = dic[@"msgdata"];
+                        if (nil != msgDic) {
+                            
+                            NSString *insresultStr = msgDic[@"insresult"];
+                            WaitPayViewController *WPVC = [[WaitPayViewController alloc]init];
+                            WPVC.insresult = insresultStr;
+                            WPVC.appcaseno = _appcaseno;
+                            WPVC.casecarno = _casecarno;
+                            [self.navigationController pushViewController:WPVC animated:YES];
+                        }
+                    }
+                    
+                    
+                }else{
+                    
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"暂无理赔信息!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
+                
+            }
+            
+        }else{
+         
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"查询理赔信息失败" message:@"请检查网络!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+        [alertView dismiss];
+    }];
 }
 
 -(void)tapInsurance:(UITapGestureRecognizer *)tap{

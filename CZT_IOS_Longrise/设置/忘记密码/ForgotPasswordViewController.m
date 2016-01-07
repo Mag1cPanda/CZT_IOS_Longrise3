@@ -84,7 +84,7 @@
                 timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(nsTimerFinish) userInfo:nil repeats:YES];
             }
             [alertView dismiss];
-            
+            self.getVerifyButton.userInteractionEnabled = YES;
         }];
         
     }else{
@@ -104,7 +104,7 @@
         count = 120;
         self.enumNumber.hidden = YES;
         [timer invalidate];
-        self.getVerifyButton.userInteractionEnabled = YES;
+//        self.getVerifyButton.userInteractionEnabled = YES;
         [self.getVerifyButton setTitle:@"获取验证码" forState:UIControlStateNormal];
     }
     else
@@ -113,7 +113,7 @@
         self.enumNumber.hidden = NO;
         NSString *title = [NSString stringWithFormat:@"剩余%d秒",count];
         self.enumNumber.text = title;
-        self.getVerifyButton.userInteractionEnabled = NO;
+//        self.getVerifyButton.userInteractionEnabled = NO;
     }
 }
 
