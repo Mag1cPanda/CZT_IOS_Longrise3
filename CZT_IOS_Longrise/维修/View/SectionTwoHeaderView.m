@@ -10,12 +10,17 @@
 
 @implementation SectionTwoHeaderView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+-(void)setUIWithInfo:(DetailInfoModel *)model{
+    
+//    self.total.text = [NSString stringWithFormat:@"评价(%@)",model.peoplenumber];
+
+    NSInteger totalNum = [model.ratenum integerValue]
+                       + [model.middlenum integerValue]
+                       + [model.badnum integerValue];
+    self.total.text = [NSString stringWithFormat:@"评价(%zi)",totalNum];
+    self.good.text = [NSString stringWithFormat:@"好评(%@)",model.ratenum];
+    self.middle.text = [NSString stringWithFormat:@"中评(%@)",model.middlenum];
+    self.bad.text = [NSString stringWithFormat:@"差评(%@)",model.badnum];
 }
-*/
 
 @end

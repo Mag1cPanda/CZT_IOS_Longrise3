@@ -73,14 +73,16 @@
     NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
     NSString *token = [bigDic objectForKey:@"token"];
     NSString *userflag = [userdic objectForKey:@"userflag"];
-    NSString *areaid = [Globle getInstance].areaid;
+//    NSString *areaid = [Globle getInstance].areaid;
+    
+    NSLog(@"_carNo -> %@",_carNo);
     
     [bean setValue:userflag forKey:@"userflag"];
     [bean setValue:token forKey:@"token"];
     [bean setValue:[NSNumber numberWithInteger:page] forKey:@"pagenum"];
     [bean setValue:@"5" forKey:@"pagesize"];
     [bean setValue:_carNo forKey:@"carno"];
-    [bean setValue:areaid forKey:@"areaid"];
+    [bean setValue:@"420100000000000000" forKey:@"areaid"];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在加载";

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DetailInfoModel.h"
 @interface SectionTwoHeaderView : UIView
 
 @property (weak, nonatomic) IBOutlet UILabel *total;
@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *middle;
 @property (weak, nonatomic) IBOutlet UILabel *bad;
 
+-(void)setUIWithInfo:(DetailInfoModel *)model;
 
 @end

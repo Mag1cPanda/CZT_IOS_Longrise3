@@ -114,6 +114,9 @@
     
     NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
     [header.icon sd_setImageWithURL:[NSURL URLWithString:[userdic objectForKey:@"photo"]]placeholderImage:[UIImage imageNamed:@"icon07"]];
+    
+    NSLog(@"photo -> %@",userdic[@"photo"]);
+    
     header.userName.text = [userdic objectForKey:@"userflag"];
     NSMutableString *phoneNum = [NSMutableString stringWithString:[userdic objectForKey:@"mobilephone"]];
     [phoneNum replaceCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
@@ -148,7 +151,7 @@
             header.userName.text = @"未登陆";
             //创建通知
             NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"1",@"restate",nil];
-            NSNotification *notification = [NSNotification notificationWithName:NotificationNameForExit object:nil userInfo:dict];
+            NSNotification *notification = [NSNotification notificationWithName:NotificationNameForLogout object:nil userInfo:dict];
             //发送通知
             [[NSNotificationCenter defaultCenter]postNotification:notification];
             [self.navigationController pushViewController:[[LoginViewController alloc]init] animated:YES];

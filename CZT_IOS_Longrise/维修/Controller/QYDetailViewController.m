@@ -18,7 +18,6 @@
 {
     UITableView *table;
     HeaderView *header;
-    NSArray *imgCount;
     CGFloat imgHeight;
     
     NSMutableArray *evaluateArray;
@@ -38,7 +37,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     evaluateArray = [NSMutableArray array];
     
-    imgCount = @[@0,@3,@0];
     
     /**
      *  暂时隐藏分享按钮
@@ -95,7 +93,7 @@
         
         [hud hide:YES afterDelay:0];
         
-//        NSLog(@"DetailResult%@",[Util objectToJson:result]);
+        NSLog(@"DetailResult%@",[Util objectToJson:result]);
         
         if (nil != result) {
             DetailModel *model = [[DetailModel alloc]initWithString:[Util objectToJson:result] error:nil];
@@ -184,10 +182,7 @@
     if (section == 1) {
         SectionTwoHeaderView *twoHeader = [[NSBundle mainBundle] loadNibNamed:@"SectionTwoHeaderView" owner:nil options:nil][0];
         if (nil != infoModel) {
-            twoHeader.total.text = [NSString stringWithFormat:@"评价(%@)",infoModel.peoplenumber];
-            twoHeader.good.text = [NSString stringWithFormat:@"好评(%@)",infoModel.ratenum];
-            twoHeader.middle.text = [NSString stringWithFormat:@"中评(%@)",infoModel.middlenum];
-            twoHeader.bad.text = [NSString stringWithFormat:@"差评(%@)",infoModel.badnum];
+            [twoHeader setUIWithInfo:infoModel];
         }
         
         return twoHeader;

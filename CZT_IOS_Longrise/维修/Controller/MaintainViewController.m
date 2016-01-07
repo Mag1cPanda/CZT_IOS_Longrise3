@@ -61,6 +61,17 @@ LoginControllerClose>
 
 @implementation MaintainViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showWarmTip) name:NotificationNameForLogout object:nil];
+}
+
+- (void)showWarmTip{
+
+    [qyTable removeFromSuperview];
+    [wxTable removeFromSuperview];
+    [self addWarmTip];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"WXviewDidLoad");
@@ -476,7 +487,11 @@ LoginControllerClose>
         QYTableViewCell *cell = (QYTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"QYTableViewCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         ResultModel *model = qyDataArray[indexPath.row];
-        [cell setUIWithInfo:model];
+        
+        if (nil != model) {
+            [cell setUIWithInfo:model];
+        }
+        
         return cell;
         
     }
@@ -553,6 +568,8 @@ LoginControllerClose>
     else{
         HealthRecordViewController *vc = [HealthRecordViewController new];
         vc.hidesBottomBarWhenPushed = YES;
+//        CarModel *carModel = wxDataArray[indexPath.section];
+//        vc.carNo = carModel.carno;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -106,9 +106,13 @@ UITableViewDelegate>
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     QYTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QYTableViewCell"];
-    ResultModel *model = qySearchData[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell setUIWithInfo:model];
+    ResultModel *model = qySearchData[indexPath.row];
+    
+    if (nil != model) {
+        [cell setUIWithInfo:model];
+    }
+    
     return cell;
 }
 
