@@ -258,7 +258,7 @@
 		6FFD0CFF1C3121AF00A78CF1 /* VerOtherSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFD0CF21C3121AF00A78CF1 /* VerOtherSectionCell.xib */; };
 		6FFD0D001C3121AF00A78CF1 /* VerSectionOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFD0CF41C3121AF00A78CF1 /* VerSectionOneCell.m */; };
 		6FFD0D011C3121AF00A78CF1 /* VerSectionOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFD0CF51C3121AF00A78CF1 /* VerSectionOneCell.xib */; };
-		8517E0521C3DF28D008443AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8517E0511C3DF28D008443AE /* Main.storyboard */; };
+		851540E41C3DFA150007EA8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 851540E31C3DFA150007EA8A /* Main.storyboard */; };
 		8517E05F1C3DF3AC008443AE /* QRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8517E0561C3DF3AC008443AE /* QRadioButton.m */; };
 		8517E0601C3DF3AC008443AE /* radio_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E0571C3DF3AC008443AE /* radio_checked.png */; };
 		8517E0611C3DF3AC008443AE /* radio_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E0581C3DF3AC008443AE /* radio_checked@2x.png */; };
@@ -748,7 +748,7 @@
 		6FFD0CF31C3121AF00A78CF1 /* VerSectionOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerSectionOneCell.h; sourceTree = "<group>"; };
 		6FFD0CF41C3121AF00A78CF1 /* VerSectionOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerSectionOneCell.m; sourceTree = "<group>"; };
 		6FFD0CF51C3121AF00A78CF1 /* VerSectionOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerSectionOneCell.xib; sourceTree = "<group>"; };
-		8517E0511C3DF28D008443AE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		851540E31C3DFA150007EA8A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8517E0551C3DF3AC008443AE /* QRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRadioButton.h; sourceTree = "<group>"; };
 		8517E0561C3DF3AC008443AE /* QRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRadioButton.m; sourceTree = "<group>"; };
 		8517E0571C3DF3AC008443AE /* radio_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_checked.png; sourceTree = "<group>"; };
@@ -1138,13 +1138,13 @@
 				5807B4501C07DB8100E7A701 /* MainTabbarController */,
 				5807B42E1C07DA7500E7A701 /* AppDelegate.h */,
 				5807B42F1C07DA7500E7A701 /* AppDelegate.mm */,
-				8517E0511C3DF28D008443AE /* Main.storyboard */,
 				5807B4311C07DA7500E7A701 /* ViewController.h */,
 				5807B4321C07DA7500E7A701 /* ViewController.m */,
 				5807B4371C07DA7500E7A701 /* Images.xcassets */,
 				5807B4391C07DA7500E7A701 /* LaunchScreen.xib */,
 				5807B42A1C07DA7500E7A701 /* Supporting Files */,
 				585730401C316B290017A6AE /* FirstGuide.storyboard */,
+				851540E31C3DFA150007EA8A /* Main.storyboard */,
 			);
 			path = CZT_IOS_Longrise;
 			sourceTree = "<group>";
@@ -1856,8 +1856,8 @@
 				85537A141C3BA5B100B940BE /* EvaluateViewController.xib in Resources */,
 				58046EF21C203FBE00F59365 /* HRDetailHeaderView.xib in Resources */,
 				6FFD0CF71C3121AF00A78CF1 /* CarDetailCell.xib in Resources */,
+				851540E41C3DFA150007EA8A /* Main.storyboard in Resources */,
 				585730411C316B290017A6AE /* FirstGuide.storyboard in Resources */,
-				8517E0521C3DF28D008443AE /* Main.storyboard in Resources */,
 				58FE1F4F1C0B445F00CF0C2F /* OneCarViewController.xib in Resources */,
 				58046EEE1C203FBE00F59365 /* HeaderView.xib in Resources */,
 				6F1DA3801C3A5BD1005BCADF /* FirstGuideViewController.xib in Resources */,
