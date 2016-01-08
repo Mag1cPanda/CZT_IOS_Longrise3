@@ -58,7 +58,7 @@
     
     //标题
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, [Util getStatusBarHeight], customNavigationBar.width, [Util getnavigationBarHeight:self.navigationController])];
-    titleLabel.text = @"出行";
+    titleLabel.text = @"事故处理";
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont systemFontOfSize:18];
     titleLabel.textAlignment = NSTextAlignmentCenter;

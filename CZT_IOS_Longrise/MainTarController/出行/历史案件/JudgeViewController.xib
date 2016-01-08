@@ -7,12 +7,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JudgeViewController">
             <connections>
+                <outlet property="justSoSoButton" destination="dbb-Pt-ftL" id="HQA-C2-avA"/>
                 <outlet property="justSoSoImageView" destination="EsZ-Pp-DuN" id="mrb-oh-ZfZ"/>
                 <outlet property="pickerBtn" destination="IBg-as-zup" id="Ufv-p8-Tzv"/>
+                <outlet property="satisfiedButton" destination="g5y-Lx-xen" id="WSz-cy-gQf"/>
                 <outlet property="satisfiedImageView" destination="4tL-e0-003" id="xfe-Ae-3we"/>
                 <outlet property="selectPickerView" destination="S0L-lc-SX9" id="tGb-ex-ciI"/>
                 <outlet property="suggestTextView" destination="OeK-iq-5wc" id="RUl-9D-hkJ"/>
+                <outlet property="sureButton" destination="DAh-Ce-gzX" id="qv7-g2-FCN"/>
+                <outlet property="unsatisfiedButton" destination="c48-H3-pJW" id="zGl-yt-QT8"/>
                 <outlet property="unsatisfiedImageView" destination="BqA-Wy-b9d" id="Srb-np-HtK"/>
+                <outlet property="verySatisfiedButton" destination="9ph-VW-RvK" id="Gbg-c9-nVx"/>
                 <outlet property="verySatisfiedImageView" destination="0m0-bd-GOm" id="xjG-cZ-uN7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configUI];
-    [self requestData];
+   // [self requestData];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -48,21 +48,19 @@
     return self;
 }
 
-//-(void)viewWillAppear:(BOOL)animated{
-//    _dataList = [NSMutableArray array];
-//    [self requestData];
-//    
-//    
-//}
+-(void)viewWillAppear:(BOOL)animated{
+    _dataList = [NSMutableArray array];
+    [self requestData];
+    
+    
+}
 
 #pragma mark -
 #pragma mark - 配置界面
 -(void)configUI{
     //添加下拉刷新
     _dataList = [NSMutableArray array];
-    alertView = [[FVCustomAlertView alloc] init];
-    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
-    [self.view addSubview:alertView];
+   
     self.title = @"历史案件";
     [_htTableView registerNib:[UINib nibWithNibName:@"HistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"historyCell"];
     [self addRefresh];
@@ -71,9 +69,9 @@
 #pragma mark -
 #pragma mark - 添加下拉刷新
 -(void)addRefresh{
-    __block HistoryCaseViewController *blockSelf = self;
+   // __block HistoryCaseViewController *blockSelf = self;
     _htTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [blockSelf.htTableView reloadData];
+        //[blockSelf.htTableView reloadData];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
              [_htTableView.mj_header endRefreshing];
@@ -85,6 +83,10 @@
 #pragma mark - 数据请求
 -(void)requestData{
    // NSString *ServiceUrl = @"http://192.168.3.229:86/KCKP/restservices/kckpzcslrest/";
+    
+    alertView = [[FVCustomAlertView alloc] init];
+    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:alertView];
     
     NSMutableDictionary *bean = [NSMutableDictionary dictionary];
     
@@ -102,14 +104,21 @@
         if ([dic[@"restate"]isEqualToString:@"0"]) {
             if (nil != dic[@"data"]) {
                 NSArray *array = dic[@"data"];
-                for (NSDictionary * dic in array) {
-                    HistoryModel *htModel = [[HistoryModel alloc]initWithDictionary:dic];
-                    if (htModel.state != 7) {
-                        [_dataList addObject:htModel];
+                if (![dic[@"data"]isEqual:@""]) {
+                    for (NSDictionary * dic in array) {
+                        HistoryModel *htModel = [[HistoryModel alloc]initWithDictionary:dic];
+                        if (htModel.state != 7) {
+                            [_dataList addObject:htModel];
+                        }
+                        // NSLog(@"dic=========%@",dic);
                     }
-                    // NSLog(@"dic=========%@",dic);
+                    [_htTableView reloadData];
+                }else{
+                    
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"没有历史记录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
                 }
-                [_htTableView reloadData];
+                
             }else{
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"没有历史记录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
@@ -121,9 +130,8 @@
             NSLog(@"请求数据失败");
             NSLog(@"%@",dic[@"redes"]);
         }
-        if (nil != alertView) {
-            [alertView dismiss];
-        }
+        [alertView dismiss];
+        
        
     }];
 }
@@ -251,6 +259,10 @@
 -(void)pushNextControllerWith:(int)caseState andNumber:(NSString *)casenumber andAppcaseseno:(NSString *)appcaseno andCasecarno:(NSString *)casecarno andCasedate:(NSString *)casedate andInscomCode:(NSString *)inscomcode andCasetype:(int)casetype{
     
     if (caseState == 1) {
+        
+        alertView = [[FVCustomAlertView alloc] init];
+        [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+        [self.view addSubview:alertView];
         SGCLViewController *SGL = [[SGCLViewController alloc]init];
         SGL.currentMark = 1;
         SGL.appcaseno = appcaseno;
@@ -261,6 +273,39 @@
             
             SGL.type = 2;
         }
+        
+        NSMutableArray *casecarlistArray = [NSMutableArray array];
+        NSMutableDictionary *bean = [NSMutableDictionary dictionary];
+        //    [bean setObject:@"110101201512180009" forKey:@"casenumber"];
+        [bean setObject:casenumber forKey:@"casenumber"];
+        //  [bean setObject:@"15071440127" forKey:@"appphone"];
+        [bean setObject:_telephone forKey:@"appphone"];
+        [bean setObject:[Globle getInstance].loadDataName forKey:@"username"];
+        [bean setObject:[Globle getInstance].loadDataPass forKey:@"password"];
+        
+        [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/zdsearchcasedetailinfo",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+            NSDictionary *bigDic = result;
+            if ([bigDic[@"restate"]isEqualToString:@"0"]) {
+                if (bigDic[@"data"]) {
+                    //     NSLog(@"%@",dic[@"data"]);
+                    NSDictionary *dataDic = bigDic[@"data"];
+                    for (NSDictionary *dic in dataDic) {
+                        [casecarlistArray addObject:dic];
+                    }
+                    [casecarlistArray addObject:casecarno];
+                    
+                }else{
+                    NSLog(@"%@",bigDic[@"redes"]);
+                }
+                
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"加载失败，请确认网络是否开启！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+                NSLog(@"请求数据失败");
+                NSLog(@"%@",bigDic[@"redes"]);
+            }
+            [alertView dismiss];
+        }];
         SGL.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:SGL animated:YES];
         

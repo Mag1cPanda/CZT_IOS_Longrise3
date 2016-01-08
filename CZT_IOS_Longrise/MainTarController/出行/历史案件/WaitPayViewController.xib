@@ -18,17 +18,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="阿斯顿三大大大大师答大手大脚啊给大家卡是孤苦伶仃撒到家阿 adsadasdsadad" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RD1-rW-5HA">
-                    <rect key="frame" x="31" y="30" width="270" height="80"/>
+                    <rect key="frame" x="28" y="30" width="282" height="80"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="lrH-vn-DPL"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon12" translatesAutoresizingMaskIntoConstraints="NO" id="wzg-SA-LCW">
-                    <rect key="frame" x="8" y="52" width="15" height="15"/>
+                    <rect key="frame" x="6" y="52" width="15" height="15"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="Cru-Pe-rdy"/>
@@ -62,11 +62,11 @@
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="RD1-rW-5HA" secondAttribute="trailing" constant="19" id="EQc-gU-WwY"/>
-                <constraint firstItem="RD1-rW-5HA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="31" id="IMP-tx-Gvh"/>
+                <constraint firstAttribute="trailing" secondItem="RD1-rW-5HA" secondAttribute="trailing" constant="10" id="EQc-gU-WwY"/>
+                <constraint firstItem="RD1-rW-5HA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="28" id="IMP-tx-Gvh"/>
                 <constraint firstItem="wzg-SA-LCW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="52" id="Jpm-GL-7MQ"/>
                 <constraint firstAttribute="bottom" secondItem="5y8-qn-qG0" secondAttribute="bottom" constant="51" id="Mad-18-v9i"/>
-                <constraint firstItem="wzg-SA-LCW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Pds-QC-Eco"/>
+                <constraint firstItem="wzg-SA-LCW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="6" id="Pds-QC-Eco"/>
                 <constraint firstItem="ytc-uM-SYE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YEJ-yA-zHg"/>
                 <constraint firstItem="ytc-uM-SYE" firstAttribute="top" secondItem="RD1-rW-5HA" secondAttribute="bottom" constant="100" id="ivI-hZ-d6W"/>
                 <constraint firstItem="RD1-rW-5HA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="kdZ-zq-fC6"/>

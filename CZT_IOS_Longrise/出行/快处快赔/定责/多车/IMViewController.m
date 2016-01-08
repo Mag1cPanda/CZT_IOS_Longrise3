@@ -54,7 +54,7 @@ NSString * monitorIP = @"203.86.8.92:82";  //监听IP
 @property (weak, nonatomic) IBOutlet UIButton *toolButton;
 @property (weak, nonatomic) IBOutlet UILabel *warnLabel;
 @property (weak, nonatomic) IBOutlet UILabel *overTimeLabel;
-
+@property (weak, nonatomic) IBOutlet UILabel *recordTimeLabel;
 
 @end
 
@@ -237,7 +237,7 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
             //增加数据源
             NSDateFormatter *fmt = [[NSDateFormatter alloc]init];
             NSDate *date = [NSDate date];
-            fmt.dateFormat = @"MM月dd日 hh:mm";
+            fmt.dateFormat = @"MM月dd日 HH:mm";
             NSString *time = [fmt stringFromDate:date];
             
             if ([[result allKeys] containsObject:@"content"]) {
@@ -700,7 +700,7 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
         NSString *sendTime = [fmt stringFromDate:date];
         NSString *context = @"2'";
         [self uploadVoice:sendTime];
-        fmt.dateFormat = @"MM月dd日 hh:mm";
+        fmt.dateFormat = @"MM月dd日 HH:mm";
         NSString *time = [fmt stringFromDate:date];
         [self addVoiceWithContent:context time:time longtime:sendTime];
         [_dispatchTableView reloadData];
@@ -716,21 +716,36 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
     if (timeCount >= 120) {
         return;
     }
-    [MP3 stopRecord];
-    [timer invalidate];
-    timer = nil;
-    _speakBtn.backgroundColor = [UIColor colorWithRed:196/255.0 green:196/255.0 blue:196/255.0 alpha:1];
     NSDateFormatter *fmt = [[NSDateFormatter alloc]init];
     NSDate *date = [NSDate date];
     fmt.dateFormat = @"mm/ss";
     timeAfter = [fmt stringFromDate:date];
+    NSString *context = [self getVoiceTime];
+    if (context.intValue == 0) {
+        [UIView animateWithDuration:0.5 animations:^{
+            _recordTimeLabel.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                _recordTimeLabel.alpha = 0;
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
+        return;
+    }
+    
+    [MP3 stopRecord];
+    [timer invalidate];
+    timer = nil;
+    _speakBtn.backgroundColor = [UIColor colorWithRed:196/255.0 green:196/255.0 blue:196/255.0 alpha:1];
+    
     
     fmt.dateFormat = @"YYYY-MM-DD HH:MM:SS";
     NSString *sendTime = [fmt stringFromDate:date];
-    NSString *context = [self getVoiceTime];
+    
     [self uploadVoice:sendTime];
     
-    fmt.dateFormat = @"MM月dd日 hh:mm";
+    fmt.dateFormat = @"MM月dd日 HH:mm";
     NSString *time = [fmt stringFromDate:date];
     
     [self addVoiceWithContent:context time:time longtime:sendTime];
@@ -850,7 +865,7 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
     
     NSDateFormatter *fmt = [[NSDateFormatter alloc]init];
     NSDate *date = [NSDate date];
-    fmt.dateFormat = @"MM月dd日 hh:mm";
+    fmt.dateFormat = @"MM月dd日 HH:mm";
     NSString *sendTime = [fmt stringFromDate:date];
     fmt.dateFormat = @"YYYY-MM-DD HH:MM:SS";
     NSString *time = [fmt stringFromDate:date];
@@ -968,7 +983,7 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
         NSString *content = textField.text;
         NSDateFormatter *fmt = [[NSDateFormatter alloc]init];
         NSDate *date = [NSDate date];
-        fmt.dateFormat = @"MM月dd日 hh:mm";
+        fmt.dateFormat = @"MM月dd日 HH:mm";
         NSString *time = [fmt stringFromDate:date];
         
         fmt.dateFormat = @"YYYY-MM-DD HH:MM:SS";

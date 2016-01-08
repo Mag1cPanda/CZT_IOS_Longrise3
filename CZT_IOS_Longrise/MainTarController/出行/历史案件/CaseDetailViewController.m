@@ -219,9 +219,9 @@
             NSDictionary *bigDic = result;
             if ([bigDic[@"restate"]isEqualToString:@"0"]) {
                 
-                if (nil != bigDic) {
+                if (![bigDic[@"data"]isEqual:@""]) {
                     NSDictionary *dic = bigDic[@"data"];
-                    if (nil != dic) {
+                    if (![dic isEqual:@""]) {
                         NSDictionary *msgDic = dic[@"msgdata"];
                         if (nil != msgDic) {
                             

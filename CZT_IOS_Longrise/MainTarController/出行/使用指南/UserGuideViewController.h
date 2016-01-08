@@ -9,5 +9,6 @@
 #import "PublicViewController.h"
 
 @interface UserGuideViewController : PublicViewController
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

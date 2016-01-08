@@ -54,9 +54,12 @@
     Photo *message = _messageFrame.message;
     
     // 1、设置时间
-    [_timeBtn setTitle:message.time forState:UIControlStateNormal];
+    if (_messageFrame.showTime) {
+        [_timeBtn setTitle:message.time forState:UIControlStateNormal];
+        
+        _timeBtn.frame = _messageFrame.timeF;
+    }
     
-    _timeBtn.frame = _messageFrame.timeF;
     
     // 2、设置头像
     _iconView.image = [UIImage imageNamed:message.icon];
@@ -68,7 +71,7 @@
    // _contentBtn.layer.cornerRadius = 100;
     
     
-    _contentBtn.contentEdgeInsets = UIEdgeInsetsMake(ContentTop, ContentLeft + 18                  , ContentBottom - 8, ContentRight);
+    _contentBtn.contentEdgeInsets = UIEdgeInsetsMake(ContentTop, ContentLeft + 18, ContentBottom - 8, ContentRight);
     _contentBtn.frame = _messageFrame.contentF;
     
     if (message.type == PhotoTypeMe) {

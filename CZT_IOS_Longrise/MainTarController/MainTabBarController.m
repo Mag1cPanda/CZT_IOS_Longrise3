@@ -13,10 +13,9 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
     NSArray *names = @[@"出行",@"维修",@"设置"];
     NSArray *imgAry = @[@"nav01@x2",@"nav02@x2",@"nav03@x2"];
-    NSArray *selectedImgAry = @[@"nav01on@x2",@"nav02on@x2",@"nav03on@x2"];
+    NSArray *selectedImgAry = @[@"nav01_on@x2",@"nav02_on@x2",@"nav03_on@x2"];
     for (int i=0; i<3; i++) {
         UINavigationController *nav = self.viewControllers[i];
         UIViewController *vc = nav.viewControllers[0];
@@ -24,8 +23,6 @@
         UIImage *selectedImage = [UIImage imageNamed:selectedImgAry[i]];
         vc.tabBarItem = [[UITabBarItem alloc]initWithTitle:names[i] image:image selectedImage:selectedImage];
     }
-    
-
     
 }
 

@@ -10,6 +10,7 @@
                 <outlet property="dispatchTableView" destination="05X-Ci-pEU" id="kBO-PU-szN"/>
                 <outlet property="messageField" destination="5bY-PH-rbS" id="Z3Z-Od-h0D"/>
                 <outlet property="overTimeLabel" destination="kcA-vK-ZVF" id="bHK-Gw-8CP"/>
+                <outlet property="recordTimeLabel" destination="uSh-tk-lE5" id="Bqa-2j-TVq"/>
                 <outlet property="sendMessageButton" destination="pNb-cg-1C8" id="0w5-Io-fSF"/>
                 <outlet property="speakBtn" destination="Mgc-kc-31v" id="xZk-bZ-sTs"/>
                 <outlet property="startVoice" destination="nq0-SW-OKO" id="KwM-fp-NKW"/>
@@ -234,6 +235,18 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="录音时间太短！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSh-tk-lE5">
+                    <rect key="frame" x="130" y="256" width="115" height="36"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.20112179487179482" green="0.20112179487179482" blue="0.20112179487179482" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="Vvl-UN-Sse"/>
+                        <constraint firstAttribute="width" constant="115" id="x68-qY-ofX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -247,7 +260,9 @@
                 <constraint firstAttribute="trailing" secondItem="05X-Ci-pEU" secondAttribute="trailing" id="Y75-yj-iRq"/>
                 <constraint firstItem="kcA-vK-ZVF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YSz-xy-f0k"/>
                 <constraint firstItem="sEI-vW-SdD" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-60" id="dcf-iJ-4G7"/>
+                <constraint firstItem="uSh-tk-lE5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h1I-g9-M9O"/>
                 <constraint firstAttribute="bottom" secondItem="KLR-ZT-v09" secondAttribute="bottom" id="hA1-71-KhA"/>
+                <constraint firstItem="uSh-tk-lE5" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-59" id="iKa-Mm-dUH"/>
                 <constraint firstItem="05X-Ci-pEU" firstAttribute="bottom" secondItem="KLR-ZT-v09" secondAttribute="top" id="mBO-Uh-0Wx"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

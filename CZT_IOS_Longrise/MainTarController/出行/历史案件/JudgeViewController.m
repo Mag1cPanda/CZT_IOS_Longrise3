@@ -11,14 +11,15 @@
 #import "AFNetWorkService.h"
 #import "CZT_IOS_Longrise.pch"
 #import "FVCustomAlertView.h"
+#import "HistoryCaseViewController.h"
 
-@interface JudgeViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>{
+@interface JudgeViewController ()<UIPickerViewDelegate,UIPickerViewDataSource,UIAlertViewDelegate>{
     
     NSMutableArray *dataList;
     NSInteger select;
     NSString *reasonName;
     NSString *reasonCode;
-    FVCustomAlertView *alertView;
+    FVCustomAlertView *FVCAlertView;
     UIAlertView *jugdeAlertView;
 }
 
@@ -32,6 +33,21 @@
     select = 100;
     dataList = [NSMutableArray array];
     reasonName = nil;
+    _sureButton.layer.masksToBounds = YES;
+    _sureButton.layer.cornerRadius = 3;
+    _sureButton.highlighted = NO;
+    _verySatisfiedButton.layer.masksToBounds = YES;
+    _verySatisfiedButton.layer.cornerRadius = 3;
+    _verySatisfiedButton.highlighted = NO;
+    _satisfiedButton.layer.masksToBounds = YES;
+    _satisfiedButton.layer.cornerRadius = 3;
+    _satisfiedButton.highlighted = NO;
+    _justSoSoButton.layer.masksToBounds = YES;
+    _justSoSoButton.layer.cornerRadius = 3;
+    _justSoSoButton.highlighted = NO;
+    _unsatisfiedButton.layer.masksToBounds = YES;
+    _unsatisfiedButton.layer.cornerRadius = 3;
+    _unsatisfiedButton.highlighted = NO;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -98,9 +114,9 @@
 #pragma mark - 请求数据
 -(void)requestData{
     
-    alertView = [[FVCustomAlertView alloc] init];
-    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
-    [self.view addSubview:alertView];
+    FVCAlertView = [[FVCustomAlertView alloc] init];
+    [FVCAlertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:FVCAlertView];
     
     NSMutableDictionary *bean = [NSMutableDictionary dictionary];
     [bean setValue:[Globle getInstance].loadDataName forKey:@"username"];
@@ -131,7 +147,7 @@
         }
         [_selectPickerView reloadAllComponents];
         _selectPickerView.hidden = NO;
-        [alertView dismiss];
+        [FVCAlertView dismiss];
         
     }];
     
@@ -147,9 +163,9 @@
         return;
     }
     
-    alertView = [[FVCustomAlertView alloc] init];
-    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
-    [self.view addSubview:alertView];
+    FVCAlertView = [[FVCustomAlertView alloc] init];
+    [FVCAlertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:FVCAlertView];
     
     NSDictionary *loginDic = [Globle getInstance].loginInfoDic;
     NSDictionary *userDic = [loginDic valueForKey:@"userinfo"];
@@ -194,9 +210,9 @@
         if (nil != result) {
             NSDictionary *bigDic = result;
             if ([bigDic[@"restate"]isEqualToString:@"0"]){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"评价成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alert show];
-//                [self.navigationController popToRootViewControllerAnimated:YES];
+                jugdeAlertView = [[UIAlertView alloc]initWithTitle:nil message:@"评价成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [jugdeAlertView show];
+            
                 
             }else{
                 NSString *str = bigDic[@"redes"];
@@ -208,7 +224,7 @@
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"评价失败!" message:@"请检查您的网络!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
         }
-        [alertView dismiss];
+        [FVCAlertView dismiss];
     }];
     
 }
@@ -241,6 +257,11 @@
     }
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView == jugdeAlertView) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 
 - (void)didReceiveMemoryWarning {

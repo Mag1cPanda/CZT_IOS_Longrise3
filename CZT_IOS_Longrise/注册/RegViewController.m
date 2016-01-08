@@ -288,6 +288,7 @@
         noticeLabel.textAlignment = NSTextAlignmentCenter;
         noticeLabel.font = [UIFont systemFontOfSize:14];
         noticeLabel.textColor = [UIColor whiteColor];
+        noticeLabel.numberOfLines = 0;
         [noticeHUD showAlertWithonView:self.view Width:200 height:60 contentView:noticeLabel cancelOnTouch:false Duration:3];
         
         if(isSucess)

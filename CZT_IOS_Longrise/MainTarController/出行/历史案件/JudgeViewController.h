@@ -28,4 +28,15 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *pickerBtn;
 
+@property (weak, nonatomic) IBOutlet UIButton *sureButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *verySatisfiedButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *satisfiedButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *justSoSoButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *unsatisfiedButton;
+
+
 @end

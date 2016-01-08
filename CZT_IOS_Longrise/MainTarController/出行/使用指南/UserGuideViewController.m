@@ -7,16 +7,75 @@
 //
 
 #import "UserGuideViewController.h"
+#import "FVCustomAlertView.h"
 
-@interface UserGuideViewController ()
+@interface UserGuideViewController ()<UIWebViewDelegate>{
+    FVCustomAlertView *alertView;
+}
 
 @end
 
 @implementation UserGuideViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization.
+        self.hidesBottomBarWhenPushed = YES;
+        //self.isShowController = true;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    alertView = [[FVCustomAlertView alloc] init];
+    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:alertView];
+    [self createWebView];
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)createWebView{
+    
+    self.title = @"使用指南";
+    NSURL *url = [NSURL URLWithString:@"http://u.eqxiu.com/s/n4OlpPLR"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    _webView.delegate = self;
+    [_webView setScalesPageToFit:NO];
+    //    _webView.scrollView.contentSize = CGSizeMake(450, 667);
+    _webView.paginationBreakingMode = UIWebPaginationBreakingModePage;
+    //    _webView.scrollView.pagingEnabled = NO;
+    [self setWebViewStatus];
+    // [_webView sizeToFit];
+    [_webView loadRequest:request];
+}
+
+-(void)setWebViewStatus
+{
+    for (UIView *_aView in [_webView subviews]) {
+        if ([_aView isKindOfClass:[UIScrollView class]])
+        {
+            [(UIScrollView *)_aView setShowsVerticalScrollIndicator:NO];
+            //右侧的滚动条
+            
+            [(UIScrollView *)_aView setShowsHorizontalScrollIndicator:NO];
+            //下侧的滚动条
+            
+            for (UIView *_inScrollview in _aView.subviews)
+            {
+                if ([_inScrollview isKindOfClass:[UIImageView class]])
+                {
+                    _inScrollview.hidden = YES;  //上下滚动出边界时的黑色的图片
+                }
+            }
+        }
+    }
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    [alertView dismiss];
 }
 
 - (void)didReceiveMemoryWarning {
