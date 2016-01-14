@@ -8,7 +8,7 @@
 
 #import "EvaluateViewController.h"
 #import "AppDelegate.h"
-
+#define FORMATSTR(str) [NSString stringWithFormat:@"%ld",str]
 @interface EvaluateViewController ()<UITextViewDelegate,CWStarRateViewDelegate>
 {
     HRDetailHeaderView *header;
@@ -92,22 +92,21 @@
     NSString *indexStr = [NSString stringWithFormat:@"%ld",_group.selectedIndex];
     [bean setValue:indexStr forKey:@"evaluatetotle"];
     
-    NSString *star1Score = [NSString stringWithFormat:@"%f",_starView1.scorePercent] ;
+    NSString *star1Score = [NSString stringWithFormat:@"%f",_starView1.scorePercent*5] ;
     [bean setValue:star1Score forKey:@"evaluateservice"];
     
-    NSString *star2Score = [NSString stringWithFormat:@"%f",_starView2.scorePercent] ;
+    NSString *star2Score = [NSString stringWithFormat:@"%f",_starView2.scorePercent*5] ;
     [bean setValue:star2Score forKey:@"evaluatequality"];
     
-    NSString *star3Score = [NSString stringWithFormat:@"%f",_starView3.scorePercent] ;
+    NSString *star3Score = [NSString stringWithFormat:@"%f",_starView3.scorePercent*5] ;
     [bean setValue:star3Score forKey:@"evaluateefficiency"];
     
-    NSString *star4Score = [NSString stringWithFormat:@"%f",_starView4.scorePercent] ;
+    NSString *star4Score = [NSString stringWithFormat:@"%f",_starView4.scorePercent*5] ;
     [bean setValue:star4Score forKey:@"evaluateprice"];
     
-    NSString *star5Score = [NSString stringWithFormat:@"%f",_starView5.scorePercent] ;
+    NSString *star5Score = [NSString stringWithFormat:@"%f",_starView5.scorePercent*5] ;
     [bean setValue:star5Score forKey:@"evaluateenvironment"];
-    
-    [bean setValue:_evaTextView.text forKey:@"evaluatetotledetails"];;
+    [bean setValue:_evaTextView.text forKey:@"evaluatetotledetails"];
     [bean setValue:_dataModel.company forKey:@"company"];
     [bean setValue:@"420115000000000000" forKey:@"areaid"];
     [bean setValue:_dataModel.companycode forKey:@"companycode"];
@@ -118,6 +117,7 @@
     [bean setValue:_dataModel.workorderno forKey:@"workorderno"];
     [bean setValue:_dataModel.carno forKey:@"carno"];
     [bean setValue:_dataModel.caruser forKey:@"caruser"];
+    [bean setValue:FORMATSTR(_group.selectedIndex) forKey:@"evaluatetotle"];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在提交";

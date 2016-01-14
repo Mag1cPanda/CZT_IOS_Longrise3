@@ -65,9 +65,9 @@ UITableViewDelegate>
 -(void)loadEnterPriseSearchData{
     
     [enterpriseBean setValue:@"420100000000000000" forKey:@"areaid"];
-    [enterpriseBean setValue:_searchString forKey:@"companyname"];//留空
+    [enterpriseBean setValue:_searchString forKey:@"companyname"];
     [enterpriseBean setValue:[NSNumber numberWithInteger:enterprisePage] forKey:@"pagenum"];
-    [enterpriseBean setValue:@"10" forKey:@"pagesize"];
+    [enterpriseBean setValue:@"3" forKey:@"pagesize"];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在加载";

@@ -21,7 +21,7 @@
 
     _storeName.text = model.company;
     _addressLab.text = model.companyaddress;
-//    _typeLab.text = model.repairtype;
+    _typeLab.text = model.repairnature;
     _priceLab.text = model.moneytotal;
     _timeStamp.text = model.repairdate;
 

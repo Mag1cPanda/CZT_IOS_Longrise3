@@ -14,11 +14,12 @@
 #import "UIImageView+WebCache.h"
 #import "DetailModel.h"
 #import "SectionTwoHeaderView.h"
+#import "AppDelegate.h"
 @interface QYDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *table;
     HeaderView *header;
-    CGFloat imgHeight;
+    NSString *evaCount;//评价数
     
     NSMutableArray *evaluateArray;
     DetailInfoModel *infoModel;
@@ -81,10 +82,10 @@
     NSLog(@"areaid -> %@",_areaId);
     NSLog(@"comid -> %@",_companyId);
     
-    [bean setValue:@"420100000000000000" forKey:@"areaid"];
-    [bean setValue:@"481dd183c79a479b9e4f0eb71385e746" forKey:@"lcipcompanyid"];
+    [bean setValue:_areaId forKey:@"areaid"];
+    [bean setValue:_companyId forKey:@"lcipcompanyid"];
     [bean setValue:@"1" forKey:@"pagenum"];
-    [bean setValue:@"2" forKey:@"pagesize"];
+    [bean setValue:@"10" forKey:@"pagesize"];
     
     
     NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxSericeURL,businessapp];
@@ -93,10 +94,11 @@
         
         [hud hide:YES afterDelay:0];
         
-        NSLog(@"DetailResult%@",[Util objectToJson:result]);
+//        NSLog(@"DetailResult%@",[Util objectToJson:result]);
         
         if (nil != result) {
             DetailModel *model = [[DetailModel alloc]initWithString:[Util objectToJson:result] error:nil];
+//            NSLog(@"DetailModel -> %@",model);
             /**
              *  头视图和主营范围模型
              */
@@ -108,12 +110,13 @@
             
             
             DetailEvaluateModel *evaModel = model.data.companyevaluate;
+
+            NSLog(@"evaCount -> %ld",evaModel.data.count);
             /**
              *  评价模型数组
              */
             evaluateArray = [NSMutableArray arrayWithArray:evaModel.data];
-            
-            
+        
             [table reloadData];
         }
     }];
@@ -132,10 +135,14 @@
         return 1;
     }
     else{
-        if (0 != evaluateArray.count) {
-            return evaluateArray.count;
+        /**
+         *  如果没有评价数据，就返回一行用来显示暂无评价数据
+         */
+        if (evaluateArray.count == 0) {
+            return 1;
         }
-        else return 2;
+        else return evaluateArray.count;
+        
     }
     
 }
@@ -154,15 +161,35 @@
         
     }
     else{
-        SectionTwoViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SectionTwoViewCell"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        if (evaluateArray.count > indexPath.row) {
-            EvaluateResultModel *model = evaluateArray[indexPath.row];
-            [cell setUIWithInfo:model];
+        /**
+         *  如果评价数据为0
+         */
+        if (evaluateArray.count == 0) {
+            
+            UITableViewCell *cell = [UITableViewCell new];
+            
+            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 120, 21)];
+            lab.text = @"暂无评价数据";
+            lab.textAlignment = NSTextAlignmentCenter;
+            lab.center = cell.contentView.center;
+            [cell.contentView addSubview:lab];
+            [AppDelegate storyBoradAutoLay:cell.contentView];
+            return cell;
         }
-
-        return cell;
+        
+        else{
+            
+            SectionTwoViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SectionTwoViewCell"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            if (evaluateArray.count > indexPath.row) {
+                EvaluateResultModel *model = evaluateArray[indexPath.row];
+                [cell setUIWithInfo:model];
+            }
+            return cell;
+        }
+        
 
     }
     
@@ -181,6 +208,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1) {
         SectionTwoHeaderView *twoHeader = [[NSBundle mainBundle] loadNibNamed:@"SectionTwoHeaderView" owner:nil options:nil][0];
+        
         if (nil != infoModel) {
             [twoHeader setUIWithInfo:infoModel];
         }
@@ -203,9 +231,7 @@
     }
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-}
+
 
 
 

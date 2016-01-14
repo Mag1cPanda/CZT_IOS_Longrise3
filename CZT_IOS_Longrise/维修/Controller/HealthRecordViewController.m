@@ -35,10 +35,9 @@
     self.title = @"健康档案";
     page = 1;
     hrDataArray = [NSMutableArray array];
-//    hrDataArray = [NSMutableArray arrayWithObjects:@"", nil];
     bean = [NSMutableDictionary dictionary];
     
-    table = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    table = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
@@ -48,15 +47,12 @@
     
     table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-//        [self refreshCarData];
+        [self refreshCarData];
         [table.mj_header endRefreshing];
         
     }];
     
-    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//        [self loadMoreCarData];
-        [table.mj_footer endRefreshing];
-    }];
+    
     
     [self loadHealthRecordData];
 }
@@ -100,6 +96,15 @@
             HealthRecordModel *model = [[HealthRecordModel alloc]initWithString:json error:nil];
             [hrDataArray addObjectsFromArray:model.data];
             [table reloadData];
+            
+            if (hrDataArray.count == 0) {
+                table.hidden = YES;
+                self.view.backgroundColor = BackColor;
+                UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 120, 21)];
+                lab.center = self.view.center;
+                lab.text = @"暂未查询到数据";
+                [self.view addSubview:lab];
+            }
         }
     } ];
 }
@@ -155,12 +160,13 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
     HealthRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HealthRecordCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     HRDataModel *model = hrDataArray[indexPath.row];
     
     if (nil != model) {
-//        [cell setUIWithInfo:model];
+        [cell setUIWithInfo:model];
     }
     
     return cell;
@@ -168,7 +174,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 95*SCALE;
+    return 110*SCALE;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -202,10 +208,11 @@
     /**
      * 正向传值，当model不为空时，将model.Id和头部视图model传给push的控制器
      */
-//    if (nil != model.Id ) {
-//        vc.model = model;
-//        vc.Id = model.Id;
-//    }
+    if (nil != model.Id ) {
+        vc.model = model;
+        vc.Id = model.Id;
+        vc.year = model.year;
+    }
     
     UIBarButtonItem *returnButtonItem = [[UIBarButtonItem alloc] init];
     returnButtonItem.title = @"";

@@ -283,7 +283,8 @@
 		85537A161C3BA5E600B940BE /* HealthRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85537A151C3BA5E600B940BE /* HealthRecordViewController.m */; };
 		85537A181C3BA62300B940BE /* HRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85537A171C3BA62300B940BE /* HRDetailViewController.m */; };
 		85537A1A1C3BA65100B940BE /* QYSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85537A191C3BA65100B940BE /* QYSearchViewController.m */; };
-		8580B32B1C23E7FC00070C83 /* WXSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8580B32A1C23E7FC00070C83 /* WXSearchViewController.m */; };
+		85898DF41C44E4F000BD2CE1 /* EvaluateDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85898DF31C44E4F000BD2CE1 /* EvaluateDataModel.m */; };
+		85898DF71C44FC2900BD2CE1 /* WXSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85898DF61C44FC2900BD2CE1 /* WXSearchViewController.m */; };
 		85B2C60C1C20FF7700C28C03 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B2C60B1C20FF7700C28C03 /* libcurl.a */; };
 		85B2C60E1C20FF7C00C28C03 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B2C60D1C20FF7C00C28C03 /* libmp3lame.a */; };
 /* End PBXBuildFile section */
@@ -784,8 +785,10 @@
 		85537A171C3BA62300B940BE /* HRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRDetailViewController.m; sourceTree = "<group>"; };
 		85537A191C3BA65100B940BE /* QYSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSearchViewController.m; sourceTree = "<group>"; };
 		8580B3031C23B0A200070C83 /* QYSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSearchViewController.h; sourceTree = "<group>"; };
-		8580B3291C23E7FC00070C83 /* WXSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSearchViewController.h; sourceTree = "<group>"; };
-		8580B32A1C23E7FC00070C83 /* WXSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSearchViewController.m; sourceTree = "<group>"; };
+		85898DF21C44E4F000BD2CE1 /* EvaluateDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateDataModel.h; sourceTree = "<group>"; };
+		85898DF31C44E4F000BD2CE1 /* EvaluateDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateDataModel.m; sourceTree = "<group>"; };
+		85898DF51C44FC2900BD2CE1 /* WXSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSearchViewController.h; sourceTree = "<group>"; };
+		85898DF61C44FC2900BD2CE1 /* WXSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSearchViewController.m; sourceTree = "<group>"; };
 		85B2C60B1C20FF7700C28C03 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurl.a; sourceTree = "<group>"; };
 		85B2C60D1C20FF7C00C28C03 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		9C18996D5EA157E98A718B6F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1538,13 +1541,13 @@
 				6F4825291C29571300BCE7F6 /* HRDetailDataModel.m */,
 				6F48252A1C29571300BCE7F6 /* HRDetailModel.h */,
 				6F48252B1C29571300BCE7F6 /* HRDetailModel.m */,
+				6F48254B1C29571300BCE7F6 /* SeviceItemsModel.h */,
+				6F48254C1C29571300BCE7F6 /* SeviceItemsModel.m */,
 				6F48252C1C29571300BCE7F6 /* JSONModel */,
 				6F4825461C29571300BCE7F6 /* QYModel.h */,
 				6F4825471C29571300BCE7F6 /* QYModel.m */,
 				6F4825481C29571300BCE7F6 /* ResultModel.h */,
 				6F4825491C29571300BCE7F6 /* ResultModel.m */,
-				6F48254B1C29571300BCE7F6 /* SeviceItemsModel.h */,
-				6F48254C1C29571300BCE7F6 /* SeviceItemsModel.m */,
 				6F48254D1C29571300BCE7F6 /* WXModel.h */,
 				6F48254E1C29571300BCE7F6 /* WXModel.m */,
 			);
@@ -1695,8 +1698,8 @@
 				58046E951C203FA200F59365 /* QYDetailViewController.m */,
 				8580B3031C23B0A200070C83 /* QYSearchViewController.h */,
 				85537A191C3BA65100B940BE /* QYSearchViewController.m */,
-				8580B3291C23E7FC00070C83 /* WXSearchViewController.h */,
-				8580B32A1C23E7FC00070C83 /* WXSearchViewController.m */,
+				85898DF51C44FC2900BD2CE1 /* WXSearchViewController.h */,
+				85898DF61C44FC2900BD2CE1 /* WXSearchViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1757,6 +1760,8 @@
 				6F48251D1C29571300BCE7F6 /* DetailInfoModel.m */,
 				6F48251A1C29571300BCE7F6 /* DetailEvaluateModel.h */,
 				6F48251B1C29571300BCE7F6 /* DetailEvaluateModel.m */,
+				85898DF21C44E4F000BD2CE1 /* EvaluateDataModel.h */,
+				85898DF31C44E4F000BD2CE1 /* EvaluateDataModel.m */,
 				6F4825201C29571300BCE7F6 /* EvaluateModel.h */,
 				6F4825211C29571300BCE7F6 /* EvaluateModel.m */,
 				6F4825221C29571300BCE7F6 /* EvaluateResultModel.h */,
@@ -2072,7 +2077,6 @@
 				58A87ECC1C12F7B300366379 /* FinishViewController.m in Sources */,
 				58046FB31C20456A00F59365 /* SDWebImageManager.m in Sources */,
 				85305F641C2A85AE00964D5E /* UISelectCell.m in Sources */,
-				8580B32B1C23E7FC00070C83 /* WXSearchViewController.m in Sources */,
 				6F4825661C29571300BCE7F6 /* SeviceItemsModel.m in Sources */,
 				58046F471C2040AC00F59365 /* IMViewController.m in Sources */,
 				58046F5B1C2040CE00F59365 /* PartiesConcernedController.m in Sources */,
@@ -2129,6 +2133,7 @@
 				58DC346D1C15456600644E3C /* UserGuideViewController.m in Sources */,
 				6FFD0CDD1C31215B00A78CF1 /* CarManageViewController.m in Sources */,
 				5819AF8F1C191F3B00BAE34F /* HomeTableViewCell.m in Sources */,
+				85898DF71C44FC2900BD2CE1 /* WXSearchViewController.m in Sources */,
 				6F4825501C29571300BCE7F6 /* DetailDataModel.m in Sources */,
 				58046EEC1C203FBE00F59365 /* CWStarRateView.m in Sources */,
 				6FFD0CF91C3121AF00A78CF1 /* InfoSectionOneCell.m in Sources */,
@@ -2153,6 +2158,7 @@
 				58046FDC1C2047BE00F59365 /* UIWindow+Hierarchy.m in Sources */,
 				6FFD0CDE1C31215B00A78CF1 /* ChangePassViewController.m in Sources */,
 				6F4825541C29571300BCE7F6 /* EvaluateModel.m in Sources */,
+				85898DF41C44E4F000BD2CE1 /* EvaluateDataModel.m in Sources */,
 				85537A181C3BA62300B940BE /* HRDetailViewController.m in Sources */,
 				6F4825641C29571300BCE7F6 /* QYModel.m in Sources */,
 				58046F4F1C2040AC00F59365 /* SignViewController.m in Sources */,

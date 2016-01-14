@@ -74,7 +74,7 @@
     
     //添加头部视图
     header = [[NSBundle mainBundle] loadNibNamed:@"HRDetailHeaderView" owner:nil options:nil][0];
-    header.frame = CGRectMake(0, 0, ScreenWidth, 100*SCALE);
+    header.frame = CGRectMake(0, 0, ScreenWidth, 110*SCALE);
     if (nil !=  _model ) {
         [header setUIWithInfo:self.model];
     }
@@ -106,25 +106,30 @@
     NSString *userflag = [userdic objectForKey:@"userflag"];
     NSString *areaid = [Globle getInstance].areaid;
     
+    NSLog(@"年份 %@",_year);
+    NSLog(@"ID %@",_Id);
+
     [bean setValue:userflag forKey:@"userflag"];
     [bean setValue:token forKey:@"token"];
     [bean setValue:areaid forKey:@"areaid"];
     [bean setValue:_Id forKey:@"id"];
+    [bean setValue:_year forKey:@"year"];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在加载";
     
     NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxSericeURL,businessapp];
     
-//    NSLog(@"健康档案bean%@",bean);
+    NSLog(@"健康档案详情bean%@",bean);
     
     [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appsearchrecord" params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
         [hud hide:YES afterDelay:0];
          NSDictionary *dic = result;
+        NSString *json = [Util objectToJson:result];
+        NSLog(@"健康档案详情%@",json);
         if ([dic[@"restate"] isEqualToString:@"1"]) {
-            NSString *json = [Util objectToJson:result];
-//            NSLog(@"健康档案详情%@",json);
+            
             HRDetailModel *model = [[HRDetailModel alloc]initWithString:json error:nil];
             dataModel = model.data[0];
             NSArray *serviceitem = dataModel.serviceitems;
@@ -132,7 +137,6 @@
             evaModel = serviceitemModel.belcipcarownerevaluate;
             
             //手动解析repairname
-           
             NSArray *data = [dic objectForKey:@"data"];
             NSDictionary *dataDic = data[0];
             NSArray *seviceItems = [dataDic objectForKey:@"serviceitems"];
@@ -154,7 +158,8 @@
 -(void)clickComplainBtn{
 
     ComplainViewController *vc = [ComplainViewController new];
-    vc.model = self.model;
+    vc.model = self.model;//头部视图数据模型
+    vc.dataModel = dataModel;//参数模型
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -162,6 +167,7 @@
 
     EvaluateViewController *vc = [EvaluateViewController new];
     vc.model = self.model;
+    vc.dataModel = dataModel;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -182,9 +188,10 @@
         
         HRDetailSectionZeroCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HRDetailSectionZeroCell"];
         
-        [cell setUIWithInfo:dataModel andData:serviceItemsAry];
+        if (nil != dataModel) {
+            [cell setUIWithInfo:dataModel andData:serviceItemsAry];
+        }
         
-        NSLog(@"serviceItemsAry%ld",serviceItemsAry.count);
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -193,7 +200,11 @@
     else if (indexPath.section == 1){
     
         HRDetailSectionOneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HRDetailSectionOneCell"];
-        [cell setUIWithInfo:dataModel];
+        
+        if (nil != evaModel) {
+            [cell setUIWithInfo:dataModel];
+        }
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -201,7 +212,11 @@
     else{
         
         HRDetailSectionTwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HRDetailSectionTwoCell"];
-        [cell setUIWithInfo:evaModel];
+        
+        if (nil != evaModel) {
+            [cell setUIWithInfo:evaModel];
+        }
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -249,7 +264,7 @@
     }
     else{
         
-        return 310*SCALE;
+        return 230*SCALE;
         
     }
     

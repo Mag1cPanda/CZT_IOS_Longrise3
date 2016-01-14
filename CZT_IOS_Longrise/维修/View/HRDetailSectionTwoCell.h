@@ -19,9 +19,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *evaluateLab;
 
-@property (weak, nonatomic) IBOutlet UIImageView *imgOne;
-
-
 
 -(void)setUIWithInfo:(EvaluateModel *)model;
 @end

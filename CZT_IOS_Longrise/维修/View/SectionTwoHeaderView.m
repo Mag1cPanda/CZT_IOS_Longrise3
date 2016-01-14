@@ -12,7 +12,7 @@
 
 -(void)setUIWithInfo:(DetailInfoModel *)model{
     
-//    self.total.text = [NSString stringWithFormat:@"评价(%@)",model.peoplenumber];
+    self.total.text = [NSString stringWithFormat:@"评价(%@)",model.peoplenumber];
 
     NSInteger totalNum = [model.ratenum integerValue]
                        + [model.middlenum integerValue]

@@ -23,6 +23,7 @@
         
         _icon = [[UIImageView alloc]initWithFrame:CGRectMake(10, 35, 60, 60)];
         _icon.image = [UIImage imageNamed:@"icon07"];
+        
         [self addSubview:_icon];
         
         _cellPhone = [[UIImageView alloc]initWithFrame:CGRectMake(82, 71, 15, 15)];
@@ -52,9 +53,10 @@
         _phoneNum.textColor = [UIColor whiteColor];
         [self addSubview:_phoneNum];
         
-        
-        
         [AppDelegate storyBoradAutoLay:self];
+        
+        _icon.layer.cornerRadius = _icon.frame.size.width/2;
+        _icon.clipsToBounds = YES;
         
     }
     return self;

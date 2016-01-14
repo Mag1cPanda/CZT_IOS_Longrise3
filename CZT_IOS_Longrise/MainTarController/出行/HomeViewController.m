@@ -397,7 +397,7 @@
         
         [Globle getInstance].areaid = [area objectForKey:@"areaid"];
         //为了调试，暂时写成北京的
-        [Globle getInstance].areaid = @"110101000000000000";
+//        [Globle getInstance].areaid = @"110101000000000000";
     }
     
     //设置天气和温度
@@ -732,12 +732,12 @@
             [Globle getInstance].imageaddress = @"北京市朝阳区";
             
             
-            [Globle getInstance].imagelat = 39.832670;
-            [Globle getInstance].imagelon = 116.46037;
-            
-            //保存经纬度
-            [UserDefaultsUtil saveNSUserDefaultsForFloat:39.832670 forKey:@"lat"];
-            [UserDefaultsUtil saveNSUserDefaultsForFloat:116.46037 forKey:@"lon"];
+//            [Globle getInstance].imagelat = 39.832670;
+//            [Globle getInstance].imagelon = 116.46037;
+//            
+//            //保存经纬度
+//            [UserDefaultsUtil saveNSUserDefaultsForFloat:39.832670 forKey:@"lat"];
+//            [UserDefaultsUtil saveNSUserDefaultsForFloat:116.46037 forKey:@"lon"];
 
         }
         

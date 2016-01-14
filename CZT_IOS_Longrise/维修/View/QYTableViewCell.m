@@ -16,7 +16,8 @@
     [self.icon sd_setImageWithURL:[NSURL URLWithString:model.companyphoto]];
     self.nameLab.text = model.name;
     self.address.text = [NSString stringWithFormat:@"地址：%@",model.address];
-    
+    self.rateCount.text = model.ratenum;
+    self.goodRate.text = model.rate;
     
 }
 

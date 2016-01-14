@@ -7,8 +7,9 @@
 //
 
 #import "JSONModel.h"
-#import "EvaluateResultModel.h"
+#import "EvaluateDataModel.h"
 @interface DetailEvaluateModel : JSONModel
 
-@property (nonatomic, strong) NSArray<EvaluateResultModel> *data;
+@property (nonatomic, strong) NSArray<EvaluateDataModel> *data;
+@property (nonatomic, strong) NSString *count;
 @end

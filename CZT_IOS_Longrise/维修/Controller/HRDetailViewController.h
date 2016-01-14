@@ -14,4 +14,5 @@
 
 
 @property (nonatomic, copy) NSString *Id;//请求数据用的id
+@property (nonatomic, copy) NSString *year;//年份
 @end

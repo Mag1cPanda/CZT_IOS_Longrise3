@@ -12,11 +12,13 @@
 @implementation HRDetailSectionTwoCell
 
 -(void)setUIWithInfo:(EvaluateModel *)model{
-    _attitudeStar.scorePercent = [model.evaluateservice floatValue]/5;
-    _qualityStar.scorePercent = [model.evaluatequality floatValue]/5;
-    _efficiencyStar.scorePercent = [model.evaluateefficiency floatValue]/5;
+    
+    _attitudeStar.scorePercent    = [model.evaluateservice floatValue]/5;
+    _qualityStar.scorePercent     = [model.evaluatequality floatValue]/5;
+    _efficiencyStar.scorePercent  = [model.evaluateefficiency floatValue]/5;
     _environmentStar.scorePercent = [model.evaluateenvironment floatValue]/5;
-    _evaluateLab.text = model.evaluatedetails;
+    _priceStar.scorePercent       = [model.evaluateprice floatValue]/5;
+    _evaluateLab.text             = model.evaluatedetails;
     
 }
 

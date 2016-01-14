@@ -348,7 +348,7 @@ LoginControllerClose>
     [carBean setValue:userflag forKey:@"userflag"];
     [carBean setValue:token forKey:@"token"];
     [carBean setValue:[NSNumber numberWithInteger:carPage] forKey:@"pagenum"];
-    [carBean setValue:@"5" forKey:@"pagesize"];
+    [carBean setValue:@"10" forKey:@"pagesize"];
     [carBean setValue:@"" forKey:@"carno"];
     [carBean setValue:@"420100000000000000" forKey:@"areaid"];
     
@@ -387,7 +387,7 @@ LoginControllerClose>
 -(void)loadMoreCarData{
 
     carPage ++;
-    NSInteger totalPage = carCount/5 + 1;
+    NSInteger totalPage = carCount/10 + 1;
     if (carPage>totalPage) {
         wxTable.mj_footer.hidden = YES;
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -411,17 +411,6 @@ LoginControllerClose>
 
 
 #pragma mark - searchBar Delegate
--(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    
-   
-    
-}
-
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-
-    NSLog(@"searchText -> %@",searchText);
-}
-
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
     if (searchBar == qySearch) {
@@ -501,7 +490,11 @@ LoginControllerClose>
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.checkHealth.userInteractionEnabled = NO;
         CarModel *carModel = wxDataArray[indexPath.section];
-        [cell setUIWithInfo:carModel];
+        
+        if (nil != carModel) {
+            [cell setUIWithInfo:carModel];
+        }
+        
         return cell;
         
     }
@@ -560,7 +553,7 @@ LoginControllerClose>
          *  正向传值，将需要的值传到QYDetailViewController
          */
         vc.title = model.name;
-        vc.companyId = model.Id;
+        vc.companyId = model.lcipcompanyid;
         vc.areaId = model.areaid;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
@@ -568,8 +561,8 @@ LoginControllerClose>
     else{
         HealthRecordViewController *vc = [HealthRecordViewController new];
         vc.hidesBottomBarWhenPushed = YES;
-//        CarModel *carModel = wxDataArray[indexPath.section];
-//        vc.carNo = carModel.carno;
+        CarModel *carModel = wxDataArray[indexPath.section];
+        vc.carNo = carModel.carno;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

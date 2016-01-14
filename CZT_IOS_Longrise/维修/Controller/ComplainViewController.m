@@ -8,7 +8,7 @@
 
 #import "ComplainViewController.h"
 #import "AppDelegate.h"
-
+#define FORMATSTR(str) [NSString stringWithFormat:@"%@",str]
 @interface ComplainViewController ()<UITextViewDelegate>
 {
     HRDetailHeaderView *header;
@@ -71,6 +71,7 @@
     [bean setValue:_dataModel.workorderno forKey:@"workorderno"];
     [bean setValue:_dataModel.carno forKey:@"carno"];
     [bean setValue:_dataModel.caruser forKey:@"caruser"];
+    
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在提交";
