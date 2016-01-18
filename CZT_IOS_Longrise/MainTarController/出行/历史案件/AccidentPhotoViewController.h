@@ -11,4 +11,5 @@
 @interface AccidentPhotoViewController : PublicViewController
 @property (nonatomic,copy)NSString * casenumber; //系统案件编号
 @property (nonatomic,copy)NSString * appphone;  //报案手机号
+@property (nonatomic,strong)NSMutableDictionary *dataListDic;
 @end

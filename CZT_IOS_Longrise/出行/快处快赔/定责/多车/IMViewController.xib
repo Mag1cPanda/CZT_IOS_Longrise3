@@ -81,8 +81,6 @@
                                 <action selector="cancelRecord:" destination="-1" eventType="touchCancel" id="kVw-r3-LRw"/>
                                 <action selector="clickedDown:" destination="-1" eventType="touchDown" id="um4-6W-y0B"/>
                                 <action selector="clickedUpInside:" destination="-1" eventType="touchUpInside" id="uGh-Gj-fM9"/>
-                                <action selector="remindDargEnter:" destination="-1" eventType="touchDragEnter" id="ljv-Q7-qH6"/>
-                                <action selector="remindDargExit:" destination="-1" eventType="touchDragExit" id="IFz-Uk-IaP"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prh-3t-5lx">

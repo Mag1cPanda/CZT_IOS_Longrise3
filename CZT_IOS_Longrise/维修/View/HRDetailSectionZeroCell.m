@@ -12,25 +12,19 @@
 
 -(void)setUIWithInfo:(HRDetailDataModel *)model andData:(NSMutableArray *)dataArray{
 
-    for (int i=1; i<=dataArray.count; i++) {
-        
-        if (i==1) {
-            _serviceItemOne.text = dataArray[0];
-        }
-        else if (i==2){
-            _serviceItemTwo.text = dataArray[1];
-        }
-        else if (i==3){
-            _serviceItemThree.text = dataArray[2];
-        }
-        else{
-            _serviceItemFour.text = dataArray[3];
-        }
-        
+    _itemScroll.contentSize = CGSizeMake(_itemScroll.frame.size.width, dataArray.count * 21);
+    for (int i=0; i<dataArray.count; i++) {
+    
+        ServiceItemView *itemView = [[ServiceItemView alloc]initWithFrame:CGRectMake(0, 21*i, _itemScroll.frame.size.width, 21)];
+        itemView.itemLab.text = dataArray[i];
+        itemView.itemLab.font = [UIFont systemFontOfSize:13];
+        itemView.itemLab.textColor = [UIColor darkGrayColor];
+        [_itemScroll addSubview:itemView];
     }
 
     _mileageLab.text = [NSString stringWithFormat:@"%@公里",model.repairmile];
     _faultLab.text = model.faultdescript;
+    [_faultLab sizeToFit];
     _reasonLab.text = model.faultreason;
     _numberLab.text = model.workorderno;
     _guaranteeLab.text = [NSString stringWithFormat:@"%@天",model.securitydate];

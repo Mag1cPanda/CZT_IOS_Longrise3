@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIView *chatView;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (nonatomic,strong)NSDictionary *dataList;
+@property (nonatomic,strong)NSMutableArray *dataListArray;
 @end
 
 @implementation CaseDetailViewController
@@ -38,7 +39,11 @@
     [super viewDidLoad];
     [self configUI];
     [self addGesture];
-    [self requestData];
+//    if (_caseState == 7) {
+//        [self requestPhotoData];
+//    }else{
+        [self requestData];
+//    }
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -96,8 +101,44 @@
     [self.view addSubview:alertView];
 }
 
+//#pragma mark - 
+//#pragma mark - 照片待审核状态数据请求
+//-(void)requestPhotoData{
+//    _dataList = [NSDictionary dictionary];
+//    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
+//    [bean setObject:_appcaseno forKey:@"appcaseno"];
+//    [bean setObject:_appphone forKey:@"appphone"];
+//    [bean setObject:[Globle getInstance].loadDataName forKey:@"username"];
+//    [bean setObject:[Globle getInstance].loadDataPass forKey:@"password"];
+//    
+//    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/searchImageDetailInfo",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+//        NSDictionary *bigDic = result;
+//        if (nil != bigDic) {
+//            if ([bigDic[@"restate"]isEqualToString:@"0"]) {
+//                if (![bigDic[@"data"]isEqual:@""]) {
+//                    _dataList = bigDic[@"data"];
+//                    NSLog(@"%@",bigDic[@"data"]);
+//                }else{
+//                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"暂无查询到数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+//                }
+//                
+//            }else{
+//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"加载失败，请确认网络是否开启！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alert show];
+//            }
+//            
+//        }else{
+//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"加载失败，请确认网络是否开启！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//            [alert show];
+//        }
+//        [alertView dismiss];
+//    }];
+//    
+//}
+
 #pragma mark -
-#pragma mark - 数据请求
+#pragma mark - 其它状态数据请求
 -(void)requestData{
     _dataList = [NSDictionary dictionary];
     NSMutableDictionary *bean = [NSMutableDictionary dictionary];
@@ -111,13 +152,11 @@
     [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/zdsearchcasedetailinfo",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         NSDictionary *dic = result;
         if ([dic[@"restate"]isEqualToString:@"0"]) {
-            if (dic[@"data"]) {
-           //     NSLog(@"%@",dic[@"data"]);
+            if (![dic[@"data"]isEqual:@""]) {
                 _dataList = dic[@"data"];
-               // NSLog(@"datalist====%@",_dataList);
-                
             }else{
-                NSLog(@"%@",dic[@"redes"]);
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"暂无查询到数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
             }
             
         }else{
@@ -157,7 +196,13 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"AccidentCar" bundle:nil];
     AccidentCarViewController *araVC = [storyboard instantiateViewControllerWithIdentifier:@"accidentID"];
     //NSLog(@"%@",_casenumber);
-    if (nil != _dataList[@"casecarlist"]) {
+//    if (_caseState == 7) {
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"无事故车辆信息" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//        [alert show];
+//        return;
+//    }
+    
+    if (![_dataList[@"casecarlist"]isEqual:@""]) {
         araVC.dataList = [NSMutableDictionary dictionary];
         [araVC.dataList setValue:_dataList[@"casecarlist"] forKey:@"casecarlist"];
         //NSLog(@"%@",araVC.dataList);
@@ -166,7 +211,7 @@
         araVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:araVC animated:YES];
     }else{
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"无事故车辆信息" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"无事故车辆信息" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
     }
    
@@ -176,7 +221,9 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"AccidentPhoto" bundle:nil];
     AccidentPhotoViewController *APVC = [storyboard instantiateViewControllerWithIdentifier:@"accidentphotoID"];
     
-    if (nil != _dataList[@"accidentimagelist"]) {
+    if (![_dataList[@"accidentimagelist"]isEqual:@""]) {
+        APVC.dataListDic = [NSMutableDictionary dictionary];
+        [APVC.dataListDic setValue:_dataList[@"accidentimagelist"] forKey:@"accidentimagelist"];
         APVC.casenumber = _casenumber;
         APVC.appphone = _appphone;
         APVC.hidesBottomBarWhenPushed = YES;
@@ -253,11 +300,17 @@
 }
 
 -(void)tapInsurance:(UITapGestureRecognizer *)tap{
-    insuranceViewController *IVC = [[insuranceViewController alloc]init];
-    IVC.hidesBottomBarWhenPushed = YES;
-    IVC.casedate = _casedate;
-    IVC.insreporttel = _insreporttel;
-    [self.navigationController pushViewController:IVC animated:YES];
+    if (_insreporttel.length > 0) {
+        insuranceViewController *IVC = [[insuranceViewController alloc]init];
+        IVC.hidesBottomBarWhenPushed = YES;
+        IVC.casedate = _casedate;
+        IVC.insreporttel = _insreporttel;
+        [self.navigationController pushViewController:IVC animated:YES];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"暂无保险报案信息!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+    }
+    
 }
 
 -(void)tapChat:(UITapGestureRecognizer *)tap{

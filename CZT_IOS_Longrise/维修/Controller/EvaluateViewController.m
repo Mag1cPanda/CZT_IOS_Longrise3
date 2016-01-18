@@ -12,7 +12,7 @@
 @interface EvaluateViewController ()<UITextViewDelegate,CWStarRateViewDelegate>
 {
     HRDetailHeaderView *header;
-    
+    BOOL isSubmit;
 }
 @end
 
@@ -76,6 +76,19 @@
     
 }
 
+-(void)refreshHRDetailDataBlockCompletion:(RefreshDataBlock)refreshDataBlock{
+    
+    _refreshDataBlock = refreshDataBlock;
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    if (nil != _refreshDataBlock) {
+        _refreshDataBlock(isSubmit);
+    }
+}
+
 #pragma mark - 提交投评价
 - (IBAction)submibEvaluate:(id)sender {
     
@@ -132,10 +145,28 @@
             hud.mode = MBProgressHUDModeText;
             hud.labelText = [dic objectForKey:@"redes"];
         }
-        [hud hide:YES afterDelay:3.0];
+        [hud hide:YES afterDelay:1.0];
         NSLog(@"评价结果%@",[Util objectToJson:result]);
         
+        sleep(1);
+        
+        /**
+         *  使用代码块
+         */
+        _refreshDataBlock(YES);
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        
+        /**
+         *  使用通知
+         */
+        //创建通知
+        //    NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"1",@"restate",nil];
+        //    NSNotification *notification = [NSNotification notificationWithName:@"RefreshData" object:nil userInfo:dict];
+        //发送通知
+        //    [[NSNotificationCenter defaultCenter]postNotification:notification];
     } ];
+    
 }
 
 

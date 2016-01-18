@@ -21,6 +21,7 @@
     UITableView *table;
     NSMutableArray *carDataArray;
     NSInteger carPage;
+    NSInteger carCount;
     NSMutableDictionary *carBean;
     WXModel *wxModel;
 }
@@ -67,13 +68,11 @@
     
     UINib *nib1 = [UINib nibWithNibName:@"WXTableViewCell" bundle:nil];
     [table registerNib:nib1 forCellReuseIdentifier:@"WXTableViewCell"];
-    
-    [self loadCarData];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    carDataArray = [NSMutableArray array];
-    [self loadCarData];
+    
+    [self refreshCarData];
 }
 
 
@@ -96,9 +95,9 @@
 
 #pragma mark - 查询车辆列表
 -(void)loadCarData{
-    
+   // carDataArray = [NSMutableArray array];
     NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
-    NSLog(@"bigdic%@",bigDic);
+  //  NSLog(@"bigdic%@",bigDic);
     NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
     NSString *token = [bigDic objectForKey:@"token"];
     NSString *userflag = [userdic objectForKey:@"userflag"];
@@ -108,24 +107,36 @@
     [carBean setValue:[NSNumber numberWithInteger:carPage] forKey:@"pagenum"];
     [carBean setValue:@"5" forKey:@"pagesize"];
     
-    NSLog(@"CarManagerBean%@",carBean);
+   // NSLog(@"CarManagerBean%@",carBean);
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在加载";
     
     NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxBaseServiceURL,baseapp];
-    NSLog(@"url%@",url);
+   // NSLog(@"url%@",url);
     [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appsearchcarlist" params:carBean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
         [hud hide:YES afterDelay:0];
+//        NSLog(@"result%@",result);
         if (nil != result) {
             NSDictionary *bigDic = result;
-            NSLog(@"%@",bigDic);
-            NSString *json = [Util objectToJson:result];
-            NSLog(@"CarManage车辆数据%@",json);
-            wxModel= [[WXModel alloc]initWithString:json error:nil];
-            NSLog(@"CarManage车辆模型个数%ld",wxModel.data.count);
-            [carDataArray addObjectsFromArray:wxModel.data];
-            [table reloadData];
+            
+            carCount = [bigDic[@"count"] integerValue];
+//            NSLog(@"count -> %@",bigDic[@"count"]);
+            
+            if (nil != bigDic) {
+                if ([bigDic[@"restate"] isEqualToString:@"1"]) {
+                    
+                    NSString *json = [Util objectToJson:result];
+//                    NSLog(@"CarManage车辆数据%@",json);
+                    wxModel= [[WXModel alloc]initWithString:json error:nil];
+                    //    NSLog(@"CarManage车辆模型个数%ld",wxModel.data.count);
+                    [carDataArray addObjectsFromArray:wxModel.data];
+                    [table reloadData];
+                }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
+            }
         }
     } ];
 }
@@ -143,7 +154,8 @@
 -(void)loadMoreCarData{
     
     carPage ++;
-    if (carPage>4) {
+    NSInteger totalPage = carCount/5 + 1;
+    if (carPage > totalPage) {
         table.mj_footer.hidden = YES;
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
@@ -177,7 +189,9 @@
 //    [cell.checkHealth addTarget:self action:@selector(jumpToHealth) forControlEvents:UIControlEventTouchUpInside];
     if (carDataArray.count > indexPath.section) {
         CarModel *model = carDataArray[indexPath.section];
+        NSLog(@"%@",model.cartype);
         cell.CellCarNo = model.carno;
+        cell.carType.text = model.cartype;
         [cell setUIWithInfo:model];
     }
     return cell;
@@ -201,13 +215,15 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     CarDetailViewController *vc = [CarDetailViewController new];
-    
-    CarModel *model = carDataArray[indexPath.section];
-    if (nil != model.Id) {
-        vc.Id = model.Id;
+    if (carDataArray.count > indexPath.row) {
+        CarModel *model = carDataArray[indexPath.section];
+        if (nil != model.Id) {
+            vc.Id = model.Id;
+            vc.carType = model.cartype;
+        }
+        
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark -

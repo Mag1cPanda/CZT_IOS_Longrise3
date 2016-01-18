@@ -15,6 +15,7 @@
 #import "HomeTableViewCell.h"
 #import "UserDefaultsUtil.h"
 #import "FVCustomAlertView.h"
+#import "AppVerModel.h"
 
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
 
@@ -32,7 +33,7 @@
 
 #import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
 
-@interface HomeViewController : BaseViewController<LoginControllerClose,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UISelectListViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface HomeViewController : BaseViewController<LoginControllerClose,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UISelectListViewDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 {
     //定位服务类
     BMKLocationService *_locService;
@@ -46,6 +47,12 @@
     //本地菜单信息
     //NSDictionary *localMenuInfo;
     NSArray *menuFirstArray;
+    AppVerModel *verModel;
+    
+    NSString *localVersion;
+    NSString *serverVersion;
+    NSString *remark;
 }
 @property (strong, nonatomic) UITableView *hometabView;
+@property(strong,nonatomic)UIAlertView *versionAlertView;
 @end

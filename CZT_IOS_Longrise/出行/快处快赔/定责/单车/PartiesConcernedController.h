@@ -16,6 +16,12 @@
     UISelectListView *usSelectCompany;
 }
 
+//查询车牌号
+@property (copy, nonatomic)  NSString *reciveCarNumber;
+
+@property (strong, nonatomic) IBOutlet UIView *backView;
+
+
 @property (weak, nonatomic) IBOutlet UIView *infoView;
 
 //姓名
@@ -45,6 +51,7 @@
 //案件号
 @property (copy, nonatomic) NSString *appcaseno;
 
-@property (strong, nonatomic) NSMutableDictionary *onlyHistoryToResponsDict;
+@property (weak, nonatomic) IBOutlet UIButton *sureButton;
+
 
 @end

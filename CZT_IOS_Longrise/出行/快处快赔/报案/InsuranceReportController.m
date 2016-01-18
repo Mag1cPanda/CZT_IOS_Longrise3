@@ -31,15 +31,19 @@ extern NSNumber *caseDutyType;
     
     self.title = @"保险报案";
     
-    NSLog(@"case = %ld",caseDict.count);
-    NSLog(@"only = %ld",onlyCaseDict.count);
-    NSLog(@"hest = %ld",self.historyCaseDict.count);
+    
+    self.reportCaseBtn.layer.cornerRadius = 3;
+    self.reportCaseBtn.layer.masksToBounds = YES;
+    
+    self.unReportCase.layer.cornerRadius = 3;
+    self.unReportCase.layer.masksToBounds = YES;
 }
 
 #pragma mark -  保险报案
 - (IBAction)reportCase:(id)sender {
     
     if (caseDict != nil) {
+        
         if ([caseDutyType isEqualToNumber:[NSNumber numberWithInt:1]]) {
             falseAlert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您是无责任方，暂不允许报案！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [falseAlert show];
@@ -64,7 +68,14 @@ extern NSNumber *caseDutyType;
 #pragma mark -  暂不报案
 - (IBAction)unReportCase:(id)sender {
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (self.historyType == 1)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 -(void)upCaseInormationCompany:(NSMutableDictionary *)dict
@@ -92,7 +103,7 @@ extern NSNumber *caseDutyType;
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"报案失败，请检查您的网络！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
         }
-       
+        
         
     } ];
 }
@@ -101,7 +112,15 @@ extern NSNumber *caseDutyType;
 {
     if (alertView == suessAlert)
     {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+        if (self.historyType == 1)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     }
     else if (alertView == falseAlert)
     {
@@ -113,13 +132,13 @@ extern NSNumber *caseDutyType;
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

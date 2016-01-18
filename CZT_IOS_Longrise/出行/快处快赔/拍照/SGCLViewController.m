@@ -10,9 +10,17 @@
 #import "UIViewExt.h"
 #import "Util.h"
 #import "WXTSViewController.h"
+#import "AppDelegate.h"
+#import "ChooseCarViewController.h"
+#import "FVCustomAlertView.h"
+#import "SetViewController.h"
+
+extern NSNumber *responsType;
 
 @interface SGCLViewController ()
-
+{
+    UIAlertView *alertCarNumber; //查询车牌号码
+}
 @end
 
 @implementation SGCLViewController
@@ -41,6 +49,8 @@
     //添加取证完成通知
     NSString *name1 = NotificationNameForOneStepFinish;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishOneStep:) name:name1 object:nil];
+    
+    [AppDelegate storyBoradAutoLay:self.view];
 }
 
 #pragma mark 接受通知的内容
@@ -50,7 +60,7 @@
     if(nil != dic)
     {
         self.appcaseno = [dic objectForKey:@"appcaseno"];
-
+        
         NSString *str = [dic objectForKey:@"type"];
         if ([str isEqualToString:@"1"])
         {
@@ -60,7 +70,7 @@
         {
             self.type = 2;
         }
-
+        
     }
 }
 
@@ -138,12 +148,20 @@
     self.reportCaseLabel.layer.cornerRadius = 15;
     self.reportCaseLabel.text = @"3";
     self.reportCaseLabel.textAlignment = NSTextAlignmentCenter;
-
+    
+    //历史案件中进来
+    if(self.currentMark == 1)
+    {   //设置第一步拍照为选中状态
+        [self setOneStep:1 selected:YES];
+    }
+    
+    
 }
 
 -(void)setCurrentMark:(int)currentMark
 {
     step = 1;
+    _currentMark = currentMark;
     [self setOneStep:1 selected:YES];
 }
 
@@ -158,7 +176,7 @@
             if(nil == alert1)
             {
                 alert1 = [[UIAlertView  alloc] initWithTitle:@"温馨提示" message:@"您是否要处理新案件" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        
+                
             }
             [alert1 show];
         }
@@ -193,18 +211,62 @@
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChooseAS" bundle:nil];
                 ChooseASController *casController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseASID"];
                 casController.appcaseno = self.appcaseno;
-                //            casController.appcaseno = @"1234234";
+                casController.carsType = 1;
+                casController.historyDescribArray = [NSMutableArray array];
+                casController.historyDescribArray = self.historyDescribArray;
+                casController.moreHistoryToResponsArray = self.moreHistoryToResponsArray;
                 [self.navigationController pushViewController:casController animated:YES];
             }
             else
-            {   //单车
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Parties" bundle:nil];
-                PartiesConcernedController *parties = [storyboard instantiateViewControllerWithIdentifier:@"PartiesID"];
-                parties.hidesBottomBarWhenPushed = YES;
-                parties.appcaseno = self.appcaseno;
-                [self.navigationController pushViewController:parties animated:YES];
-            }
+            {
+               FVCustomAlertView *fvalertView = [[FVCustomAlertView alloc]init];
+                [fvalertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:0];
+                [self.view addSubview:fvalertView];
+                NSMutableDictionary *bean = [[NSMutableDictionary alloc] init];
+                NSDictionary *userinfo = [[Globle getInstance].loginInfoDic objectForKey:@"userinfo"];
+                [bean setValue:userinfo[@"userflag"] forKey:@"userflag"];
+                [bean setValue:[Globle getInstance].loginInfoDic[@"token"] forKey:@"token"];
+                [bean setValue:@"1" forKey:@"pagenum"];
+                [bean setValue:@"100" forKey:@"pagesize"];
+                
+                
+                [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxBaseServiceURL ServiceName:[NSString stringWithFormat:@"%@/appsearchcarlist",baseapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+                    
+                    
+                    NSLog(@"result = %@",result[@"data"]);
+                    [fvalertView dismiss];
+                    if ([result[@"restate"]isEqualToString:@"-4"])
+                    {
+//                        alertCarNumber = [[UIAlertView alloc]initWithTitle:nil message:@"验证失效，是否退出重新登录！" delegate:self cancelButtonTitle:@"继续" otherButtonTitles:@"确定", nil];
+                        alertCarNumber = [[UIAlertView alloc]initWithTitle:nil message:result[@"redes"] delegate:self cancelButtonTitle:@"继续" otherButtonTitles:@"确定", nil];
+                        [alertCarNumber show];
+                    }
+                    else
+                    {
+                        if([result[@"data"]isEqual:@""])
+                        {
+                            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Parties" bundle:nil];
+                            PartiesConcernedController *parties = [storyboard instantiateViewControllerWithIdentifier:@"PartiesID"];
+                            parties.hidesBottomBarWhenPushed = YES;
+                            parties.appcaseno = self.appcaseno;
+                            [self.navigationController pushViewController:parties animated:YES];
+                        }
+                        else
+                        {
+                            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChooseCar" bundle:nil];
+                            ChooseCarViewController *araVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseCarStoryboard"];
+                            araVC.hidesBottomBarWhenPushed = YES;
+                            araVC.CarDict = result[@"data"];
+                            araVC.appcaseno = self.appcaseno;
+                            araVC.carsType = 0;
+                            [self.navigationController pushViewController:araVC animated:YES];
+                        }
 
+                    }
+                    
+                }];
+            }
+            
         }
         
     }
@@ -216,12 +278,20 @@
             [myAlert show];
             return;
         }
-
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Insurance" bundle:nil];
-        InsuranceReportController *InReVC = [storyboard instantiateViewControllerWithIdentifier:@"InsuranceReport"];
-        InReVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:InReVC animated:YES];
+        //责任方判断 0：全责 1：无责 2： 同责
+        if ([responsType isEqualToNumber:[NSNumber numberWithInt:1]] && self.type == 2)
+        {
+            UIAlertView *myAlert = [[UIAlertView  alloc] initWithTitle:@"温馨提示" message:@"您是无责方，暂不允许报案！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [myAlert show];
+        }
+        else
+        {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Insurance" bundle:nil];
+            InsuranceReportController *InReVC = [storyboard instantiateViewControllerWithIdentifier:@"InsuranceReport"];
+            InReVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:InReVC animated:YES];
+        }
+   
     }
 }
 
@@ -242,6 +312,22 @@
             [self.navigationController pushViewController:wxtsController animated:YES];
         }
     }
+//    else if (alertView == alertCarNumber)
+//    {
+//        if (buttonIndex == 0)
+//        {
+//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Parties" bundle:nil];
+//            PartiesConcernedController *parties = [storyboard instantiateViewControllerWithIdentifier:@"PartiesID"];
+//            parties.hidesBottomBarWhenPushed = YES;
+//            parties.appcaseno = self.appcaseno;
+//            [self.navigationController pushViewController:parties animated:YES];
+//        }
+//        else
+//        {
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+//        }
+//        
+//    }
 }
 
 #pragma mark 设置某一步是否选中
@@ -285,6 +371,8 @@
         }
     }
 }
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

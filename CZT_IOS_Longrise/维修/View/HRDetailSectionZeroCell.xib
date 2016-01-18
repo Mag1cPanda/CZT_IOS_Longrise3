@@ -20,34 +20,6 @@
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P9I-nc-aQ1">
-                        <rect key="frame" x="44" y="30" width="195" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vv9-oF-9Dm">
-                        <rect key="frame" x="44" y="51" width="143" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FNL-41-oqL">
-                        <rect key="frame" x="44" y="71" width="143" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mMA-yb-qLW">
-                        <rect key="frame" x="44" y="92" width="143" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="送修里程：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eKg-KP-szi">
                         <rect key="frame" x="16" y="128" width="68" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -85,8 +57,8 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kjE-lL-2mR">
-                        <rect key="frame" x="16" y="209" width="143" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kjE-lL-2mR">
+                        <rect key="frame" x="16" y="209" width="288" height="42"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,38 +85,19 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pyE-1v-K1o">
-                        <rect key="frame" x="31" y="37" width="5" height="5"/>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="bNW-Fr-sH3">
+                        <rect key="frame" x="16" y="27" width="260" height="84"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.16078431369999999" green="0.47058823529999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="trj-em-9ff">
-                        <rect key="frame" x="31" y="59" width="5" height="5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.16078431369999999" green="0.47058823529999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="aYV-Jy-vb2">
-                        <rect key="frame" x="31" y="80" width="5" height="5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.16078431369999999" green="0.47058823529999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Kmi-HM-6eC">
-                        <rect key="frame" x="31" y="100" width="5" height="5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.16078431369999999" green="0.47058823529999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </imageView>
+                    </scrollView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="faultLab" destination="kjE-lL-2mR" id="luj-GM-Q0d"/>
                 <outlet property="guaranteeLab" destination="vUr-ST-t9N" id="PXF-F3-UXP"/>
+                <outlet property="itemScroll" destination="bNW-Fr-sH3" id="X8p-kg-Ryv"/>
                 <outlet property="mileageLab" destination="xdB-BA-VoU" id="P47-Qc-u7w"/>
                 <outlet property="numberLab" destination="zDg-G2-6Q7" id="GBp-Wt-5W4"/>
                 <outlet property="reasonLab" destination="fCg-ts-hCk" id="QuO-rd-4Ty"/>
-                <outlet property="serviceItemFour" destination="mMA-yb-qLW" id="NXb-RF-suW"/>
-                <outlet property="serviceItemOne" destination="P9I-nc-aQ1" id="Wf1-RN-t5k"/>
-                <outlet property="serviceItemThree" destination="FNL-41-oqL" id="mv9-PI-EyY"/>
-                <outlet property="serviceItemTwo" destination="vv9-oF-9Dm" id="aiQ-gv-oxo"/>
             </connections>
             <point key="canvasLocation" x="400" y="262"/>
         </tableViewCell>

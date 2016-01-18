@@ -18,8 +18,8 @@
     _efficiencyStar.scorePercent  = [model.evaluateefficiency floatValue]/5;
     _environmentStar.scorePercent = [model.evaluateenvironment floatValue]/5;
     _priceStar.scorePercent       = [model.evaluateprice floatValue]/5;
-    _evaluateLab.text             = model.evaluatedetails;
-    
+    _evaluateLab.text             = model.evaluatetotledetails;
+    _complainLab.text             = model.evaluatedetails;
 }
 
 - (void)awakeFromNib {

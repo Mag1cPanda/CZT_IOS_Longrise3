@@ -12,6 +12,7 @@
 #import "UISelectListView.h"
 #import "SetInsModel.h"
 #import "FVCustomAlertView.h"
+#import "SJAvatarBrowser.h"
 
 @interface AddCarViewController ()
 <UIAlertViewDelegate,UISelectListViewDelegate>
@@ -30,7 +31,8 @@
     NSString *insName;
     NSString *insCodeString;
     
-    FVCustomAlertView *alertView;
+    FVCustomAlertView *FVAlertView;
+    UIAlertView *warnAlertView;
 }
 @end
 
@@ -109,6 +111,10 @@
 #pragma mark - 加载车辆类型列表
 -(void)loadCarType{
     
+    FVAlertView = [[FVCustomAlertView alloc] init];
+    [FVAlertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:FVAlertView];
+    
     NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
     NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
     NSString *token = [bigDic objectForKey:@"token"];
@@ -130,8 +136,8 @@
                 NSArray *codeAry = [bigDic objectForKey:@"data"];
                  //           NSLog(@"appcartype%@",result);
                //             NSLog(@"appcartype%@",[Util objectToJson:result]);
-             //   NSLog(@"%@",codeAry);
-                if (nil != codeAry) {
+                NSLog(@"%@",bigDic);
+                if (![bigDic[@"data"]isEqual:@""]) {
                     NSLog(@"%@",codeAry);
                     for (int i = 0; i < codeAry.count; i++) {
                         
@@ -140,14 +146,20 @@
                         
                         NSMutableDictionary *codeDic = [[NSMutableDictionary alloc]init];
                         [codeDic setValue:codeValue forKey:@"cartype"];
-                        [carTypeData addObject:codeDic ];
+                        [carTypeData addObject:codeDic];
                         
                     }
                     [carTypeSelect addArray:carTypeData forKey:@"cartype"];
+                }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }else{
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"数据加载失败，请确定网络是否开启" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
                 }
                 
             }
-        
+        [FVAlertView dismiss];
     }];
 }
 
@@ -181,7 +193,7 @@
     NSMutableDictionary *bean = [NSMutableDictionary dictionary];
     [bean setValue:userflag forKey:@"userflag"];
     [bean setValue:token forKey:@"token"];
-    NSLog(@"-------------%@",token);
+   // NSLog(@"-------------%@",token);
     [bean setValue:@"1100" forKey:@"areaid"];
     NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxBaseServiceURL,baseapp];
     
@@ -191,17 +203,27 @@
 //            NSLog(@"appsearchincompanylist%@",[Util objectToJson:result]);
             SetInsModel *model = [[SetInsModel alloc]initWithString:[Util objectToJson:result] error:nil];
             
-            for (int i = 0; i < model.data.count; i++) {
-                
-                SetInsDataModel *dataModel = model.data[i];
-                
-                NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-                NSMutableDictionary *dicCode = [NSMutableDictionary dictionary];
-                [dic setValue:dataModel.incomname forKey:@"ins"];
-                [dicCode setValue:dataModel.incomcode forKey:dataModel.incomname];
-                [insData addObject:dic];
-                [insCode addObject:dicCode];
+            @try {
+                for (int i = 0; i < model.data.count; i++) {
+                    
+                    SetInsDataModel *dataModel = model.data[i];
+                    
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                    NSMutableDictionary *dicCode = [NSMutableDictionary dictionary];
+                    [dic setValue:dataModel.incomname forKey:@"ins"];
+                    [dicCode setValue:dataModel.incomcode forKey:dataModel.incomname];
+                    [insData addObject:dic];
+                    [insCode addObject:dicCode];
+                }
             }
+            @catch (NSException *exception) {
+                
+            }
+            @finally {
+                
+            }
+            
+            
             
         }
         
@@ -214,9 +236,9 @@
 -(void)pushToVerifyInfo{
     if (carType.length > 0 && carNumber.length > 0 && insName.length > 0 && _carNum.text.length > 0 && _vinCode.text.length > 0 && _engineNum.text.length > 0) {
         
-        alertView = [[FVCustomAlertView alloc] init];
-        [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
-        [self.view addSubview:alertView];
+        FVAlertView = [[FVCustomAlertView alloc] init];
+        [FVAlertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+        [self.view addSubview:FVAlertView];
 
         NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
         NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
@@ -231,15 +253,25 @@
             }
         }
         
+        NSString *appCarType;
+        if ([carType isEqualToString:@"小型汽车"]) {
+            appCarType = @"1";
+        }else if ([carType isEqualToString:@"客车"]){
+            appCarType = @"2";
+        }else if ([carType isEqualToString:@"货车"]){
+            appCarType = @"3";
+        }else if([carType isEqualToString:@"公交车"]){
+            appCarType = @"9";
+        }
       //  NSString *str = @"WDDFH3DB0AJ541602";
-     
+        
         NSMutableDictionary *bean = [NSMutableDictionary dictionary];
         [bean setValue:userflag forKey:@"userflag"];
         [bean setValue:carNo forKey:@"carno"];
        // [bean setValue:_vinCode.text forKey:@"identificationnum"];
         [bean setValue:_vinCode.text forKey:@"identificationnum"];
         [bean setValue:_engineNum.text forKey:@"enginenumber"];
-        [bean setValue:carType forKey:@"cartype"];
+        [bean setValue:appCarType forKey:@"cartype"];
         [bean setValue:insName forKey:@"incomname"];
         [bean setValue:insCodeString forKey:@"incomcode"];
         [bean setValue:token forKey:@"token"];
@@ -251,9 +283,12 @@
                 if ([bigDic[@"restate"]isEqualToString:@"1"]) {
 //                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆添加成功" message:@"是否需要现在验证车辆信息" delegate:self cancelButtonTitle:@"稍后验证" otherButtonTitles: @"立即验证",nil];
 //                    [alert show];
-                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"车辆添加成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    warnAlertView = [[UIAlertView alloc]initWithTitle:nil message:@"车辆添加成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [warnAlertView show];
+                }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                     [alert show];
-                }else if ([bigDic[@"restate"]isEqualToString:@"-9"]){
+                }else if ([bigDic[@"restate"]isEqualToString:@"-9"]||([bigDic[@"restate"]isEqualToString:@"-26"])){
                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆添加失败" message:@"请输入正确的车牌号!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                     [alert show];
                 }else if ([bigDic[@"restate"]isEqualToString:@"-16"]){
@@ -262,7 +297,11 @@
                 }else if ([bigDic[@"restate"]isEqualToString:@"-11"]||[bigDic[@"restate"]isEqualToString:@"-12"]){
                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆添加失败" message:@"车牌号已在该用户名下!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                     [alert show];
+                }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
                 }
+                
                 else{
                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆添加失败" message:@"请核对好信息再填写!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                     [alert show];
@@ -272,7 +311,7 @@
             }else{
                 NSLog(@"没有数据返回！");
             }
-            [alertView dismiss];
+            [FVAlertView dismiss];
             
         }];
         
@@ -308,12 +347,18 @@
         insName = dic[@"ins"];
     }
     
+    
 }
 
 
 #pragma mark - UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 
+    if (alertView == warnAlertView) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
     if (buttonIndex == 0) {
         NSLog(@"0");
     }
@@ -323,9 +368,21 @@
         vc.VINCode = _vinCode.text;
         vc.engineNumber = _engineNum.text;
         [self.navigationController pushViewController:vc animated:YES];
-        
     }
 
+}
+
+#pragma mark - 问号点击事件
+- (IBAction)btnClicked:(id)sender {
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"car_enginenub"]];
+    [SJAvatarBrowser showImage:imageView];
+    
+}
+
+- (IBAction)VINBtnCilcked:(id)sender {
+    UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"car_indexnumb"]];
+    [SJAvatarBrowser showImage:imageView];
 }
 
 /*

@@ -22,4 +22,5 @@
 
 
 @property (nonatomic, copy) NSString *Id;
+@property (nonatomic, copy) NSString *carType;
 @end

@@ -22,7 +22,8 @@
 #import "FVCustomAlertView.h"
 
 NSMutableDictionary *caseDict;
-NSNumber *caseDutyType;
+NSNumber *caseDutyType; //保险报案界面 判断能否报案
+NSNumber *responsType; //流程页面 判断能否跳转到保险报案界面
 
 @interface SureResponsController ()<UIAlertViewDelegate,CustomAlertViewDelegate>
 {
@@ -493,8 +494,12 @@ NSNumber *caseDutyType;
     }
     
     
-    //保险报案数据
-    [self reprotCaseData];
+    NSNumber *usduty = [NSNumber numberWithInt:usDutyType];
+    if (![usduty isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        //保险报案数据
+        [self reprotCaseData];
+    }
+    
 }
 - (void)checkTypeCaseData:(NSMutableDictionary *)bean2 Interface:(NSString *)interface
 {
@@ -558,6 +563,10 @@ NSNumber *caseDutyType;
     NSNumber *thirdduty = [NSNumber numberWithInt:thirdDutyType];
     
     caseDutyType = usduty;
+    if ([usduty isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        responsType = usduty;
+    }
+    
     //本方
     NSMutableDictionary *usCarListDict = [[NSMutableDictionary alloc]init];
     [usCarListDict setValue:self.CarNumber forKey:@"casecarno"];

@@ -12,9 +12,16 @@
 @interface ChooseASController : PublicViewController <UIScrollViewDelegate>
 
 
-@property (weak, nonatomic) IBOutlet UITableView *chosseTableview;
+//历史案件进来 接收已有的车主信息
+@property (strong, nonatomic) NSMutableArray *moreHistoryToResponsArray;
+//历史案件 事故情形判断显示
+@property (strong, nonatomic) NSMutableArray *historyDescribArray;
+
+//判断单车还是双车的跳转 0 单车  1 双车
+@property (assign, nonatomic) int carsType;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *backScrollView;
+//案件号
 @property (copy, nonatomic) NSString *appcaseno;
 
 @property (weak, nonatomic) IBOutlet UIView *showView1;
@@ -53,17 +60,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *checkImage9;
 
-
-
-
-
-
+//确定按钮
 @property (weak, nonatomic) IBOutlet UIButton *sureButton;
-
-
-
-
-
-
 
 @end

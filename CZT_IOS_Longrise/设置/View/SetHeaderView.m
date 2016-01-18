@@ -55,7 +55,7 @@
         
         [AppDelegate storyBoradAutoLay:self];
         
-        _icon.layer.cornerRadius = _icon.frame.size.width/2;
+        _icon.layer.cornerRadius = _icon.frame.size.height*SCALE/2;
         _icon.clipsToBounds = YES;
         
     }

@@ -153,7 +153,7 @@
         lame_init_params(lame);
         
         do {
-            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            read = (int)fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
             if (read == 0)
                 write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
             else
@@ -168,7 +168,7 @@
         fclose(pcm);
     }
     @catch (NSException *exception) {
-        NSLog(@"%@",[exception description]);
+        NSLog(@"------------------%@",[exception description]);
     }
     @finally {
         [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
@@ -192,7 +192,7 @@
 - (NSString *)mp3Path
 {
     NSString *mp3Path = [NSTemporaryDirectory() stringByAppendingPathComponent:@"mp3.caf"];
- //   NSLog(@"%@",mp3Path);
+    NSLog(@"%@",mp3Path);
     return mp3Path;
 }
 

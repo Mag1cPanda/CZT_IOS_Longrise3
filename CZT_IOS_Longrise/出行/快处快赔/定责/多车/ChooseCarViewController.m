@@ -12,6 +12,7 @@
 #import "Util.h"
 #import <Masonry.h>
 #import "ChooseCarViewCell.h"
+#import "PartiesConcernedController.h"
 
 @interface ChooseCarViewController ()
 {
@@ -126,7 +127,7 @@
     [self.backScrollView addSubview:sureButton];
     [sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(50);
-        make.left.equalTo(self.backScrollView).with.offset(10);
+        make.left.equalTo(self.backScrollView).with.offset(0);
         make.top.equalTo(otherButton.mas_bottom).with.offset(20);
         make.width.mas_equalTo(self.backScrollView.mas_width);
     }];
@@ -142,55 +143,92 @@
         viewstatus.tag = 0;
         ((UIView *)viewstatus.subviews[1]).hidden = YES;
     }
-
+    
     UIView *checkView = recognizer.view;
     checkView.tag = 1;
     
     if (checkView.tag == 1)
     {
         ((UIView *)checkView.subviews[1]).hidden = NO;
-     
+        
     }
     else
     {
         ((UIView *)checkView.subviews[1]).hidden = YES;
     }
-   
+    
 }
 - (void)setCarData
 {
     for (NSDictionary *str in self.CarDict) {
         [self.dataSource addObject:str[@"carno"]];
     }
-     NSLog(@"car = %@",self.dataSource[0]);
+    NSLog(@"car = %@",self.dataSource[0]);
 }
 
 
 #pragma mark 确定
 -(void)chooseSureButtonClick
 {
+    if (carNumber)
+    {
+        if (self.carsType == 0)
+        {
+            //单车
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Parties" bundle:nil];
+            PartiesConcernedController *parties = [storyboard instantiateViewControllerWithIdentifier:@"PartiesID"];
+            parties.hidesBottomBarWhenPushed = YES;
+            parties.appcaseno = self.appcaseno;
+            parties.reciveCarNumber = carNumber;
+            [self.navigationController pushViewController:parties animated:YES];
+        }
+        else if(self.carsType == 1)
+        {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FillInfomation" bundle:nil];
+            FillInformationController *filleVC = [storyboard instantiateViewControllerWithIdentifier:@"fillinfomationID"];
+            filleVC.hidesBottomBarWhenPushed = YES;
+            filleVC.appcaseno = self.appcaseno;
+            filleVC.reciveCarNumber = carNumber;
+            filleVC.describeData = self.describeData;
+            filleVC.describeString = self.describeString;
+            //    filleVC.reciveCarNumber = dic[@"carno"];
+            filleVC.moreHistoryToResponsArray = self.moreHistoryToResponsArray;
+            [self.navigationController pushViewController:filleVC animated:YES];
+        }
+        
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请选择事故车辆车牌号！" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FillInfomation" bundle:nil];
-    FillInformationController *filleVC = [storyboard instantiateViewControllerWithIdentifier:@"fillinfomationID"];
-    filleVC.hidesBottomBarWhenPushed = YES;
-    filleVC.appcaseno = self.appcaseno;
-    filleVC.reciveCarNumber = carNumber;
-    filleVC.describeData = self.describeData;
-    filleVC.describeString = self.describeString;
-//    filleVC.reciveCarNumber = dic[@"carno"];
-    [self.navigationController pushViewController:filleVC animated:YES];
 }
 
 #pragma mark 其他
 - (void)otherChooseClick {
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FillInfomation" bundle:nil];
-    FillInformationController *filleVC = [storyboard instantiateViewControllerWithIdentifier:@"fillinfomationID"];
-    filleVC.hidesBottomBarWhenPushed = YES;
-    filleVC.appcaseno = self.appcaseno;
-    filleVC.describeData = self.describeData;
-    filleVC.describeString = self.describeString;
-    [self.navigationController pushViewController:filleVC animated:YES];
+    if (self.carsType == 0)
+    {
+        //单车
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Parties" bundle:nil];
+        PartiesConcernedController *parties = [storyboard instantiateViewControllerWithIdentifier:@"PartiesID"];
+        parties.hidesBottomBarWhenPushed = YES;
+        parties.appcaseno = self.appcaseno;
+        [self.navigationController pushViewController:parties animated:YES];
+    }
+    else
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FillInfomation" bundle:nil];
+        FillInformationController *filleVC = [storyboard instantiateViewControllerWithIdentifier:@"fillinfomationID"];
+        filleVC.hidesBottomBarWhenPushed = YES;
+        filleVC.appcaseno = self.appcaseno;
+        filleVC.describeData = self.describeData;
+        filleVC.describeString = self.describeString;
+        filleVC.moreHistoryToResponsArray = self.moreHistoryToResponsArray;
+        [self.navigationController pushViewController:filleVC animated:YES];
+    }
+   
 }
 
 
@@ -202,13 +240,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

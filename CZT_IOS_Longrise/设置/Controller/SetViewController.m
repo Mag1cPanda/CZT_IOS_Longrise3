@@ -18,7 +18,6 @@
 #import "LoginViewController.h"
 #import "UserDefaultsUtil.h"
 
-
 @interface SetViewController ()
 <UIAlertViewDelegate,LoginControllerClose>
 {
@@ -37,21 +36,15 @@
     imgAry = @[@"icon14",@"icon15",@"icon16",@"iconExit"];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
-
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backg"]
                                                  forBarPosition:UIBarPositionAny
                                                      barMetrics:UIBarMetricsDefault];
     //隐藏导航栏底部黑条
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
-//    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];
-//    lab.text = @"我的";
-//    lab.textColor = [UIColor whiteColor];
     
-//    UIBarButtonItem *barBtn = [[UIBarButtonItem alloc]initWithCustomView:lab];
-//    self.navigationItem.leftBarButtonItem = barBtn;
-    
-    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 100)];
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 120)];
     backView.backgroundColor = BackColor;
     [self.view addSubview:backView];
     
@@ -60,7 +53,7 @@
     [backView addSubview:header];
     
     self.dataSource = @[@"车辆管理",@"修改密码",@"系统设置",@"退出登录"];
-    self.hometabView = [[UITableView alloc]initWithFrame:CGRectMake(0, 100, ScreenWidth, ScreenHeight-100) style:UITableViewStylePlain];
+    self.hometabView = [[UITableView alloc]initWithFrame:CGRectMake(0, 120, ScreenWidth, ScreenHeight-120) style:UITableViewStylePlain];
     self.hometabView.backgroundColor = BackColor;
     self.hometabView.delegate = self;
     self.hometabView.dataSource = self;
@@ -95,9 +88,9 @@
 }
 
 -(void)setHeaderView{
-
+    
     NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
-//    NSLog(@"bigdic%@",bigDic);
+    //    NSLog(@"bigdic%@",bigDic);
     if (bigDic == nil) {
         [header.icon setImage:[UIImage imageNamed:@"icon07"]];
         header.phoneNum.hidden = YES;
@@ -121,7 +114,7 @@
     NSMutableString *phoneNum = [NSMutableString stringWithString:[userdic objectForKey:@"mobilephone"]];
     [phoneNum replaceCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
     header.phoneNum.text = phoneNum;
-
+    
 }
 
 #pragma mark -
@@ -135,7 +128,7 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if (alertView == exitAlertView) {
-
+        
         if (buttonIndex == 0) {
             
             NSLog(@"取消退出登录");
@@ -160,7 +153,7 @@
         }
         
     }else{
-    
+        
         if (buttonIndex == 0) {
             LoginViewController *loginVC = [LoginViewController new];
             loginVC.isShowController = false;
@@ -264,7 +257,7 @@
         
     }
     
-   
+    
 }
 
 //没有登陆时的提醒
@@ -275,13 +268,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

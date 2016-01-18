@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "HRDetailDataModel.h"
+#import "ServiceItemView.h"
 
 @interface HRDetailSectionZeroCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *serviceItemOne;//服务项目
-@property (weak, nonatomic) IBOutlet UILabel *serviceItemTwo;
-@property (weak, nonatomic) IBOutlet UILabel *serviceItemThree;
-@property (weak, nonatomic) IBOutlet UILabel *serviceItemFour;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *itemScroll;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *mileageLab;//里程
 @property (weak, nonatomic) IBOutlet UILabel *faultLab;//故障描述

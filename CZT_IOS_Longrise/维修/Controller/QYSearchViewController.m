@@ -122,8 +122,18 @@ UITableViewDelegate>
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     QYDetailViewController *vc = [QYDetailViewController new];
+    ResultModel *model = _qyDataArray[indexPath.row];
+    /**
+     *  正向传值，将需要的值传到QYDetailViewController
+     */
+    vc.title = model.name;
+    vc.companyId = model.lcipcompanyid;
+    vc.areaId = model.areaid;
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{

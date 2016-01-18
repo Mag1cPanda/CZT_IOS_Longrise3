@@ -10,12 +10,15 @@
 #import "WordTableViewCell.h"
 #import "VoiceTableViewCell.h"
 #import "ImageTableViewCell.h"
+#import "LocationTableViewCell.h"
 #import "MessageFrame.h"
 #import "Message.h"
 #import "VoiceFrame.h"
 #import "Voice.h"
 #import "Photo.h"
 #import "PhotoFrame.h"
+#import "Location.h"
+#import "LocationFrame.h"
 #import "AFNetWorkService.h"
 #import "UIViewExt.h"
 #import "Util.h"
@@ -341,6 +344,39 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
 }
 
 #pragma mark -
+#pragma mark - 上传地理位置
+-(void)sendLocationMessage:(NSString *)content andTime:(NSString *)time{
+    NSMutableDictionary *bean = [[NSMutableDictionary alloc] init];
+    NSString *str = [content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [bean setValue:_infoRoadName forKey:@"appcaseno"];
+    [bean setValue:_infoAccount forKey:@"account"];
+    [bean setValue:@"2" forKey:@"messageorigin"];
+    [bean setValue:str forKey:@"messagecontent"];
+    [bean setValue:time forKey:@"messagedate"];
+    [bean setValue:[Globle getInstance].loadDataName forKey:@"username"];
+    [bean setValue:[Globle getInstance].loadDataPass forKey:@"password"];
+    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/zdsubmittextmessage",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+        NSDictionary *dic = result;
+     //   NSLog(@"%@",dic);
+     //   NSLog(@"dic = %@",dic[@"redes"]);
+        if (dic[@"redes"]) {
+            NSString *restate = dic[@"restate"];
+            for (int i = 0; i < dataArray.count; i++) {
+                if([dataArray[i] isKindOfClass:[LocationFrame class]]){
+                    LocationFrame *pf = dataArray[i];
+                    if ([pf.message.longtime isEqualToString:bean[@"messagedate"]]) {
+                        pf.message.isSucess = restate.intValue;
+                        [_dispatchTableView reloadData];
+                    }
+                }
+            }
+        }
+        
+    }];
+}
+
+
+#pragma mark -
 #pragma mark - 上传语音文件
 -(void)uploadVoice:(NSString *)time{
     NSString * encodedImageStr = [sendVoiceData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
@@ -477,6 +513,7 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
     msg.icon = nil;
    // msg.type = MessageTypeMe;
     mf.message = msg;
+    mf.showTime = NO;
     mf.contentF = CGRectMake(self.view.bounds.size.width, 0, 0, 0);
     dataArray = [NSMutableArray array];
     [dataArray addObject:mf];
@@ -585,6 +622,27 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
 }
 
 #pragma mark -
+#pragma mark - 给数据源增加location内容
+-(void)addLocationWithContent:(NSString *)content time:(NSString *)time longtime:(NSString *)longtime{
+    LocationFrame *lf = [[LocationFrame alloc]init];
+    Location *la = [[Location alloc]init];
+    la.content = content;
+    la.time = time;
+    la.icon = @"picon04.png";
+   // la.voice = sendVoiceData;
+    la.type = VoiceTypeMe;
+    la.isSucess = 1;
+    la.longtime = longtime;
+    
+    LocationFrame *lastMf = dataArray.lastObject;
+    if (![la.time isEqualToString:lastMf.message.time]) {
+        lf.showTime = YES;
+    }
+    lf.message = la;
+    [dataArray addObject:lf];
+}
+
+#pragma mark -
 #pragma mark - 配置UI
 -(void)configUI{
     
@@ -662,6 +720,16 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
 //按下语音按钮
 - (IBAction)clickedDown:(id)sender {
     //初始化MP3
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if([fileManager removeItemAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"mp3.caf"] error:nil])
+    {
+        NSLog(@"删除以前的mp3文件");
+    }
+    if ([fileManager removeItemAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"tmp.caf"] error:nil]) {
+        NSLog(@"删除以前的tmp文件");
+    }
+    
+    MP3 = nil;
     timeCount = 0; //语音计时器
     _speakBtn.backgroundColor = [UIColor colorWithRed:148/255.0 green:148/255.0 blue:148/255.0 alpha:1];
     [_speakBtn setTitle:@"拖出取消录音" forState:UIControlStateHighlighted];
@@ -713,6 +781,11 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
 
 //松开语音按钮
 - (IBAction)clickedUpInside:(id)sender {
+    
+    [MP3 stopRecord];
+    [timer invalidate];
+    timer = nil;
+    _speakBtn.backgroundColor = [UIColor colorWithRed:196/255.0 green:196/255.0 blue:196/255.0 alpha:1];
     if (timeCount >= 120) {
         return;
     }
@@ -720,8 +793,7 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
     NSDate *date = [NSDate date];
     fmt.dateFormat = @"mm/ss";
     timeAfter = [fmt stringFromDate:date];
-    NSString *context = [self getVoiceTime];
-    if (context.intValue == 0) {
+    if (timeCount == 0) {
         [UIView animateWithDuration:0.5 animations:^{
             _recordTimeLabel.alpha = 1.0;
         } completion:^(BOOL finished) {
@@ -733,13 +805,7 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
         }];
         return;
     }
-    
-    [MP3 stopRecord];
-    [timer invalidate];
-    timer = nil;
-    _speakBtn.backgroundColor = [UIColor colorWithRed:196/255.0 green:196/255.0 blue:196/255.0 alpha:1];
-    
-    
+    NSString *context = [self getVoiceTime];
     fmt.dateFormat = @"YYYY-MM-DD HH:MM:SS";
     NSString *sendTime = [fmt stringFromDate:date];
     
@@ -761,13 +827,6 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
     timer = nil;
       _speakBtn.backgroundColor = [UIColor colorWithRed:196/255.0 green:196/255.0 blue:196/255.0 alpha:1];
     
-}
-- (IBAction)remindDargEnter:(id)sender {
-   // NSLog(@"11111");
-}
-- (IBAction)remindDargExit:(id)sender {
-  //  NSLog(@"222222");
-   
 }
 
 - (IBAction)photo:(id)sender {
@@ -791,6 +850,24 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
 
 - (IBAction)map:(id)sender {
     
+    NSString *content = [Globle getInstance].imageaddress;
+    NSDateFormatter *fmt = [[NSDateFormatter alloc]init];
+    NSDate *date = [NSDate date];
+    fmt.dateFormat = @"MM月dd日 HH:mm";
+    NSString *time = [fmt stringFromDate:date];
+    
+    fmt.dateFormat = @"YYYY-MM-DD HH:MM:SS";
+    NSString *time1 = [fmt stringFromDate:date];
+    [self addLocationWithContent:content time:time longtime:time1];
+    [_dispatchTableView reloadData];
+    
+    //滚动到当前行
+    if (dataArray.count>1) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dataArray.count-1 inSection:0];
+        [_dispatchTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    //给服务器发送消息
+    [self sendLocationMessage:content andTime:time1];
 }
 
 #pragma mark -
@@ -913,10 +990,11 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
     static NSString *reuseIdetify1 = @"WordTableViewCell";
     static NSString *reuseIdetify2 = @"VoiceTableViewCell";
     static NSString *reuseIdetify3 = @"ImageTableViewCell";
+    static NSString *reuseIdetify4 = @"LocationTableViewCell";
     WordTableViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier:reuseIdetify1];
     VoiceTableViewCell *cell2 = [tableView dequeueReusableCellWithIdentifier:reuseIdetify2];
     ImageTableViewCell *cell3 = [tableView dequeueReusableCellWithIdentifier:reuseIdetify3];
-    
+    LocationTableViewCell *cell4 = [tableView dequeueReusableCellWithIdentifier:reuseIdetify4];
     if([dataArray[indexPath.row] isKindOfClass:[MessageFrame class]]){
         if (cell1 == nil) {
             cell1 = [[WordTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdetify1];
@@ -949,6 +1027,15 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
         }
        
         return cell3;
+    }else if ([dataArray[indexPath.row]isKindOfClass:[LocationFrame class]]){
+        if (cell4 == nil) {
+            cell4 = [[LocationTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdetify4];
+        }
+        cell4.messageFrame = dataArray[indexPath.row];
+        if (cell4.messageFrame.message.isSucess == 0) {
+            [cell4.indicator stopAnimating];
+        }
+        return cell4;
     }
     return nil;
 }
@@ -1024,11 +1111,10 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
 #pragma mark - MP3RecorderDelegate
 
 -(void)beginConvert{
- 
+
 }
 
 -(void)endConvertWithData:(NSData *)voiceData{
- 
     sendVoiceData = [NSMutableData dataWithData:voiceData];
 }
 

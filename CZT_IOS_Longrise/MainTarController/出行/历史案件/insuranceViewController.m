@@ -33,7 +33,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"保险报案信息";
-    _insuranceTime.text = _casedate;
+    if ([_casedate containsString:@"."]) {
+        NSArray *array = [_casedate componentsSeparatedByString:@"."];
+        _insuranceTime.text = array[0];
+    }else{
+        _insuranceTime.text = _casedate;
+    }
     _insuranceNumber.text = _insreporttel;
     _timeView.layer.masksToBounds = YES;
     _telView.layer.masksToBounds = YES;

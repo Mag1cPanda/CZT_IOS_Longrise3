@@ -58,6 +58,12 @@
 #pragma mark - 点击事件
 - (IBAction)sure:(id)sender {
 //    SureResponsController *sureVC = [[SureResponsController alloc]init];
+    if (signatureView.lblSignature.superview == signatureView) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"请签名!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     
     UIImage *image = [[UIImage alloc]init];
     image = [[signatureView getSignatureImage]resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1) resizingMode:UIImageResizingModeStretch];
@@ -82,9 +88,9 @@
     return NO;
 }
 
--(NSUInteger)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskLandscapeRight;
-}
+//-(NSUInteger)supportedInterfaceOrientations{
+//    return UIInterfaceOrientationMaskLandscapeRight;
+//}
 
 -(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
     return UIInterfaceOrientationLandscapeRight;

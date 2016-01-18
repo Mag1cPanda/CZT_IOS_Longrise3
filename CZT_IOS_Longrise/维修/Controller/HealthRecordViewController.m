@@ -37,7 +37,7 @@
     hrDataArray = [NSMutableArray array];
     bean = [NSMutableDictionary dictionary];
     
-    table = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStyleGrouped];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
@@ -51,8 +51,6 @@
         [table.mj_header endRefreshing];
         
     }];
-    
-    
     
     [self loadHealthRecordData];
 }
@@ -140,14 +138,12 @@
 -(void)clickComplainBtn{
     
     ComplainViewController *vc = [ComplainViewController new];
-    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)clickEvaluateBtn{
     
     EvaluateViewController *vc = [EvaluateViewController new];
-    
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -178,6 +174,10 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.000001;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.000001;
 }
 

@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *Id;
 @property (nonatomic, copy) NSString *enginenumber;
+@property (nonatomic, copy) NSString *cartype;
 @property (nonatomic, copy) NSString *lcipusertableid;
 @property (nonatomic, copy) NSString *isapprove;
 @property (nonatomic, copy) NSString *carno;

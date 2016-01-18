@@ -201,7 +201,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FeS-xN-RKM">
                                         <rect key="frame" x="10" y="414" width="356" height="45"/>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.078431372550000003" green="0.58823529409999997" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.23921568630000001" green="0.65098039220000004" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="gp5-lP-dA1"/>
                                         </constraints>
@@ -249,6 +249,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="backView" destination="pR5-nB-35s" id="Yy9-IO-Q79"/>
                         <outlet property="carBackViewLine" destination="jkv-GG-FWG" id="rcP-tc-wlH"/>
                         <outlet property="carCityiesView" destination="kcG-8g-gHb" id="N4M-Nd-g8b"/>
                         <outlet property="companyView" destination="2AF-3m-kdl" id="HBc-Pw-CSn"/>
@@ -257,6 +258,7 @@
                         <outlet property="driverNumber" destination="tFh-NG-2oc" id="cYE-kC-45Z"/>
                         <outlet property="infoView" destination="8wi-Za-OQx" id="fcC-A0-NDQ"/>
                         <outlet property="phoneNumber" destination="hx9-xo-tb1" id="1Ce-jc-WAh"/>
+                        <outlet property="sureButton" destination="FeS-xN-RKM" id="7eG-qY-UzV"/>
                         <outlet property="usPHBackViewLine" destination="pfe-jK-QX5" id="c9Q-cI-GrY"/>
                     </connections>
                 </viewController>

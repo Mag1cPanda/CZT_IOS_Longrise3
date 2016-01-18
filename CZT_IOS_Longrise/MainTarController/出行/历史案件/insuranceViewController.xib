@@ -63,8 +63,8 @@
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nI-TF-riN">
                             <rect key="frame" x="289" y="8" width="43" height="33"/>
                             <animations/>
-                            <state key="normal" title="拨打">
-                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="[拨号]">
+                                <color key="titleColor" red="0.011564241671254138" green="0.65438000193958301" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="telephoneClicked:" destination="-1" eventType="touchUpInside" id="CFd-v1-8vS"/>

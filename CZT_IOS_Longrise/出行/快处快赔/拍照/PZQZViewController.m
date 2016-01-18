@@ -9,6 +9,7 @@
 #import "PZQZViewController.h"
 #import "TakePhoneFactory.h"
 #import "PhoneViewController.h"
+#import "AppDelegate.h"
 
 @interface PZQZViewController ()
 
@@ -23,6 +24,8 @@
     //设置按钮监听
     [self.moreCarCaseBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.oneCaseBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [AppDelegate storyBoradAutoLay:self.view];
 }
 
 

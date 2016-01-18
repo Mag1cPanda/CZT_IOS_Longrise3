@@ -26,8 +26,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车辆照片" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKt-95-GYq">
-                        <rect key="frame" x="165" y="14" width="147" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKt-95-GYq">
+                        <rect key="frame" x="120" y="14" width="192" height="21"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -41,7 +41,7 @@
                     <constraint firstItem="AAP-nn-ckc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OkV-ad-mta"/>
                     <constraint firstItem="AAP-nn-ckc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="coD-5q-iYH"/>
                     <constraint firstItem="YKt-95-GYq" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="kbd-ji-tY2"/>
-                    <constraint firstItem="YKt-95-GYq" firstAttribute="leading" secondItem="AAP-nn-ckc" secondAttribute="trailing" constant="90" id="ptC-eR-Ye6"/>
+                    <constraint firstItem="YKt-95-GYq" firstAttribute="leading" secondItem="AAP-nn-ckc" secondAttribute="trailing" constant="45" id="ptC-eR-Ye6"/>
                     <constraint firstItem="AAP-nn-ckc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="qaZ-r7-Jyq"/>
                 </constraints>
             </tableViewCellContentView>

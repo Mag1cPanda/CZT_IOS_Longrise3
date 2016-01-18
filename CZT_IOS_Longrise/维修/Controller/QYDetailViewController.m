@@ -15,7 +15,10 @@
 #import "DetailModel.h"
 #import "SectionTwoHeaderView.h"
 #import "AppDelegate.h"
-@interface QYDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface QYDetailViewController ()
+<UITableViewDataSource,
+UITableViewDelegate,
+UIActionSheetDelegate>
 {
     UITableView *table;
     HeaderView *header;
@@ -94,7 +97,7 @@
         
         [hud hide:YES afterDelay:0];
         
-//        NSLog(@"DetailResult%@",[Util objectToJson:result]);
+        NSLog(@"DetailResult%@",[Util objectToJson:result]);
         
         if (nil != result) {
             DetailModel *model = [[DetailModel alloc]initWithString:[Util objectToJson:result] error:nil];
@@ -105,7 +108,9 @@
             infoModel = model.data.companyinfo;
             
             if (nil != infoModel) {
+                [header.callBtn addTarget:self action:@selector(callEnterprise) forControlEvents:UIControlEventTouchUpInside];
                 [header setUIWithInfo:infoModel];
+                
             }
             
             
@@ -123,7 +128,24 @@
 }
 
 
+#pragma mark - 拨打电话
+-(void)callEnterprise{
 
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:@"确定拨打电话？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles: nil];
+    action.delegate = self;
+    [action showInView:self.view];
+    
+    
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    NSLog(@"buttonIndex -> %zi",buttonIndex);
+    if (buttonIndex == 0) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",infoModel.linktel]]];
+    }
+
+}
 
 #pragma mark - tabelView Delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

@@ -29,7 +29,6 @@
         [_timeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _timeBtn.titleLabel.font = kTimeFont;
         _timeBtn.enabled = NO;
-        [_timeBtn setBackgroundImage:[UIImage imageNamed:@"chat_timeline_bg.png"] forState:UIControlStateNormal];
         [self.contentView addSubview:_timeBtn];
         
         // 2、创建头像
@@ -57,7 +56,11 @@
     Message *message = _messageFrame.message;
     
     // 1、设置时间
-    [_timeBtn setTitle:message.time forState:UIControlStateNormal];
+    if (_messageFrame.showTime) {
+        [_timeBtn setBackgroundImage:[UIImage imageNamed:@"chat_timeline_bg.png"] forState:UIControlStateNormal];
+        [_timeBtn setTitle:message.time forState:UIControlStateNormal];
+    }
+    
     
     _timeBtn.frame = _messageFrame.timeF;
     

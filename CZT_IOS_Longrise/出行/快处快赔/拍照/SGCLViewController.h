@@ -23,6 +23,9 @@
 @property(nonatomic,assign) int currentMark;
 //事故类型，1:单车，2:多车
 @property(nonatomic,assign) int type;
+
+
+
 //报案号
 @property(nonatomic,copy) NSString *appcaseno;
 @property (weak, nonatomic) IBOutlet UIButton *takePhoneBtn;
@@ -33,4 +36,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *takePhoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *identifiedResLabel;
 @property (weak, nonatomic) IBOutlet UILabel *reportCaseLabel;
+
+//历史案件进来 接收已有的车主信息
+@property (strong, nonatomic) NSMutableArray *moreHistoryToResponsArray; //多车
+//历史案件 事故情形判断显示
+@property (strong, nonatomic) NSMutableArray *historyDescribArray;
 @end

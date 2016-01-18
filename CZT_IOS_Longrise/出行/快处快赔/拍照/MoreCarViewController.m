@@ -110,27 +110,27 @@
      */
     if(btn == self.imageBtn1)
     {
-        shoottype = 1;
+        shoottype = 0;
     }
     else if(btn == self.imageBtn2)
     {
-        shoottype = 2;
+        shoottype = 1;
     }
     else if(btn == self.imageBtn3)
     {
-        shoottype = 5;
+        shoottype = 3;
     }
     else if(btn == self.imageBtn4)
     {
-        shoottype = 7;
+        shoottype = 4;
     }
     else if(btn == self.imageBtn5)
     {
-        shoottype = 3;
+        shoottype = 2;
     }
     else if(btn == self.imageBtn6)
     {
-        shoottype = 9;
+        shoottype = 5;
     }
     
     [self takePhone2:shoottype];
@@ -142,32 +142,32 @@
     TakePhotoViewController *cameraVc = [[TakePhotoViewController alloc] init];
     cameraVc.delegate = self;
     
-    if(photoType == 1)
+    if(photoType == 0)
     {
         cameraVc.stringFromLast = @"侧前方";
         cameraVc.imageFromLast = [UIImage imageNamed:@"car_double_font"];
     }
-    else if(photoType == 2)
+    else if(photoType == 1)
     {
         cameraVc.stringFromLast = @"侧后方";
         cameraVc.imageFromLast = [UIImage imageNamed:@"car_double_behind"];
     }
-    else if(photoType == 3)
+    else if(photoType == 2)
     {
         cameraVc.stringFromLast = @"碰撞部位";
         cameraVc.imageFromLast = [UIImage imageNamed:@"car_double_zhuang"];
     }
-    else if(photoType == 5)
+    else if(photoType == 3)
     {
         cameraVc.stringFromLast = @"本方全景";
         cameraVc.imageFromLast = [UIImage imageNamed:@"car_double_me"];
     }
-    else if(photoType == 7)
+    else if(photoType == 4)
     {
         cameraVc.stringFromLast = @"对方全景";
         cameraVc.imageFromLast = [UIImage imageNamed:@"car_double_other"];
     }
-    else if(photoType == 9)
+    else if(photoType == 5)
     {
         cameraVc.stringFromLast = @"其它现场照片";
         cameraVc.imageFromLast = nil;

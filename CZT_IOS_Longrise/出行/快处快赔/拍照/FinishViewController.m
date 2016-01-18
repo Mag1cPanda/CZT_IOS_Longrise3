@@ -7,6 +7,7 @@
 //
 
 #import "FinishViewController.h"
+#import "AppDelegate.h"
 
 @interface FinishViewController ()
 
@@ -53,6 +54,9 @@
 
     
     [self.okBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    self.okBtn.layer.cornerRadius = 3;
+    self.okBtn.layer.masksToBounds = YES;
+    [AppDelegate storyBoradAutoLay:self.view];
 }
 
 #pragma mark 点击回调函数

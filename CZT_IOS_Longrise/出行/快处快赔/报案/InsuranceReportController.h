@@ -13,5 +13,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *reportCaseBtn;
 @property (weak, nonatomic) IBOutlet UIButton *unReportCase;
 
+//判断是否历史案件跳转进来 historyType = 1 回跳到历史案件界面
+@property (assign, nonatomic) int historyType;
+//历史案件报案接收的数据
 @property (strong, nonatomic)NSMutableDictionary *historyCaseDict;
+
+
 @end

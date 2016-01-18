@@ -43,7 +43,7 @@
         [_timeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _timeBtn.titleLabel.font = kTimeFont;
         _timeBtn.enabled = NO;
-        [_timeBtn setBackgroundImage:[UIImage imageNamed:@"chat_timeline_bg.png"] forState:UIControlStateNormal];
+        
         [self.contentView addSubview:_timeBtn];
         
         // 2、创建头像
@@ -76,7 +76,11 @@
     _messageFrame = messageFrame;
     Voice *message = _messageFrame.message;
     // 1、设置时间
-    [_timeBtn setTitle:message.time forState:UIControlStateNormal];
+    if (_messageFrame.showTime) {
+        [_timeBtn setBackgroundImage:[UIImage imageNamed:@"chat_timeline_bg.png"] forState:UIControlStateNormal];
+        [_timeBtn setTitle:message.time forState:UIControlStateNormal];
+    }
+    
     
     _timeBtn.frame = _messageFrame.timeF;
     
@@ -101,8 +105,8 @@
     if (message.type == VoiceTypeMe) {
         normal = [UIImage imageNamed:@"picon06.png"];
         normal = [normal stretchableImageWithLeftCapWidth:normal.size.width * 0.5 topCapHeight:normal.size.height * 0.7];
-        NSLog(@"%lf",normal.size.width);
-        NSLog(@"%lf",normal.size.height);
+       // NSLog(@"%lf",normal.size.width);
+       // NSLog(@"%lf",normal.size.height);
         _indicator.center = CGPointMake(_messageFrame.contentF.origin.x - 10, _messageFrame.contentF.origin.y + _messageFrame.contentF.size.height/2);
         [_indicator startAnimating];
         _imgView.frame = CGRectMake(_messageFrame.contentF.origin.x + 8, _messageFrame.contentF.origin.y + _messageFrame.contentF.size.height/3.5, _messageFrame.contentF.size.height/3, _messageFrame.contentF.size.height/3);

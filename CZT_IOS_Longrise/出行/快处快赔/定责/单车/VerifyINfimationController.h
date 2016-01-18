@@ -37,4 +37,7 @@
 //案件号
 @property (copy, nonatomic) NSString *appcaseno;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *sureButton;
+
 @end

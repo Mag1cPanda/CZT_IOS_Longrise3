@@ -7,8 +7,11 @@
 //
 
 #import "BreakRulesViewController.h"
+#import "FVCustomAlertView.h"
 
-@interface BreakRulesViewController ()<UIWebViewDelegate>
+@interface BreakRulesViewController ()<UIWebViewDelegate>{
+    FVCustomAlertView *alertView;
+}
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
@@ -33,6 +36,10 @@
 }
 
 -(void)createWebView{
+    
+    alertView = [[FVCustomAlertView alloc] init];
+    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:alertView];
 
     self.title = @"违章查询";
     NSURL *url = [NSURL URLWithString:@"http://www.bjjtgl.gov.cn/weifachaxun/wfcxnew.htm"];
@@ -67,6 +74,10 @@
             }
         }
     }
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    [alertView dismiss];
 }
 
 - (void)didReceiveMemoryWarning {

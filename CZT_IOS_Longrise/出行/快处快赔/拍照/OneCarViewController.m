@@ -96,19 +96,19 @@
      */
     if(btn == self.imageBtn1)
     {
-        shoottype = 1;
+        shoottype = 0;
     }
     else if(btn == self.imageBtn2)
     {
-        shoottype = 2;
+        shoottype = 1;
     }
     else if(btn == self.imageBtn3)
     {
-        shoottype = 6;
+        shoottype = 2;
     }
     else if(btn == self.imageBtn4)
     {
-        shoottype = 9;
+        shoottype = 5;
     }
     [self takePhone2:shoottype];
 }
@@ -118,22 +118,22 @@
     //遵守协议
     TakePhotoViewController *cameraVc = [[TakePhotoViewController alloc] init];
     cameraVc.delegate = self;
-    if(photoType == 1)
+    if(photoType == 0)
     {
         cameraVc.stringFromLast = @"侧前方";
         cameraVc.imageFromLast = [UIImage imageNamed:@"car_one_font"];
     }
-    else if(photoType == 2)
+    else if(photoType == 1)
     {
         cameraVc.stringFromLast = @"侧后方";
         cameraVc.imageFromLast = [UIImage imageNamed:@"car_one_behind"];
     }
-    else if(photoType == 6)
+    else if(photoType == 2)
     {
         cameraVc.stringFromLast = @"碰撞部位";
         cameraVc.imageFromLast = [UIImage imageNamed:@"car_one_zhuang"];
     }
-    else if(photoType == 9)
+    else if(photoType == 5)
     {
         cameraVc.stringFromLast = @"其它现场照片";
         cameraVc.imageFromLast = nil;

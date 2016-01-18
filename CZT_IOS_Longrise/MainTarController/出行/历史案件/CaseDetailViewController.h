@@ -19,4 +19,5 @@
 @property (nonatomic,copy)NSString * casedate;  //报案时间
 @property (nonatomic,copy)NSString * insreporttel; //保险公司报案电话
 @property (nonatomic,copy)NSString * appcaseno; //app报案编号
+@property (nonatomic,assign)int caseState;
 @end

@@ -8,7 +8,7 @@
 
 #import "WXTSViewController.h"
 #import "WXTSViewController2.h"
-
+#import "AppDelegate.h"
 @interface WXTSViewController ()
 
 @end
@@ -36,6 +36,7 @@
     [self.okBtn setBackgroundColor:[UIColor colorWithRed:61/255.0 green:166/255.0 blue:244/255.0 alpha:1]];
     self.okBtn.layer.cornerRadius = 5;
     [self.okBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    [AppDelegate storyBoradAutoLay:self.view];
 }
 
 -(void)onClick:(UIButton *)btn

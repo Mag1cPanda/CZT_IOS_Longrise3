@@ -17,7 +17,8 @@
 @property (weak, nonatomic) IBOutlet CWStarRateView *priceStar;
 @property (weak, nonatomic) IBOutlet CWStarRateView *environmentStar;
 
-@property (weak, nonatomic) IBOutlet UILabel *evaluateLab;
+@property (weak, nonatomic) IBOutlet UITextView *evaluateLab;
+@property (weak, nonatomic) IBOutlet UITextView *complainLab;
 
 
 -(void)setUIWithInfo:(EvaluateModel *)model;

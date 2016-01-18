@@ -31,7 +31,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="vv2-2F-EA0"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="驾驶人姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8H-kM-KvZ">
@@ -159,7 +159,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adO-4N-hLF">
                                         <rect key="frame" x="10" y="422" width="355" height="45"/>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.078431372549019607" green="0.58823529411764708" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.23921568630000001" green="0.65098039220000004" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="TQ9-BS-7TI"/>
                                         </constraints>
@@ -202,6 +202,7 @@
                         <outlet property="driverNumberLabel" destination="VaB-iW-zVP" id="oca-Hf-sfH"/>
                         <outlet property="phoneNumberLabel" destination="5Ej-yW-TWn" id="BSF-nI-yrB"/>
                         <outlet property="showView" destination="77Q-4f-IOp" id="I2L-0g-2vb"/>
+                        <outlet property="sureButton" destination="adO-4N-hLF" id="mUB-gt-3up"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GmN-OK-szL" userLabel="First Responder" sceneMemberID="firstResponder"/>

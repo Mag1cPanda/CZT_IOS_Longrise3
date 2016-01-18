@@ -56,7 +56,6 @@ extern NSString * monitorIP;  //监听IP
     [backBtn addTarget:self action:@selector(backClicked:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:backBtn];
     [self.navigationItem setLeftBarButtonItem:item];
-    
     self.navigationItem.hidesBackButton = YES;
     [self initCurl];
     [self go];
@@ -138,7 +137,7 @@ size_t icomet_callback1(char *ptr, size_t size, size_t nmemb, void *userdata)
     DutyViewController *vc = (__bridge DutyViewController *)userdata;
     NSError *error;
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-    NSLog(@"idc === %@",dic);
+    //NSLog(@"idc === %@",dic);
     
     if ([dic[@"type"] isEqualToString:@"data"])
     {
@@ -201,7 +200,7 @@ size_t icomet_callback1(char *ptr, size_t size, size_t nmemb, void *userdata)
 }
 
 - (IBAction)noGiveUp:(id)sender {
-    
+    self.navigationItem.hidesBackButton = YES;
     self.navigationController.navigationBar.alpha = 1.0;
     _imageView.hidden = NO;
     _backgroundImageView.hidden = NO;
@@ -238,6 +237,7 @@ size_t icomet_callback1(char *ptr, size_t size, size_t nmemb, void *userdata)
         NSString *restate = dic[@"restate"];
       //  NSLog(@"%@",dic);
         if ([restate isEqualToString:@"0"]) {
+            self.navigationItem.hidesBackButton = NO;
             [self.navigationController popViewControllerAnimated:YES];
         }
         else{
@@ -249,6 +249,8 @@ size_t icomet_callback1(char *ptr, size_t size, size_t nmemb, void *userdata)
 }
 
 - (IBAction)resultSure:(id)sender {
+    [self.navigationItem setLeftBarButtonItem:nil];
+    self.navigationItem.hidesBackButton = NO;
     self.navigationController.navigationBar.alpha = 1.0;
     _noGiveUpView.hidden = YES;
     _giveUpWarnView.hidden = YES;

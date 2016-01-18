@@ -140,13 +140,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4u-xC-zz7">
-                            <rect key="frame" x="346" y="181" width="37" height="30"/>
+                            <rect key="frame" x="341" y="178" width="42" height="30"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="AgH-JE-ZGD"/>
-                                <constraint firstAttribute="width" constant="37" id="WyB-MZ-ozb"/>
+                                <constraint firstAttribute="width" constant="42" id="WyB-MZ-ozb"/>
                             </constraints>
-                            <state key="normal" backgroundImage="item_icon03"/>
+                            <state key="normal" title="[拨号]"/>
                             <connections>
                                 <action selector="usClicked:" destination="-1" eventType="touchUpInside" id="mCW-R5-jhl"/>
                             </connections>
@@ -169,7 +169,7 @@
                         <constraint firstAttribute="trailing" secondItem="Ncm-cg-Q6v" secondAttribute="trailing" constant="8" id="KRQ-PG-S1p"/>
                         <constraint firstItem="Ncm-cg-Q6v" firstAttribute="leading" secondItem="qfx-mi-5uV" secondAttribute="trailing" constant="5" id="Lo1-cV-d0a"/>
                         <constraint firstItem="N3C-Wa-RJb" firstAttribute="trailing" secondItem="Ncm-cg-Q6v" secondAttribute="trailing" id="OQh-bP-kUk"/>
-                        <constraint firstItem="b4u-xC-zz7" firstAttribute="bottom" secondItem="fWM-hJ-xVI" secondAttribute="top" constant="-5" id="PdT-ms-owk"/>
+                        <constraint firstItem="b4u-xC-zz7" firstAttribute="bottom" secondItem="fWM-hJ-xVI" secondAttribute="top" constant="-8" id="PdT-ms-owk"/>
                         <constraint firstItem="Rez-v3-Wsc" firstAttribute="height" secondItem="Ncm-cg-Q6v" secondAttribute="height" id="SMf-hJ-P1A"/>
                         <constraint firstItem="N3C-Wa-RJb" firstAttribute="height" secondItem="Ncm-cg-Q6v" secondAttribute="height" id="UB4-Hx-qqt"/>
                         <constraint firstItem="qfx-mi-5uV" firstAttribute="top" secondItem="fbv-KT-dI1" secondAttribute="bottom" constant="10" id="Uba-qW-2LV"/>
@@ -319,13 +319,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y97-1d-L2C">
-                            <rect key="frame" x="344" y="177" width="37" height="30"/>
+                            <rect key="frame" x="339" y="177" width="42" height="30"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="OR3-wm-E9i"/>
-                                <constraint firstAttribute="width" constant="37" id="V3i-8L-DOI"/>
+                                <constraint firstAttribute="width" constant="42" id="V3i-8L-DOI"/>
                             </constraints>
-                            <state key="normal" backgroundImage="item_icon03"/>
+                            <state key="normal" title="[拨号]"/>
                             <connections>
                                 <action selector="otherClicked:" destination="-1" eventType="touchUpInside" id="nGy-Rp-jY1"/>
                             </connections>
@@ -498,13 +498,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUa-kF-nl9">
-                            <rect key="frame" x="351" y="177" width="37" height="30"/>
+                            <rect key="frame" x="346" y="177" width="42" height="30"/>
                             <animations/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="37" id="Y8f-db-QPG"/>
+                                <constraint firstAttribute="width" constant="42" id="Y8f-db-QPG"/>
                                 <constraint firstAttribute="height" constant="30" id="al9-tg-Qiw"/>
                             </constraints>
-                            <state key="normal" backgroundImage="item_icon03"/>
+                            <state key="normal" title="[拨号]"/>
                             <connections>
                                 <action selector="thirdClicked:" destination="-1" eventType="touchUpInside" id="REW-ho-8K8"/>
                             </connections>
@@ -564,7 +564,4 @@
             <point key="canvasLocation" x="260" y="711.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="item_icon03" width="269" height="198"/>
-    </resources>
 </document>

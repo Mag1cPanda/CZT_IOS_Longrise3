@@ -454,7 +454,8 @@
         [alert show];
     }
     
-    
+    //检查版本
+    [self checkVersion];
 }
 
 
@@ -562,7 +563,13 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 60;
+    return 50;
+
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -713,6 +720,7 @@
         NSString *cityName = result.addressDetail.city;
         NSLog(@"城市名称：%@",cityName);
         if([@"北京市" isEqualToString:cityName])
+//        if([@"上海市" isEqualToString:cityName])
         {
             BMKPointAnnotation* item = [[BMKPointAnnotation alloc]init];
             item.coordinate = result.location;
@@ -725,21 +733,7 @@
             [UserDefaultsUtil saveNSUserDefaultsForObject:showmeg forKey:@"imageaddress"];
             [Globle getInstance].imageaddress = showmeg;
         }
-        else
-        {
-            //保存地址
-            [UserDefaultsUtil saveNSUserDefaultsForObject:@"北京市朝阳区" forKey:@"imageaddress"];
-            [Globle getInstance].imageaddress = @"北京市朝阳区";
-            
-            
-//            [Globle getInstance].imagelat = 39.832670;
-//            [Globle getInstance].imagelon = 116.46037;
-//            
-//            //保存经纬度
-//            [UserDefaultsUtil saveNSUserDefaultsForFloat:39.832670 forKey:@"lat"];
-//            [UserDefaultsUtil saveNSUserDefaultsForFloat:116.46037 forKey:@"lon"];
-
-        }
+        
         
         
         //开始加载菜单
@@ -761,6 +755,68 @@
 -(void)selectListView:(UISelectListView *)selectListView index:(NSUInteger)index content:(NSDictionary *)dic
 {
     
+}
+
+#pragma mark - 检测版本更新
+-(void)checkVersion
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setValue:@"Convenient_Traffic" forKey:@"arg1"];
+    
+    NSString *tempStr = kckpdecanrest;
+    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[tempStr stringByAppendingString:@"/lbcp_getAppVersion"] params:params httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+        
+        if (nil != result)
+        {
+            NSString *jsonStr = [Util objectToJson:result];
+            NSLog(@"版本检测%@",jsonStr);
+            verModel = [[AppVerModel alloc]initWithString:jsonStr error:nil];
+            //            verModel.appversion;
+            //            verModel.upgrade
+            //            verModel.remarks
+            remark = verModel.remarks;
+            
+            localVersion = VersionCode;
+            NSLog(@"当前版本号%@",verModel.appversion);
+            int localVersionNUm = (localVersion == nil ? -1 : [localVersion intValue]);
+            
+            //获取服务器版本
+            serverVersion = verModel.appversion;
+            int serverVersionNum = (serverVersion == nil ? -1 : [serverVersion intValue]);
+            //判断是非升级
+            if(localVersionNUm < serverVersionNum)
+            {
+                NSString *upgrade = verModel.upgrade;
+                if([@"1" isEqualToString:upgrade])    //   强制升级
+                {
+                    self.versionAlertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"有新的版本，请及时更新。" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                }
+                else     //  自选升级
+                {
+                    self.versionAlertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"有新的版本，请及时更新。" delegate:self cancelButtonTitle: nil otherButtonTitles:@"确定",@"取消",nil];
+                }
+                [self.versionAlertView show];
+                
+            }
+        }
+        
+    }];
+    
+}
+
+#pragma mark - UIAlertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView == self.versionAlertView)
+    {
+        if(buttonIndex == 0)
+        {
+            
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:remark]];
+            
+        }
+    }
 }
 
 @end

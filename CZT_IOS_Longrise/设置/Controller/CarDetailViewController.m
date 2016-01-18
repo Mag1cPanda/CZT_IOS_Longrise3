@@ -13,7 +13,7 @@
 #import "CarDetailCell.h"
 #import "CZT_IOS_Longrise.pch"
 #import "CarDetailInfoModel.h"
-#import "CarDetailInfoModel.h"
+#import "FVCustomAlertView.h"
 
 @interface CarDetailViewController ()
 <UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
@@ -23,6 +23,7 @@
     CarDetailInfoModel *model;
     NSMutableArray *dataAry;
     UIAlertView *deleteAlertView;
+    FVCustomAlertView *FVAlertView;
 }
 @end
 
@@ -53,9 +54,9 @@
 
 }
 
-//-(void)viewWillAppear:(BOOL)animated{
-//    [self loadCarDetailData];
-//}
+-(void)viewWillAppear:(BOOL)animated{
+    [self loadCarDetailData];
+}
 
 -(void)addCar{
     AddCarViewController *vc = [AddCarViewController new];
@@ -64,6 +65,10 @@
 
 #pragma mark - 加载车辆详情数据
 -(void)loadCarDetailData{
+    
+    FVAlertView = [[FVCustomAlertView alloc] init];
+    [FVAlertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:FVAlertView];
     
     NSMutableDictionary *bean = [NSMutableDictionary dictionary];
     
@@ -81,15 +86,18 @@
     [[Globle getInstance].service requestWithServiceIP:url  ServiceName:@"appcarviewdetil" params:bean httpMethod:@"POST"resultIsDictionary:YES completeBlock:^(id result) {
         
         if (nil != result) {
-            
-            NSLog(@"车辆详情 %@",[Util objectToJson:result]);
-            
+//            NSLog(@"车辆详情 %@",[Util objectToJson:result]);
             model = [[CarDetailInfoModel alloc]initWithString:[Util objectToJson:result] error:nil];
-            NSLog(@"%@",model);
+//            NSLog(@"详情 -> %@",model);
+           
+//            NSMutableArray *ary = [NSMutableArray arrayWithObjects:model.carno, model., nil];
+            
+            
             
             [table reloadData];
             
         }
+        [FVAlertView dismiss];
         
     }];
     
@@ -145,6 +153,22 @@
         imageV.image = [UIImage imageNamed:@"img07"];
         [cell.contentView addSubview:imageV];
     }
+    else if (indexPath.row == 1){
+    
+        cell.rightLab.text = model.carno;
+    }
+    else if (indexPath.row == 3){
+        
+        cell.rightLab.text = model.cartype;
+    }
+    else if (indexPath.row == 5){
+        
+        cell.rightLab.text = model.identificationnum;
+    }
+    else if (indexPath.row == 6){
+        cell.rightLab.text = model.enginenumber;
+    }
+    
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;;
@@ -189,6 +213,9 @@
             NSLog(@"取消删除！");
         }else{
             
+            FVAlertView = [[FVCustomAlertView alloc] init];
+            [FVAlertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+            [self.view addSubview:FVAlertView];
             //删除车辆信息
             NSMutableDictionary *bean = [NSMutableDictionary dictionary];
             
@@ -210,6 +237,10 @@
                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"删除成功！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                         [alert show];
                         
+                    }else if ([returnDic[@"restate"]isEqualToString:@"-4"]){
+                        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                        [alert show];
+                        
                     }else{
                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"删除失败！" message:@"请检查网络！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                         [alert show];
@@ -218,7 +249,7 @@
                 }else{
                     NSLog(@"没有数据返回");
                 }
-                
+                [FVAlertView dismiss];
             }];
         }
         

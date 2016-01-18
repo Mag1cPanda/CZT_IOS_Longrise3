@@ -65,6 +65,7 @@
 //基础服务
 #define WXBaseServiceURL [NSString stringWithFormat:@"%@",@"http://202.43.147.36:71/restservices/"]
 
+#define VersionCode @"1"
 
 //事故类型的通知名称
 #define NotificationNameForCaseType @"caseTypeNotice"

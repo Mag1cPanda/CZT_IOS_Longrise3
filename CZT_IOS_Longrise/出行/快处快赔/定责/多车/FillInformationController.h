@@ -31,7 +31,8 @@
     UISelectListView *thirdSelectCompany;
 }
 
-@property (strong, nonatomic) NSMutableDictionary *moreHistoryToResponsDict;
+//历史案件进来 接收已有的车主信息
+@property (strong, nonatomic) NSMutableArray *moreHistoryToResponsArray;
 
 //案件号
 @property (copy, nonatomic) NSString *appcaseno;

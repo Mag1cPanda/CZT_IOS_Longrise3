@@ -8,10 +8,12 @@
 
 #import "ComplainViewController.h"
 #import "AppDelegate.h"
+#import "HRDetailViewController.h"
 #define FORMATSTR(str) [NSString stringWithFormat:@"%@",str]
 @interface ComplainViewController ()<UITextViewDelegate>
 {
     HRDetailHeaderView *header;
+    BOOL isSubmit;
 }
 @end
 
@@ -25,7 +27,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"投诉";
     
-    NSLog(@"_dataModel -> %@",_dataModel);
+//    NSLog(@"_dataModel -> %@",_dataModel);
     
     self.commitBtn.layer.cornerRadius = 5;
     header  = [[NSBundle mainBundle] loadNibNamed:@"HRDetailHeaderView" owner:nil options:nil][0];
@@ -43,6 +45,19 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)refreshHRDetailDataBlockCompletion:(RefreshDataBlock)refreshDataBlock{
+
+    _refreshDataBlock = refreshDataBlock;
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+
+    if (nil != _refreshDataBlock) {
+        _refreshDataBlock(isSubmit);
+    }
 }
 
 #pragma mark - 提交投诉
@@ -78,7 +93,7 @@
     
     NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxSericeURL,businessapp];
     
-    NSLog(@"结果bean %@",bean);
+//    NSLog(@"结果bean %@",bean);
     [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appevaluatestroecomplaint" params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
         if (nil != result) {
@@ -86,10 +101,32 @@
             hud.mode = MBProgressHUDModeText;
             hud.labelText = [dic objectForKey:@"redes"];
         }
-        [hud hide:YES afterDelay:3.0];
+        [hud hide:YES afterDelay:1.0];
         NSLog(@"投诉结果%@",[Util objectToJson:result]);
         
+        sleep(1);
+        
+        /**
+         *  使用代码块
+         */
+        _refreshDataBlock(YES);
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        
+        /**
+         *  使用通知
+         */
+        //创建通知
+        //    NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"1",@"restate",nil];
+        //    NSNotification *notification = [NSNotification notificationWithName:@"RefreshData" object:nil userInfo:dict];
+        //发送通知
+        //    [[NSNotificationCenter defaultCenter]postNotification:notification];
     } ];
+    
+
+    
+    
+    
 }
 
 /*

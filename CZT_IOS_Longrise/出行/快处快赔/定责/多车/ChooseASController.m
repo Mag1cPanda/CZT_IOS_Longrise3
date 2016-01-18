@@ -17,10 +17,14 @@
 #import "InfimationModel.h"
 #import "ResponsViewController.h"
 #import "FVCustomAlertView.h"
+#import "SetViewController.h"
+
+
 @interface ChooseASController ()<UITextViewDelegate,UIAlertViewDelegate>
 {
     UITextView *destextView;
     FVCustomAlertView *fvalertView;
+    UIAlertView *alertCarNumber; //查询车牌号码
 }
 
 @property (strong, nonatomic) NSArray *dataSource;
@@ -48,7 +52,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     
     self.backScrollView.delegate = self;
     
@@ -57,28 +61,43 @@
     
 }
 
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.sureButton.userInteractionEnabled = YES;
+}
 
 #pragma mark  - 下一步
 
 - (IBAction)sureNextButton:(id)sender {
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    if (self.moreHistoryToResponsArray.count)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FillInfomation" bundle:nil];
+        FillInformationController *fillController = [storyboard instantiateViewControllerWithIdentifier:@"fillinfomationID"];
+        fillController.hidesBottomBarWhenPushed = YES;
+        fillController.appcaseno = self.appcaseno;
+        fillController.describeData = self.describeData;
+        fillController.describeString = [self.historyDescribArray lastObject];
+        fillController.moreHistoryToResponsArray = self.moreHistoryToResponsArray;
+        [self.navigationController pushViewController:fillController animated:YES];
+    }
+    else
+    {
+
         if (self.showView1.tag == 0 && self.showView2.tag == 0 && self.showView3.tag == 0 && self.showView4.tag == 0 && self.showView5.tag == 0 && self.showView6.tag == 0 && self.showView7.tag == 0 && self.showView8.tag == 0 && self.showView9.tag == 0 ) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请选择事故类型" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
             [alert show];
         }
         else
         {
-//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                fvalertView = [[FVCustomAlertView alloc]init];
-                [fvalertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:0];
-                [self startLoadData];
-//            });
-            
+            [self startLoadData];
         }
-    });
-   
+        
+    }
+    
+
+    
     self.sureButton.userInteractionEnabled =  NO;
 }
 
@@ -86,47 +105,65 @@
 -(void)startLoadData
 {
    
-    NSMutableDictionary *bean = [[NSMutableDictionary alloc] init];
-    NSDictionary *userinfo = [[Globle getInstance].loginInfoDic objectForKey:@"userinfo"];
-    [bean setValue:userinfo[@"userflag"] forKey:@"userflag"];
-    [bean setValue:[Globle getInstance].loginInfoDic[@"token"] forKey:@"token"];
-    [bean setValue:@"1" forKey:@"pagenum"];
-    [bean setValue:@"100" forKey:@"pagesize"];
-   
-    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxBaseServiceURL ServiceName:[NSString stringWithFormat:@"%@/appsearchcarlist",businessapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
-       
-        NSLog(@"result = %@",result[@"result"]);
-       
-            if(result[@"result"] == nil)
+        fvalertView = [[FVCustomAlertView alloc]init];
+        [fvalertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:0];
+        [self.view addSubview:fvalertView];
+        NSMutableDictionary *bean = [[NSMutableDictionary alloc] init];
+        NSDictionary *userinfo = [[Globle getInstance].loginInfoDic objectForKey:@"userinfo"];
+        [bean setValue:userinfo[@"userflag"] forKey:@"userflag"];
+        [bean setValue:[Globle getInstance].loginInfoDic[@"token"] forKey:@"token"];
+        [bean setValue:@"1" forKey:@"pagenum"];
+        [bean setValue:@"100" forKey:@"pagesize"];
+
+        
+        [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxBaseServiceURL ServiceName:[NSString stringWithFormat:@"%@/appsearchcarlist",baseapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+
+            
+            NSLog(@"result = %@",result[@"data"]);
+            [fvalertView dismiss];
+            if ([result[@"restate"]isEqualToString:@"-4"])
             {
-                [fvalertView dismiss];
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FillInfomation" bundle:nil];
-                FillInformationController *fillController = [storyboard instantiateViewControllerWithIdentifier:@"fillinfomationID"];
-                fillController.hidesBottomBarWhenPushed = YES;
-                fillController.appcaseno = self.appcaseno;
-                fillController.describeData = self.describeData;
-                fillController.describeString = destextView.text;
-                [self.navigationController pushViewController:fillController animated:YES];
+//                alertCarNumber = [[UIAlertView alloc]initWithTitle:nil message:@"验证失效，是否退出重新登录！" delegate:self cancelButtonTitle:@"继续" otherButtonTitles:@"确定", nil];
+                alertCarNumber = [[UIAlertView alloc]initWithTitle:nil message:result[@"redes"] delegate:self cancelButtonTitle:@"继续" otherButtonTitles:@"确定", nil];
+                [alertCarNumber show];
             }
             else
             {
-                
-                [fvalertView dismiss];
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChooseCar" bundle:nil];
-                ChooseCarViewController *araVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseCarStoryboard"];
-                araVC.hidesBottomBarWhenPushed = YES;
-                araVC.CarDict = result[@"result"];
-                araVC.appcaseno = self.appcaseno;
-                araVC.describeData = self.describeData;
-                araVC.describeString = destextView.text;
-                [self.navigationController pushViewController:araVC animated:YES];
-                
-                
+                if([result[@"data"]isEqual:@""])
+                {
+                    
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FillInfomation" bundle:nil];
+                    FillInformationController *fillController = [storyboard instantiateViewControllerWithIdentifier:@"fillinfomationID"];
+                    fillController.hidesBottomBarWhenPushed = YES;
+                    fillController.appcaseno = self.appcaseno;
+                    fillController.describeData = self.describeData;
+                    fillController.describeString = destextView.text;
+                    fillController.moreHistoryToResponsArray = self.moreHistoryToResponsArray;
+                    [self.navigationController pushViewController:fillController animated:YES];
+                }
+                else
+                {
+                    
+                    
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChooseCar" bundle:nil];
+                    ChooseCarViewController *araVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseCarStoryboard"];
+                    araVC.hidesBottomBarWhenPushed = YES;
+                    araVC.CarDict = result[@"data"];
+                    araVC.appcaseno = self.appcaseno;
+                    araVC.describeData = self.describeData;
+                    araVC.describeString = destextView.text;
+                    araVC.carsType = self.carsType;
+                    araVC.moreHistoryToResponsArray = self.moreHistoryToResponsArray;
+                    [self.navigationController pushViewController:araVC animated:YES];
+                    
+                    
+                }
             }
+            
+            
+        }];
 
-    }];
-
-
+  
     
 }
 #pragma mark - 设置tabView
@@ -163,6 +200,10 @@
         make.width.mas_equalTo(self.backScrollView.mas_width);
         
     }];
+    
+    //历史案件进来 显示已选择的数据
+    [self judgeDescribShow];
+    
     
     [self.sureButton.layer setCornerRadius:4];
     
@@ -231,7 +272,7 @@
         self.checkImage1.hidden = NO;
         [self.describeData removeAllObjects];
         [self.describeData addObject:self.dataSource[0]];
-    
+        
     }else
     {
         self.checkImage1.hidden = YES;
@@ -300,7 +341,96 @@
     {
         self.checkImage9.hidden = YES;
     }
- 
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    self.sureButton.userInteractionEnabled = YES;
+//    if (alertView == alertCarNumber)
+//    {
+//        if (buttonIndex == 0)
+//        {
+//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FillInfomation" bundle:nil];
+//            FillInformationController *fillController = [storyboard instantiateViewControllerWithIdentifier:@"fillinfomationID"];
+//            fillController.hidesBottomBarWhenPushed = YES;
+//            fillController.appcaseno = self.appcaseno;
+//            fillController.describeData = self.describeData;
+//            fillController.describeString = destextView.text;
+//            fillController.moreHistoryToResponsArray = self.moreHistoryToResponsArray;
+//            [self.navigationController pushViewController:fillController animated:YES];
+//        }
+//        else
+//        {
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+//        }
+//        
+//    }
+
+}
+
+#pragma mark - 历史案件进来判断显示的状态
+- (void)judgeDescribShow
+{
+    if (self.historyDescribArray.count)
+    {
+        
+        if ([[self.historyDescribArray firstObject] isEqualToString:@"0"])
+        {
+            [self.showView1.subviews lastObject].hidden = NO;
+            [self.describeData removeAllObjects];
+            [self.describeData addObject:self.dataSource[0]];
+        }
+        else if ([[self.historyDescribArray firstObject] isEqualToString:@"1"])
+        {
+            [self.showView2.subviews lastObject].hidden = NO;
+            [self.describeData removeAllObjects];
+            [self.describeData addObject:self.dataSource[1]];
+        }
+        else if ([[self.historyDescribArray firstObject] isEqualToString:@"2"])
+        {
+            [self.showView3.subviews lastObject].hidden = NO;
+            [self.describeData removeAllObjects];
+            [self.describeData addObject:self.dataSource[2]];
+        }
+        else if ([[self.historyDescribArray firstObject] isEqualToString:@"3"])
+        {
+            [self.showView4.subviews lastObject].hidden = NO;
+            [self.describeData removeAllObjects];
+            [self.describeData addObject:self.dataSource[3]];
+        }
+        else if ([[self.historyDescribArray firstObject] isEqualToString:@"4"])
+        {
+            [self.showView5.subviews lastObject].hidden = NO;
+            [self.describeData removeAllObjects];
+            [self.describeData addObject:self.dataSource[4]];
+        }
+        else if ([[self.historyDescribArray firstObject] isEqualToString:@"5"])
+        {
+            [self.showView6.subviews lastObject].hidden = NO;
+            [self.describeData removeAllObjects];
+            [self.describeData addObject:self.dataSource[5]];
+        }
+        else if ([[self.historyDescribArray firstObject] isEqualToString:@"6"])
+        {
+            [self.showView7.subviews lastObject].hidden = NO;
+            [self.describeData removeAllObjects];
+            [self.describeData addObject:self.dataSource[6]];
+        }
+        else if ([[self.historyDescribArray firstObject] isEqualToString:@"7"])
+        {
+            [self.showView8.subviews lastObject].hidden = NO;
+            [self.describeData removeAllObjects];
+            [self.describeData addObject:self.dataSource[7]];
+        }
+        else
+        {
+            [self.showView9.subviews lastObject].hidden = NO;
+            [self.describeData removeAllObjects];
+            [self.describeData addObject:self.dataSource[8]];
+            destextView.text = [self.historyDescribArray lastObject];
+        }
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -308,13 +438,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

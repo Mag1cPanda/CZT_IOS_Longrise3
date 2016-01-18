@@ -12,6 +12,9 @@
 #import "HRDataModel.h"
 #import "HRDetailDataModel.h"
 #import "SRSelectGroup.h"
+
+typedef void (^RefreshDataBlock)(BOOL);
+
 @interface EvaluateViewController : UIViewController
 
 @property (nonatomic, strong) SRSelectGroup *group;
@@ -27,11 +30,14 @@
 @property (weak, nonatomic) IBOutlet CWStarRateView *starView5;
 @property (weak, nonatomic) IBOutlet UITextView *evaTextView;
 
-@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
+@property (nonatomic, copy) RefreshDataBlock refreshDataBlock;
 
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 
 //头部视图数据
 @property (nonatomic, strong) HRDataModel *model;
 //参数数据模型
 @property (nonatomic, strong) HRDetailDataModel *dataModel;
+
+-(void)refreshHRDetailDataBlockCompletion:(RefreshDataBlock)refreshDataBlock;
 @end

@@ -8,6 +8,7 @@
 
 #import "WXTSViewController2.h"
 #import "PZQZViewController.h"
+#import "AppDelegate.h"
 
 @interface WXTSViewController2 ()
 
@@ -45,6 +46,7 @@
     //设置监听
     [self.okBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.repCaseBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    [AppDelegate storyBoradAutoLay:self.view];
 }
 
 #pragma mark 按钮点击回调方法
@@ -57,7 +59,7 @@
     }
     else if(btn == self.repCaseBtn)
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://112"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://122"]];
     }
 }
 

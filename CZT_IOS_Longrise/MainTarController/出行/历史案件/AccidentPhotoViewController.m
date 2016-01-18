@@ -49,59 +49,23 @@
 -(void)configUI{
     self.title = @"事故影像";
     [_PhotoTableView registerNib:[UINib nibWithNibName:@"AccidentPhotoTableViewCell" bundle:nil] forCellReuseIdentifier:@"accidentCell"];
-    alertView = [[FVCustomAlertView alloc]init];
-    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
-    [self.view addSubview:alertView];
+//    alertView = [[FVCustomAlertView alloc]init];
+//    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+//    [self.view addSubview:alertView];
 }
 
 #pragma mark -
 #pragma mark - 数据请求
 -(void)requestData{
+    //NSLog(@"----------%@",_dataListDic);
     _dataList = [NSMutableArray array];
-    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
-   // [bean setObject:@"110101201512180009" forKey:@"casenumber"];
-     [bean setObject:_casenumber forKey:@"casenumber"];
-    //[bean setObject:@"15071440127" forKey:@"appphone"];
-    [bean setObject:_appphone forKey:@"appphone"];
-    [bean setObject:[Globle getInstance].loadDataName forKey:@"username"];
-    [bean setObject:[Globle getInstance].loadDataPass forKey:@"password"];
-   // NSString *ServiceUrl = @"http://192.168.3.229:86/KCKP/restservices/kckpzcslrest/";
-    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat: @"%@/zdsearchcasedetailinfo",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
-        NSDictionary *dic = result;
-        if ([dic[@"restate"]isEqualToString:@"0"]) {
-            if (dic[@"data"]) {
-               // NSLog(@"%@",dic[@"data"]);
-                if (nil!=dic[@"data"][@"accidentimagelist"]) {
-                    //  NSLog(@"--------------------------------%@",dic[@"data"][@"accidentimagelist"]);
-                    @try {
-                        NSArray *accidentimagelist = dic[@"data"][@"accidentimagelist"];
-                        for (NSDictionary *dic1 in accidentimagelist) {
-                            [_dataList addObject:dic1];
-                        }
-                      //  NSLog(@"%@",dic[@"data"][@"accidentimagelist"]);
-                        [_PhotoTableView reloadData];
-                    }
-                    @catch (NSException *exception) {
-                        
-                    }
-                    @finally {
-                        
-                    }
-                   
-                }
-                
-            }else{
-                NSLog(@"%@",dic[@"redes"]);
+    if (nil != _dataListDic) {
+        NSArray *accidentimagelist = _dataListDic[@"accidentimagelist"];
+            for (NSDictionary *dic1 in accidentimagelist) {
+                [_dataList addObject:dic1];
             }
-            
-        }else{
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"加载失败，请确认网络是否开启！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alert show];
-            NSLog(@"请求数据失败");
-            NSLog(@"%@",dic[@"redes"]);
+            [_PhotoTableView reloadData];
         }
-        [alertView dismiss];
-    }];
 }
 
 #pragma mark - 
@@ -121,10 +85,13 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     AccidentPhotoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"accidentCell" forIndexPath:indexPath];
     NSDictionary *dic = _dataList[indexPath.row];
-    [cell.carPhotoImageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageurl"]]placeholderImage:[UIImage imageNamed:@"beijing_ico05"]];
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(magnifyImage:)];
-//    [cell.carPhotoImageView addGestureRecognizer:tap];
-    cell.photoLocationLabel.text = dic[@"imagetypename"];
+    [cell.carPhotoImageView sd_setImageWithURL:[NSURL URLWithString:dic[@"imageurl"]]placeholderImage:[UIImage imageNamed:@"loadingPhoto"]];
+    if ([dic[@"imagetypename"]isEqual:@""]) {
+        cell.photoLocationLabel.text = @"其它现场照片";
+    }else{
+        cell.photoLocationLabel.text = dic[@"imagetypename"];
+    }
+    
     return cell;
 }
 

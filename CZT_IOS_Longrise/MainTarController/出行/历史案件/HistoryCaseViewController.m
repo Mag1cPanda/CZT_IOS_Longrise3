@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configUI];
-   // [self requestData];
+    // [self requestData];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -60,7 +60,7 @@
 -(void)configUI{
     //添加下拉刷新
     _dataList = [NSMutableArray array];
-   
+    
     self.title = @"历史案件";
     [_htTableView registerNib:[UINib nibWithNibName:@"HistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"historyCell"];
     [self addRefresh];
@@ -69,12 +69,12 @@
 #pragma mark -
 #pragma mark - 添加下拉刷新
 -(void)addRefresh{
-   // __block HistoryCaseViewController *blockSelf = self;
+    // __block HistoryCaseViewController *blockSelf = self;
     _htTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         //[blockSelf.htTableView reloadData];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-             [_htTableView.mj_header endRefreshing];
+            [_htTableView.mj_header endRefreshing];
         });
     }];
 }
@@ -82,7 +82,7 @@
 #pragma mark -
 #pragma mark - 数据请求
 -(void)requestData{
-   // NSString *ServiceUrl = @"http://192.168.3.229:86/KCKP/restservices/kckpzcslrest/";
+    // NSString *ServiceUrl = @"http://192.168.3.229:86/KCKP/restservices/kckpzcslrest/";
     
     alertView = [[FVCustomAlertView alloc] init];
     [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
@@ -94,7 +94,7 @@
     NSDictionary *userDic = [loginDic valueForKey:@"userinfo"];
     _telephone = [userDic valueForKey:@"mobilephone"];
     //[bean setValue:_casecarno forKey:@"casecarno"];
-   // [bean setValue:@"15071440127" forKey:@"telephone"];
+    // [bean setValue:@"15071440127" forKey:@"telephone"];
     [bean setValue:_telephone forKey:@"telephone"];
     [bean setValue:[Globle getInstance].loadDataName forKey:@"username"];
     [bean setValue:[Globle getInstance].loadDataPass forKey:@"password"];
@@ -110,7 +110,6 @@
                         if (htModel.state != 7) {
                             [_dataList addObject:htModel];
                         }
-                        // NSLog(@"dic=========%@",dic);
                     }
                     [_htTableView reloadData];
                 }else{
@@ -132,27 +131,27 @@
         }
         [alertView dismiss];
         
-       
+        
     }];
 }
 
 
-#pragma mark - 
+#pragma mark -
 #pragma mark - 代理方法
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    HistoryTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"historyCell"];
-//    if (!cell) {
-//        cell = [tableView dequeueReusableCellWithIdentifier:@"historyCell" forIndexPath:indexPath];
-//    }else{
-//        while ([cell.contentView.subviews lastObject] != nil) {
-//            [(UIView *)[cell.contentView.subviews lastObject] removeFromSuperview];
-//        }
-//    }
+    //    HistoryTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"historyCell"];
+    //    if (!cell) {
+    //        cell = [tableView dequeueReusableCellWithIdentifier:@"historyCell" forIndexPath:indexPath];
+    //    }else{
+    //        while ([cell.contentView.subviews lastObject] != nil) {
+    //            [(UIView *)[cell.contentView.subviews lastObject] removeFromSuperview];
+    //        }
+    //    }
     
     HistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"historyCell" forIndexPath:indexPath];
-
+    
     cell.delegate = self;
     if (_dataList.count > indexPath.row) {
         
@@ -183,23 +182,31 @@
             cell.caseHandleState.backgroundColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
         }else if (model.state == 3){
             cell.caseState.text = @"待理赔";
-            [cell.caseHandleState setTitle:@"处理" forState:UIControlStateNormal];
+            [cell.caseHandleState setTitle:@"待理赔" forState:UIControlStateNormal];
             cell.caseHandleState.backgroundColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
         }else if (model.state == 4){
             cell.caseState.text = @"待评价";
-            [cell.caseHandleState setTitle:@"处理" forState:UIControlStateNormal];
+            [cell.caseHandleState setTitle:@"评价" forState:UIControlStateNormal];
             cell.caseHandleState.backgroundColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
         }else if (model.state == 5){
             cell.caseState.text = @"完成";
-            [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
+            [cell.caseHandleState setTitle:@"完成" forState:UIControlStateNormal];
             cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
         }else if (model.state == 6){
             cell.caseState.text = @"撤销案件";
-            [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
+            [cell.caseHandleState setTitle:@"已撤销" forState:UIControlStateNormal];
+            cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
+//        }else if (model.state == 7){
+//            cell.caseState.text = @"照片待审核";
+//            [cell.caseHandleState setTitle:@"处理" forState:UIControlStateNormal];
+//            cell.caseHandleState.backgroundColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:15/255.0 alpha:1.0];
+        }else if (model.state == 8){
+            cell.caseState.text = @"转现场处理";
+            [cell.caseHandleState setTitle:@"完成" forState:UIControlStateNormal];
             cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
         }else{
             cell.caseState.text = @"完成";
-            [cell.caseHandleState setTitle:@"已处理" forState:UIControlStateNormal];
+            [cell.caseHandleState setTitle:@"完成" forState:UIControlStateNormal];
             cell.caseHandleState.backgroundColor = [UIColor colorWithRed:107/255.0 green:220/255.0 blue:91/255.0 alpha:1.0];
         }
         NSArray *array = [model.casehaptime componentsSeparatedByString:@"."];
@@ -208,15 +215,15 @@
     }
     
     return cell;
-
+    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  //  NSLog(@"-----------%ld",indexPath.row);
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (_dataList.count > indexPath.row) {
         HistoryModel *model = _dataList[indexPath.row];
         CaseDetailViewController *CDVC = [[CaseDetailViewController alloc]init];
+//        CDVC.caseState = model.state;
         CDVC.casetype = model.casetype;
         CDVC.casehaptime = model.casehaptime;
         CDVC.accidentplace = model.accidentplace;
@@ -226,7 +233,6 @@
         CDVC.insreporttel = model.insreporttel;
         CDVC.appphone = _telephone;
         CDVC.appcaseno = model.appcaseno;
-        //    NSLog(@"%@",model.instel);
         CDVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:CDVC animated:YES];
     }
@@ -239,7 +245,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-   // NSLog(@"%ld",_dataList.count);
+    // NSLog(@"%ld",_dataList.count);
     return _dataList.count;
 }
 
@@ -263,18 +269,9 @@
         alertView = [[FVCustomAlertView alloc] init];
         [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
         [self.view addSubview:alertView];
-        SGCLViewController *SGL = [[SGCLViewController alloc]init];
-        SGL.currentMark = 1;
-        SGL.appcaseno = appcaseno;
-        if (casetype == 0) {
-            SGL.type = 1;
-            
-        }else{
-            
-            SGL.type = 2;
-        }
         
         NSMutableArray *casecarlistArray = [NSMutableArray array];
+        NSMutableArray *historyDescribArray = [NSMutableArray array];
         NSMutableDictionary *bean = [NSMutableDictionary dictionary];
         //    [bean setObject:@"110101201512180009" forKey:@"casenumber"];
         [bean setObject:casenumber forKey:@"casenumber"];
@@ -286,16 +283,20 @@
         [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/zdsearchcasedetailinfo",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
             NSDictionary *bigDic = result;
             if ([bigDic[@"restate"]isEqualToString:@"0"]) {
-                if (bigDic[@"data"]) {
+                if (![bigDic[@"data"]isEqual:@""]) {
                     //     NSLog(@"%@",dic[@"data"]);
                     NSDictionary *dataDic = bigDic[@"data"];
-                    for (NSDictionary *dic in dataDic) {
+                    NSArray *dataArray = dataDic[@"casecarlist"];
+                    for (NSDictionary *dic in dataArray) {
                         [casecarlistArray addObject:dic];
                     }
                     [casecarlistArray addObject:casecarno];
+                    [historyDescribArray addObject:dataDic[@"accidenttype"]];
+                    [historyDescribArray addObject:dataDic[@"accidentdes"]];
                     
                 }else{
-                    NSLog(@"%@",bigDic[@"redes"]);
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"加载失败，请确认网络是否开启！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
                 }
                 
             }else{
@@ -304,8 +305,26 @@
                 NSLog(@"请求数据失败");
                 NSLog(@"%@",bigDic[@"redes"]);
             }
+            
             [alertView dismiss];
         }];
+        
+        SGCLViewController *SGL = [[SGCLViewController alloc]init];
+        SGL.currentMark = 1;
+        SGL.appcaseno = appcaseno;
+        if (casetype == 0) {
+            SGL.type = 1;
+            
+        }else{
+            
+            SGL.type = 2;
+            SGL.moreHistoryToResponsArray = [NSMutableArray array];
+            SGL.moreHistoryToResponsArray = casecarlistArray;
+            SGL.historyDescribArray = [NSMutableArray array];
+            SGL.historyDescribArray = historyDescribArray;
+        }
+        
+        
         SGL.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:SGL animated:YES];
         
@@ -317,13 +336,10 @@
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Insurance" bundle:nil];
         InsuranceReportController *InReVC = [storyboard instantiateViewControllerWithIdentifier:@"InsuranceReport"];
-       
+        
         NSMutableDictionary *bean = [NSMutableDictionary dictionary];
-        //[bean setValue:_casecarno forKey:@"casecarno"];
         [bean setValue:casenumber forKey:@"casenumber"];
         [bean setValue:_telephone forKey:@"appphone"];
-       // [bean setValue:@"15071440127" forKey:@"appphone"];
-        // [bean setValue:_telephone forKey:@"telephone"];
         [bean setValue:[Globle getInstance].loadDataName forKey:@"username"];
         [bean setValue:[Globle getInstance].loadDataPass forKey:@"password"];
         [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/zdsearchcasedetailinfo",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
@@ -334,7 +350,7 @@
                     for (NSDictionary *dic in array) {
                         if ([dic[@"casecarno"]isEqualToString:casecarno]) {
                             if ([dic[@"dutytype"]isEqualToNumber:@1]) {
-                    
+                                
                                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"无责信息无需处理" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                                 [alert show];
                                 break;
@@ -358,7 +374,6 @@
                                 _historyDic = [NSMutableDictionary dictionary];
                                 [_historyDic setValue:appcaseno forKey:@"appcaseno"];
                                 [_historyDic setValue:casecarno forKey:@"casecarno"];
-                                //[_historyDic setValue:@"15071440127" forKey:@"casetelephone"];
                                 [_historyDic setValue:_telephone forKey:@"casetelephone"];
                                 [_historyDic setValue:[NSString stringWithFormat:@"%lf",[Globle getInstance].imagelon] forKey:@"caselon"];
                                 [_historyDic setValue:[NSString stringWithFormat:@"%lf",[Globle getInstance].imagelat] forKey:@"caselat"];
@@ -367,7 +382,6 @@
                                 [_historyDic setValue:inscomcode forKey:@"inscomcode"];
                                 [_historyDic setValue:@"0" forKey:@"reportway"];
                                 [_historyDic setValue:[Globle getInstance].areaid forKey:@"areaid"];
-                               // [_historyDic setValue:@"110101000000000000" forKey:@"areaid"];
                                 [_historyDic setValue:casecarlistArray forKey:@"casecarlist"];
                                 [_historyDic setValue:[Globle getInstance].loadDataName forKey:@"username"];
                                 [_historyDic setValue:[Globle getInstance].loadDataPass forKey:@"password"];
@@ -381,13 +395,13 @@
                     
                     
                 }else{
-                   
+                    
                     NSLog(@"无数据");
                     NSLog(@"%@",reDic[@"redes"]);
                 }
                 
             }else{
-             
+                
                 NSLog(@"获取数据失败");
                 NSLog(@"%@",reDic[@"redes"]);
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"加载数据失败，请检查网络！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -395,7 +409,7 @@
             }
             [alertView1 dismiss];
         }];
-
+        
         
     }else if (caseState == 3){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请等待理赔！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -414,11 +428,27 @@
     }else if (caseState == 6){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"案件已撤消！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
+//    }else if (caseState == 7){
+//        SGCLViewController *SGL = [[SGCLViewController alloc]init];
+//        SGL.currentMark = 1;
+//        SGL.appcaseno = appcaseno;
+//        if (casetype == 0) {
+//            SGL.type = 1;
+//            
+//        }else{
+//            SGL.type = 2;
+//        }
+//        SGL.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:SGL animated:YES];
+        
+    }else if (caseState == 8){
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"案件已转现场处理！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
     }else{
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"案件已完成！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
     }
-
+    
 }
 
 //#pragma mark -
@@ -433,12 +463,12 @@
 //
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Insurance" bundle:nil];
 //    InsuranceReportController *InReVC = [storyboard instantiateViewControllerWithIdentifier:@"InsuranceReport"];
-//    
+//
 //    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 //    indicator.center = CGPointMake(self.view.bounds.size.width, self.view.bounds.size.height-40);
 //    [self.view addSubview:indicator];
 //    [indicator startAnimating];
-//    
+//
 //    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
 //    //[bean setValue:_casecarno forKey:@"casecarno"];
 //    [bean setValue:casenumber forKey:@"casenumber"];
@@ -465,7 +495,7 @@
 //                            [_historyDic setValue:[NSString stringWithFormat:@"%lf",[Globle getInstance].imagelon] forKey:@"caselon"];
 //                             [_historyDic setValue:[NSString stringWithFormat:@"%lf",[Globle getInstance].imagelat] forKey:@"caselat"];
 //                            [_historyDic setValue:dic[@"data"][@"caseaddress"] forKey:@"caseaddress"];
-//                            
+//
 ////                            @property(nonatomic,assign)float imagelon;
 ////                            //纬度
 ////                            @property(nonatomic,assign)float imagelat;
@@ -474,20 +504,20 @@
 //                        }
 //                    }
 //                }
-//                
-//                
+//
+//
 //            }else{
 //                NSLog(@"无数据");
 //                NSLog(@"%@",dic[@"redes"]);
 //            }
-//            
+//
 //        }else{
 //            NSLog(@"获取数据失败");
 //            NSLog(@"%@",dic[@"redes"]);
 //        }
 //    }];
 
-//    
+//
 //}
 //
 //-(void)completeBrnClicked:(UIButton *)sender{
@@ -502,13 +532,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

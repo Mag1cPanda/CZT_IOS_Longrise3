@@ -31,6 +31,15 @@
 
 @implementation HRDetailViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    /**
+     *  要实现投诉或者评价后返回健康档案详情并刷新数据，可以用通知或者代码块
+     */
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadHealthRecordDetailData) name:@"RefreshData" object:nil];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -95,6 +104,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
 #pragma mark - 加载健康档案详情数据
 -(void)loadHealthRecordDetailData{
     
@@ -106,8 +117,8 @@
     NSString *userflag = [userdic objectForKey:@"userflag"];
     NSString *areaid = [Globle getInstance].areaid;
     
-    NSLog(@"年份 %@",_year);
-    NSLog(@"ID %@",_Id);
+//    NSLog(@"年份 %@",_year);
+//    NSLog(@"ID %@",_Id);
 
     [bean setValue:userflag forKey:@"userflag"];
     [bean setValue:token forKey:@"token"];
@@ -120,14 +131,14 @@
     
     NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxSericeURL,businessapp];
     
-    NSLog(@"健康档案详情bean%@",bean);
+//    NSLog(@"健康档案详情bean%@",bean);
     
     [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appsearchrecord" params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
         [hud hide:YES afterDelay:0];
          NSDictionary *dic = result;
         NSString *json = [Util objectToJson:result];
-        NSLog(@"健康档案详情%@",json);
+//        NSLog(@"健康档案详情%@",json);
         if ([dic[@"restate"] isEqualToString:@"1"]) {
             
             HRDetailModel *model = [[HRDetailModel alloc]initWithString:json error:nil];
@@ -145,7 +156,7 @@
             for (int i=0; i<lciptimesheet.count; i++) {
                 NSDictionary *repairDic = lciptimesheet[i];
                 NSString *repairname = [repairDic objectForKey:@"repairname"];
-                NSLog(@"repairname%@",repairname);
+//                NSLog(@"repairname%@",repairname);
                 [serviceItemsAry addObject:repairname];
             }
             
@@ -160,6 +171,15 @@
     ComplainViewController *vc = [ComplainViewController new];
     vc.model = self.model;//头部视图数据模型
     vc.dataModel = dataModel;//参数模型
+    //给代码块赋值
+    vc.refreshDataBlock = ^(BOOL isSubmit){
+        
+        //当调用代码块的时候就会回到这里
+        if (isSubmit ) {
+            [self loadHealthRecordDetailData];
+        }
+        
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -168,6 +188,13 @@
     EvaluateViewController *vc = [EvaluateViewController new];
     vc.model = self.model;
     vc.dataModel = dataModel;
+    vc.refreshDataBlock = ^(BOOL isSubmit){
+        
+        if (isSubmit ) {
+            [self loadHealthRecordDetailData];
+        }
+        
+    };
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -264,7 +291,7 @@
     }
     else{
         
-        return 230*SCALE;
+        return 300*SCALE;
         
     }
     

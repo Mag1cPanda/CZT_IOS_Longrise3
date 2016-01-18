@@ -7,7 +7,7 @@
 //
 
 #import "FirstGuideViewController.h"
-
+#import "AppDelegate.h"
 @interface FirstGuideViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [AppDelegate storyBoradAutoLay:self.view];
 }
 
 - (void)didReceiveMemoryWarning {

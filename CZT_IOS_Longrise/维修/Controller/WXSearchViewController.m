@@ -102,7 +102,11 @@ UITableViewDelegate>
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     HealthRecordViewController *vc = [HealthRecordViewController new];
+    vc.hidesBottomBarWhenPushed = YES;
+    CarModel *carModel = _wxDataArray[indexPath.section];
+    vc.carNo = carModel.carno;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

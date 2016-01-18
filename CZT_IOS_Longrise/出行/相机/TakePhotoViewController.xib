@@ -33,14 +33,14 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZh-er-WKv">
-                    <rect key="frame" x="0.0" y="580" width="375" height="87"/>
+                    <rect key="frame" x="0.0" y="561" width="375" height="106"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWp-EK-3D7">
-                            <rect key="frame" x="37" y="28" width="37" height="37"/>
+                            <rect key="frame" x="37" y="23" width="60" height="60"/>
                             <animations/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="37" id="B7p-uR-jEW"/>
-                                <constraint firstAttribute="width" constant="37" id="ngC-Oq-OTY"/>
+                                <constraint firstAttribute="height" constant="60" id="B7p-uR-jEW"/>
+                                <constraint firstAttribute="width" constant="60" id="ngC-Oq-OTY"/>
                             </constraints>
                             <state key="normal" image="phone_icon03"/>
                             <connections>
@@ -48,11 +48,11 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOF-ao-mKn">
-                            <rect key="frame" x="166" y="25" width="43" height="43"/>
+                            <rect key="frame" x="148" y="13" width="80" height="80"/>
                             <animations/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="43" id="Nl7-ZU-GhL"/>
-                                <constraint firstAttribute="width" constant="43" id="ka3-sL-Rwq"/>
+                                <constraint firstAttribute="height" constant="80" id="Nl7-ZU-GhL"/>
+                                <constraint firstAttribute="width" constant="80" id="ka3-sL-Rwq"/>
                             </constraints>
                             <state key="normal" image="phone_icon04"/>
                             <connections>
@@ -60,11 +60,11 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzy-Mv-X1M">
-                            <rect key="frame" x="301" y="28" width="37" height="37"/>
+                            <rect key="frame" x="278" y="23" width="60" height="60"/>
                             <animations/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="37" id="cAH-lA-u1D"/>
-                                <constraint firstAttribute="height" constant="37" id="mhX-5J-Q9s"/>
+                                <constraint firstAttribute="width" constant="60" id="cAH-lA-u1D"/>
+                                <constraint firstAttribute="height" constant="60" id="mhX-5J-Q9s"/>
                             </constraints>
                             <state key="normal" image="phone_icon02"/>
                             <connections>
@@ -76,14 +76,13 @@
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="cOF-ao-mKn" firstAttribute="centerY" secondItem="AZh-er-WKv" secondAttribute="centerY" id="5ay-91-wjT"/>
-                        <constraint firstAttribute="bottom" secondItem="uzy-Mv-X1M" secondAttribute="bottom" constant="22" id="8Kt-en-5ZF"/>
-                        <constraint firstAttribute="bottom" secondItem="cOF-ao-mKn" secondAttribute="bottom" constant="19" id="Aaj-Ha-N9i"/>
+                        <constraint firstAttribute="bottom" secondItem="uzy-Mv-X1M" secondAttribute="bottom" constant="23" id="8Kt-en-5ZF"/>
+                        <constraint firstAttribute="bottom" secondItem="cOF-ao-mKn" secondAttribute="bottom" constant="13" id="Aaj-Ha-N9i"/>
                         <constraint firstAttribute="trailing" secondItem="uzy-Mv-X1M" secondAttribute="trailing" constant="37" id="JJK-w8-vfX"/>
                         <constraint firstItem="lWp-EK-3D7" firstAttribute="leading" secondItem="AZh-er-WKv" secondAttribute="leading" constant="37" id="Y3K-EJ-nru"/>
                         <constraint firstItem="cOF-ao-mKn" firstAttribute="centerX" secondItem="AZh-er-WKv" secondAttribute="centerX" id="boZ-IG-fX3"/>
                         <constraint firstItem="cOF-ao-mKn" firstAttribute="centerY" secondItem="AZh-er-WKv" secondAttribute="centerY" id="mx6-KY-UHp"/>
-                        <constraint firstAttribute="height" constant="87" id="wcn-gQ-jD5"/>
-                        <constraint firstItem="lWp-EK-3D7" firstAttribute="top" secondItem="AZh-er-WKv" secondAttribute="top" constant="28" id="xwT-MZ-KyB"/>
+                        <constraint firstAttribute="height" constant="106" id="wcn-gQ-jD5"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -155,6 +154,7 @@
                 <constraint firstItem="FaQ-eX-f70" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="WCo-67-hwR"/>
                 <constraint firstAttribute="bottom" secondItem="FaQ-eX-f70" secondAttribute="bottom" constant="140" id="Wxy-8L-nBw"/>
                 <constraint firstAttribute="trailing" secondItem="lgF-nR-wFY" secondAttribute="trailing" id="gFV-F7-Jja"/>
+                <constraint firstAttribute="bottom" secondItem="lWp-EK-3D7" secondAttribute="bottom" constant="23" id="haD-Rb-aaJ"/>
                 <constraint firstItem="AZh-er-WKv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kbT-0B-3nZ"/>
                 <constraint firstAttribute="trailing" secondItem="FaQ-eX-f70" secondAttribute="trailing" constant="50" id="yVM-sH-3ec"/>
                 <constraint firstItem="8iA-Bg-I1l" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-39" id="yxh-wk-1v3"/>

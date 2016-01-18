@@ -14,7 +14,10 @@
 #import "DESCript.h"
 #import "IQKeyboardManager.h"
 
-@interface ChangePassViewController ()<UIAlertViewDelegate,UITextFieldDelegate>{
+@interface ChangePassViewController ()
+<UIAlertViewDelegate,
+UITextFieldDelegate>
+{
     UIAlertView *changeSuccessAlertView;
 }
 
@@ -91,6 +94,10 @@
                 changeSuccessAlertView = [[UIAlertView alloc]initWithTitle:nil message:@"密码修改成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [changeSuccessAlertView show];
                // NSLog(@"修改成功!");
+            }else if ([dic[@"restate"]isEqualToString:@"-4"]){
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+                
             }else if([dic[@"restate"]isEqualToString:@"-5"]){
                 UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"未查到用户信息！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];

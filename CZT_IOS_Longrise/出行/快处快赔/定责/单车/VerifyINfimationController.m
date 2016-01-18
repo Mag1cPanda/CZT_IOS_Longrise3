@@ -28,6 +28,9 @@ NSMutableDictionary *onlyCaseDict;
     
     self.showView.layer.masksToBounds = YES;
     self.showView.layer.cornerRadius = 2;
+    
+    self.sureButton.layer.cornerRadius = 2;
+    self.sureButton.layer.masksToBounds = YES;
 }
 - (void)loadVerifyData
 {

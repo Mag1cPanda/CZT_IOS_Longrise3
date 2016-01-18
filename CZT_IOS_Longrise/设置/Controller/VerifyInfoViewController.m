@@ -127,6 +127,9 @@
                 }
                 [table reloadData];
                 [alertView dismiss];
+            }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
             }else{
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆信息验证失败！" message:@"没有查询到车辆维修记录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];

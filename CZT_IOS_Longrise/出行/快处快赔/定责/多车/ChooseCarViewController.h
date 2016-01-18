@@ -13,7 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *backScrollView;
 
-
+//历史案件进来 接收已有的车主信息
+@property (strong, nonatomic) NSMutableArray *moreHistoryToResponsArray;
 
 @property (strong, nonatomic)NSArray *CarDict;
 
@@ -23,4 +24,7 @@
 @property (strong, nonatomic) NSArray *describeData;
 //事故详情描述
 @property (copy, nonatomic) NSString *describeString;
+
+//判断单车还是双车的跳转 0 单车  1 双车
+@property (assign, nonatomic) int carsType;
 @end
