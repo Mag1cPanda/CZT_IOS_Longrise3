@@ -12,6 +12,9 @@
 		4C26CBD91C3FC3EE0047850C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4C26CBF11C3FD6B00047850C /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C26CBF01C3FD6B00047850C /* SecondViewController.xib */; };
 		4C26CBF31C3FD75A0047850C /* FirstGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C26CBF21C3FD75A0047850C /* FirstGuideViewController.xib */; };
+		4C3777201C47A3E600E411B7 /* ImgCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C37771F1C47A3E600E411B7 /* ImgCodeView.m */; };
+		4C377CD01C47BB2900E411B7 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C377AC51C47BB2800E411B7 /* RegViewController.m */; };
+		4C377CD11C47BB2900E411B7 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C377AC61C47BB2800E411B7 /* RegViewController.xib */; };
 		4C7371461C3FAFE1009ADF5F /* Parties.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7371401C3FAFE1009ADF5F /* Parties.storyboard */; };
 		4C7371471C3FAFE1009ADF5F /* PartiesConcernedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7371421C3FAFE1009ADF5F /* PartiesConcernedController.m */; };
 		4C7371481C3FAFE1009ADF5F /* Verify.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7371431C3FAFE1009ADF5F /* Verify.storyboard */; };
@@ -35,8 +38,6 @@
 		4CFB25441C22AC9100058216 /* ChooseASController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFB25421C22AC9100058216 /* ChooseASController.m */; };
 		4CFB25451C22AC9100058216 /* ChooseAS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB25431C22AC9100058216 /* ChooseAS.storyboard */; };
 		4CFB25471C22B50F00058216 /* ChooseAS.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB25461C22B50F00058216 /* ChooseAS.xib */; };
-		580205261C24F0A900497F47 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 580205241C24F0A900497F47 /* RegViewController.m */; };
-		580205271C24F0A900497F47 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 580205251C24F0A900497F47 /* RegViewController.xib */; };
 		58039FD91C09AFD20093079E /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58039FD81C09AFD20093079E /* PhoneViewController.m */; };
 		58039FDC1C09B0FA0093079E /* MoreCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58039FDB1C09B0FA0093079E /* MoreCarViewController.m */; };
 		58039FE41C09B1440093079E /* OneCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58039FE21C09B1440093079E /* OneCarViewController.m */; };
@@ -151,6 +152,12 @@
 		58103CC21C16C4E800333349 /* SHA1Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 58103CC01C16C4E800333349 /* SHA1Encrypt.m */; };
 		58103CC51C16C75800333349 /* IPDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 58103CC41C16C75800333349 /* IPDetector.m */; };
 		58103CC81C16C82100333349 /* UserDefaultsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58103CC71C16C82100333349 /* UserDefaultsUtil.m */; };
+		58119FD51C48FFE1009C8276 /* TakePhoneTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58119FD31C48FFE1009C8276 /* TakePhoneTypeViewController.m */; };
+		58119FD61C48FFE1009C8276 /* TakePhoneTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58119FD41C48FFE1009C8276 /* TakePhoneTypeViewController.xib */; };
+		58119FDA1C490029009C8276 /* AppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58119FD81C490029009C8276 /* AppointmentViewController.m */; };
+		58119FDB1C490029009C8276 /* AppointmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58119FD91C490029009C8276 /* AppointmentViewController.xib */; };
+		58119FDF1C49004C009C8276 /* XJHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58119FDD1C49004C009C8276 /* XJHistoryViewController.m */; };
+		58119FE01C49004C009C8276 /* XJHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58119FDE1C49004C009C8276 /* XJHistoryViewController.xib */; };
 		581451A11C17B89A00CE734C /* DESCript.m in Sources */ = {isa = PBXBuildFile; fileRef = 581451A01C17B89A00CE734C /* DESCript.m */; };
 		581451A41C17BB4200CE734C /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 581451A31C17BB4200CE734C /* GTMBase64.m */; };
 		5819AF8F1C191F3B00BAE34F /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5819AF8E1C191F3B00BAE34F /* HomeTableViewCell.m */; };
@@ -181,9 +188,12 @@
 		58FC7F121C1D4B1B00E31CB7 /* FVCustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FC7F111C1D4B1B00E31CB7 /* FVCustomAlertView.m */; };
 		58FEF26E1C113A5B00B32D25 /* UISelectListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FEF26D1C113A5B00B32D25 /* UISelectListView.m */; };
 		6F0C14CB1C3CEA5400FEA2BC /* JudgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C14C61C3CEA5400FEA2BC /* JudgeViewController.m */; };
-		6F0C14CC1C3CEA5400FEA2BC /* JudgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0C14C71C3CEA5400FEA2BC /* JudgeViewController.xib */; };
 		6F0C14CD1C3CEA5400FEA2BC /* WaitPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C14C91C3CEA5400FEA2BC /* WaitPayViewController.m */; };
 		6F0C14CE1C3CEA5400FEA2BC /* WaitPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0C14CA1C3CEA5400FEA2BC /* WaitPayViewController.xib */; };
+		6F36CFD71C47855B0047A30B /* CustomPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F36CFD61C47855B0047A30B /* CustomPickerView.m */; };
+		6F36CFDB1C4785ED0047A30B /* CustomPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F36CFDA1C4785ED0047A30B /* CustomPickerView.xib */; };
+		6F3C3D5F1C487E83003BC82F /* JudgeViewSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F3C3D5E1C487E83003BC82F /* JudgeViewSB.storyboard */; };
+		6F3C3D611C48BCCF003BC82F /* JudgeViewXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3C3D601C48BCCF003BC82F /* JudgeViewXIB.xib */; };
 		6F3E6CC41C326088004FD9CC /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E6CC21C326088004FD9CC /* ForgotPasswordViewController.m */; };
 		6F3E6CC51C326088004FD9CC /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E6CC31C326088004FD9CC /* ForgotPasswordViewController.xib */; };
 		6F4825131C2953EA00BCE7F6 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4825111C2953EA00BCE7F6 /* TakePhotoViewController.m */; };
@@ -310,6 +320,11 @@
 		4521150277ADDBA946E772F6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4C26CBF01C3FD6B00047850C /* SecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
 		4C26CBF21C3FD75A0047850C /* FirstGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstGuideViewController.xib; sourceTree = "<group>"; };
+		4C37771E1C47A3E600E411B7 /* ImgCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgCodeView.h; sourceTree = "<group>"; };
+		4C37771F1C47A3E600E411B7 /* ImgCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgCodeView.m; sourceTree = "<group>"; };
+		4C377AC41C47BB2800E411B7 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegViewController.h; path = "注册/RegViewController.h"; sourceTree = "<group>"; };
+		4C377AC51C47BB2800E411B7 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegViewController.m; path = "注册/RegViewController.m"; sourceTree = "<group>"; };
+		4C377AC61C47BB2800E411B7 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegViewController.xib; path = "注册/RegViewController.xib"; sourceTree = "<group>"; };
 		4C7371401C3FAFE1009ADF5F /* Parties.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Parties.storyboard; sourceTree = "<group>"; };
 		4C7371411C3FAFE1009ADF5F /* PartiesConcernedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartiesConcernedController.h; sourceTree = "<group>"; };
 		4C7371421C3FAFE1009ADF5F /* PartiesConcernedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartiesConcernedController.m; sourceTree = "<group>"; };
@@ -347,9 +362,6 @@
 		4CFB25421C22AC9100058216 /* ChooseASController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseASController.m; sourceTree = "<group>"; };
 		4CFB25431C22AC9100058216 /* ChooseAS.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChooseAS.storyboard; sourceTree = "<group>"; };
 		4CFB25461C22B50F00058216 /* ChooseAS.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseAS.xib; sourceTree = "<group>"; };
-		580205231C24F0A900497F47 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
-		580205241C24F0A900497F47 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
-		580205251C24F0A900497F47 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
 		58039FD21C09A8470093079E /* PZQZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZQZViewController.h; sourceTree = "<group>"; };
 		58039FD71C09AFD20093079E /* PhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneViewController.h; sourceTree = "<group>"; };
 		58039FD81C09AFD20093079E /* PhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneViewController.m; sourceTree = "<group>"; };
@@ -568,6 +580,15 @@
 		58103CC41C16C75800333349 /* IPDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPDetector.m; sourceTree = "<group>"; };
 		58103CC61C16C82100333349 /* UserDefaultsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsUtil.h; sourceTree = "<group>"; };
 		58103CC71C16C82100333349 /* UserDefaultsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsUtil.m; sourceTree = "<group>"; };
+		58119FD21C48FFE1009C8276 /* TakePhoneTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhoneTypeViewController.h; sourceTree = "<group>"; };
+		58119FD31C48FFE1009C8276 /* TakePhoneTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhoneTypeViewController.m; sourceTree = "<group>"; };
+		58119FD41C48FFE1009C8276 /* TakePhoneTypeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TakePhoneTypeViewController.xib; sourceTree = "<group>"; };
+		58119FD71C490029009C8276 /* AppointmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointmentViewController.h; sourceTree = "<group>"; };
+		58119FD81C490029009C8276 /* AppointmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentViewController.m; sourceTree = "<group>"; };
+		58119FD91C490029009C8276 /* AppointmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppointmentViewController.xib; sourceTree = "<group>"; };
+		58119FDC1C49004C009C8276 /* XJHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJHistoryViewController.h; sourceTree = "<group>"; };
+		58119FDD1C49004C009C8276 /* XJHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJHistoryViewController.m; sourceTree = "<group>"; };
+		58119FDE1C49004C009C8276 /* XJHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XJHistoryViewController.xib; sourceTree = "<group>"; };
 		5814519F1C17B89A00CE734C /* DESCript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESCript.h; sourceTree = "<group>"; };
 		581451A01C17B89A00CE734C /* DESCript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESCript.m; sourceTree = "<group>"; };
 		581451A21C17BB4200CE734C /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -619,10 +640,14 @@
 		58FEF26D1C113A5B00B32D25 /* UISelectListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISelectListView.m; sourceTree = "<group>"; };
 		6F0C14C51C3CEA5400FEA2BC /* JudgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JudgeViewController.h; sourceTree = "<group>"; };
 		6F0C14C61C3CEA5400FEA2BC /* JudgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JudgeViewController.m; sourceTree = "<group>"; };
-		6F0C14C71C3CEA5400FEA2BC /* JudgeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JudgeViewController.xib; sourceTree = "<group>"; };
 		6F0C14C81C3CEA5400FEA2BC /* WaitPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitPayViewController.h; sourceTree = "<group>"; };
 		6F0C14C91C3CEA5400FEA2BC /* WaitPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitPayViewController.m; sourceTree = "<group>"; };
 		6F0C14CA1C3CEA5400FEA2BC /* WaitPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitPayViewController.xib; sourceTree = "<group>"; };
+		6F36CFD51C47855B0047A30B /* CustomPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPickerView.h; sourceTree = "<group>"; };
+		6F36CFD61C47855B0047A30B /* CustomPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPickerView.m; sourceTree = "<group>"; };
+		6F36CFDA1C4785ED0047A30B /* CustomPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPickerView.xib; sourceTree = "<group>"; };
+		6F3C3D5E1C487E83003BC82F /* JudgeViewSB.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JudgeViewSB.storyboard; sourceTree = "<group>"; };
+		6F3C3D601C48BCCF003BC82F /* JudgeViewXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JudgeViewXIB.xib; sourceTree = "<group>"; };
 		6F3E6CC11C326088004FD9CC /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		6F3E6CC21C326088004FD9CC /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		6F3E6CC31C326088004FD9CC /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgotPasswordViewController.xib; sourceTree = "<group>"; };
@@ -1163,6 +1188,7 @@
 		5807B4291C07DA7500E7A701 /* CZT_IOS_Longrise */ = {
 			isa = PBXGroup;
 			children = (
+				58119FCE1C48FEB8009C8276 /* xinjiang */,
 				4C7371981C3FBE0E009ADF5F /* FirstGuide */,
 				58046DEF1C203CA000F59365 /* 设置 */,
 				58FEF26B1C113A4600B32D25 /* CustomView */,
@@ -1296,6 +1322,8 @@
 				5807B4931C08006400E7A701 /* Util.m */,
 				58103CC61C16C82100333349 /* UserDefaultsUtil.h */,
 				58103CC71C16C82100333349 /* UserDefaultsUtil.m */,
+				4C37771E1C47A3E600E411B7 /* ImgCodeView.h */,
+				4C37771F1C47A3E600E411B7 /* ImgCodeView.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1317,6 +1345,47 @@
 				5807B4A31C08006900E7A701 /* SearchParameters.m */,
 			);
 			path = LoadData;
+			sourceTree = "<group>";
+		};
+		58119FCE1C48FEB8009C8276 /* xinjiang */ = {
+			isa = PBXGroup;
+			children = (
+				58119FD11C48FF89009C8276 /* XinJiangHistory */,
+				58119FD01C48FF82009C8276 /* makeAnAppointment */,
+				58119FCF1C48FF7B009C8276 /* takePhone */,
+			);
+			path = xinjiang;
+			sourceTree = "<group>";
+		};
+		58119FCF1C48FF7B009C8276 /* takePhone */ = {
+			isa = PBXGroup;
+			children = (
+				58119FD21C48FFE1009C8276 /* TakePhoneTypeViewController.h */,
+				58119FD31C48FFE1009C8276 /* TakePhoneTypeViewController.m */,
+				58119FD41C48FFE1009C8276 /* TakePhoneTypeViewController.xib */,
+			);
+			path = takePhone;
+			sourceTree = "<group>";
+		};
+		58119FD01C48FF82009C8276 /* makeAnAppointment */ = {
+			isa = PBXGroup;
+			children = (
+				58119FD71C490029009C8276 /* AppointmentViewController.h */,
+				58119FD81C490029009C8276 /* AppointmentViewController.m */,
+				58119FD91C490029009C8276 /* AppointmentViewController.xib */,
+			);
+			name = makeAnAppointment;
+			path = "makeAn Appointment";
+			sourceTree = "<group>";
+		};
+		58119FD11C48FF89009C8276 /* XinJiangHistory */ = {
+			isa = PBXGroup;
+			children = (
+				58119FDC1C49004C009C8276 /* XJHistoryViewController.h */,
+				58119FDD1C49004C009C8276 /* XJHistoryViewController.m */,
+				58119FDE1C49004C009C8276 /* XJHistoryViewController.xib */,
+			);
+			path = XinJiangHistory;
 			sourceTree = "<group>";
 		};
 		5856DD441C1BB4B60060150B /* 单车 */ = {
@@ -1409,12 +1478,14 @@
 		58DC346F1C1545CB00644E3C /* 历史案件 */ = {
 			isa = PBXGroup;
 			children = (
+				6F36CFD41C4784D00047A30B /* CustomView */,
 				6F4825A71C296C0300BCE7F6 /* HistoryCaseViewController.h */,
 				6F4825A81C296C0300BCE7F6 /* HistoryCaseViewController.m */,
 				6F4825A91C296C0300BCE7F6 /* HistoryCaseViewController.xib */,
 				6F0C14C51C3CEA5400FEA2BC /* JudgeViewController.h */,
 				6F0C14C61C3CEA5400FEA2BC /* JudgeViewController.m */,
-				6F0C14C71C3CEA5400FEA2BC /* JudgeViewController.xib */,
+				6F3C3D601C48BCCF003BC82F /* JudgeViewXIB.xib */,
+				6F3C3D5E1C487E83003BC82F /* JudgeViewSB.storyboard */,
 				6F0C14C81C3CEA5400FEA2BC /* WaitPayViewController.h */,
 				6F0C14C91C3CEA5400FEA2BC /* WaitPayViewController.m */,
 				6F0C14CA1C3CEA5400FEA2BC /* WaitPayViewController.xib */,
@@ -1489,9 +1560,9 @@
 		58FC220C1C0D4B0D006698B5 /* 注册 */ = {
 			isa = PBXGroup;
 			children = (
-				580205231C24F0A900497F47 /* RegViewController.h */,
-				580205241C24F0A900497F47 /* RegViewController.m */,
-				580205251C24F0A900497F47 /* RegViewController.xib */,
+				4C377AC41C47BB2800E411B7 /* RegViewController.h */,
+				4C377AC51C47BB2800E411B7 /* RegViewController.m */,
+				4C377AC61C47BB2800E411B7 /* RegViewController.xib */,
 			);
 			path = "注册";
 			sourceTree = "<group>";
@@ -1539,6 +1610,16 @@
 				B05BC011BC21E753840F6EB4 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F36CFD41C4784D00047A30B /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				6F36CFD51C47855B0047A30B /* CustomPickerView.h */,
+				6F36CFD61C47855B0047A30B /* CustomPickerView.m */,
+				6F36CFDA1C4785ED0047A30B /* CustomPickerView.xib */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		6F3E6CC01C325FFA004FD9CC /* 忘记密码 */ = {
@@ -1905,7 +1986,6 @@
 				4C8825911C22D37C0081C932 /* ChooseCar.storyboard in Resources */,
 				8517E0661C3DF3AC008443AE /* UnSelect.png in Resources */,
 				4CC9402C1C21468200878430 /* ChooseCarViewCell.xib in Resources */,
-				6F0C14CC1C3CEA5400FEA2BC /* JudgeViewController.xib in Resources */,
 				5807B43B1C07DA7500E7A701 /* LaunchScreen.xib in Resources */,
 				85305F6C1C2A992C00964D5E /* SectionTwoHeaderView.xib in Resources */,
 				8517E0641C3DF3AC008443AE /* Select.png in Resources */,
@@ -1927,14 +2007,19 @@
 				6F4825A21C296BD300BCE7F6 /* HistoryTableViewCell.xib in Resources */,
 				85305F651C2A85AE00964D5E /* UISelectCell.xib in Resources */,
 				58046F3D1C2040AC00F59365 /* ControversialView.xib in Resources */,
+				58119FD61C48FFE1009C8276 /* TakePhoneTypeViewController.xib in Resources */,
+				6F36CFDB1C4785ED0047A30B /* CustomPickerView.xib in Resources */,
+				6F3C3D611C48BCCF003BC82F /* JudgeViewXIB.xib in Resources */,
 				58046EFC1C203FBE00F59365 /* SectionOneCell.xib in Resources */,
 				6F4825A01C296BD300BCE7F6 /* FastOperateViewController.xib in Resources */,
 				6F48259C1C296BD300BCE7F6 /* CaseDetailViewController.xib in Resources */,
 				6F48259A1C296BD300BCE7F6 /* AccidentPhotoViewController.xib in Resources */,
 				6F48259E1C296BD300BCE7F6 /* chatViewController.xib in Resources */,
+				58119FDB1C490029009C8276 /* AppointmentViewController.xib in Resources */,
 				58DC347C1C15464300644E3C /* TrafficSituationViewController.xib in Resources */,
 				58DC34861C15469800644E3C /* BreakRulesViewController.xib in Resources */,
 				4C7371581C3FB0C7009ADF5F /* SGCLViewController.xib in Resources */,
+				4C377CD11C47BB2900E411B7 /* RegViewController.xib in Resources */,
 				4C73715A1C3FB0C7009ADF5F /* WXTSViewController.xib in Resources */,
 				6F4825931C296BD300BCE7F6 /* AccidentCar.storyboard in Resources */,
 				855127201C2546B9001D2778 /* LoginViewController.xib in Resources */,
@@ -1944,13 +2029,12 @@
 				8517E0601C3DF3AC008443AE /* radio_checked.png in Resources */,
 				4CFB25451C22AC9100058216 /* ChooseAS.storyboard in Resources */,
 				6F4825141C2953EA00BCE7F6 /* TakePhotoViewController.xib in Resources */,
-				580205271C24F0A900497F47 /* RegViewController.xib in Resources */,
-				8517E0611C3DF3AC008443AE /* radio_checked@2x.png in Resources */,
 				6FFD0CFA1C3121AF00A78CF1 /* InfoSectionOneCell.xib in Resources */,
 				58046EF61C203FBE00F59365 /* HRDetailSectionTwoCell.xib in Resources */,
 				58046EFA1C203FBE00F59365 /* QYTableViewCell.xib in Resources */,
 				58046F411C2040AC00F59365 /* FillInfomation.storyboard in Resources */,
 				6FFD0CDF1C31215B00A78CF1 /* ChangePassViewController.xib in Resources */,
+				58119FE01C49004C009C8276 /* XJHistoryViewController.xib in Resources */,
 				58046F531C2040AC00F59365 /* SureResponsController.xib in Resources */,
 				58046F341C2040AC00F59365 /* ARAView.storyboard in Resources */,
 				58046EF01C203FBE00F59365 /* HealthRecordCell.xib in Resources */,
@@ -1958,6 +2042,7 @@
 				6F0C14CE1C3CEA5400FEA2BC /* WaitPayViewController.xib in Resources */,
 				4C73715F1C3FB0C7009ADF5F /* MoreCarViewController.xib in Resources */,
 				58046EFE1C203FBE00F59365 /* SectionTwoViewCell.xib in Resources */,
+				6F3C3D5F1C487E83003BC82F /* JudgeViewSB.storyboard in Resources */,
 				6F4825981C296BD300BCE7F6 /* AccidentPhotoTableViewCell.xib in Resources */,
 				58046F3F1C2040AC00F59365 /* DutyViewController.xib in Resources */,
 				6FFD0CFC1C3121AF00A78CF1 /* InfoSectionTwoCell.xib in Resources */,
@@ -2032,6 +2117,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C3777201C47A3E600E411B7 /* ImgCodeView.m in Sources */,
 				4C26CBD91C3FC3EE0047850C /* (null) in Sources */,
 				4C26CBD71C3FC3EE0047850C /* (null) in Sources */,
 				58046F431C2040AC00F59365 /* ImageTableViewCell.m in Sources */,
@@ -2088,6 +2174,7 @@
 				5807B45D1C07DDA600E7A701 /* BaseViewController.m in Sources */,
 				58046F521C2040AC00F59365 /* SureResponsController.m in Sources */,
 				5807B4951C08006400E7A701 /* UIViewExt.m in Sources */,
+				58119FD51C48FFE1009C8276 /* TakePhoneTypeViewController.m in Sources */,
 				6F48254F1C29571300BCE7F6 /* CarModel.m in Sources */,
 				58046FBB1C20456A00F59365 /* UIView+WebCacheOperation.m in Sources */,
 				58046F6F1C20420B00F59365 /* Voice.m in Sources */,
@@ -2102,6 +2189,7 @@
 				6F48259F1C296BD300BCE7F6 /* FastOperateViewController.m in Sources */,
 				58046FB71C20456A00F59365 /* UIImage+MultiFormat.m in Sources */,
 				581451A41C17BB4200CE734C /* GTMBase64.m in Sources */,
+				58119FDF1C49004C009C8276 /* XJHistoryViewController.m in Sources */,
 				5807B4301C07DA7500E7A701 /* AppDelegate.mm in Sources */,
 				58046FB61C20456A00F59365 /* UIImage+GIF.m in Sources */,
 				6F4825A51C296BD300BCE7F6 /* insuranceViewController.m in Sources */,
@@ -2122,7 +2210,6 @@
 				58046FAE1C20456A00F59365 /* SDImageCache.m in Sources */,
 				581451A11C17B89A00CE734C /* DESCript.m in Sources */,
 				58039FE41C09B1440093079E /* OneCarViewController.m in Sources */,
-				580205261C24F0A900497F47 /* RegViewController.m in Sources */,
 				5807B4A51C08006900E7A701 /* Demo.m in Sources */,
 				58DC34851C15469800644E3C /* BreakRulesViewController.m in Sources */,
 				58046EED1C203FBE00F59365 /* HeaderView.m in Sources */,
@@ -2204,6 +2291,7 @@
 				58046F4F1C2040AC00F59365 /* SignViewController.m in Sources */,
 				58046F6B1C20420B00F59365 /* Message.m in Sources */,
 				58046E9F1C203FA200F59365 /* QYDetailViewController.m in Sources */,
+				6F36CFD71C47855B0047A30B /* CustomPickerView.m in Sources */,
 				58039FD91C09AFD20093079E /* PhoneViewController.m in Sources */,
 				8517E0651C3DF3AC008443AE /* SRSelectGroup.m in Sources */,
 				58039FE81C09B18C0093079E /* TakePhoneFactory.m in Sources */,
@@ -2222,6 +2310,9 @@
 				58046FD91C2047BE00F59365 /* NSArray+Sort.m in Sources */,
 				58046FAC1C20456A00F59365 /* MKAnnotationView+WebCache.m in Sources */,
 				58046F4B1C2040AC00F59365 /* PJRSignatureView.m in Sources */,
+				58046E9D1C203FA200F59365 /* HRDetailViewController.m in Sources */,
+				58119FDA1C490029009C8276 /* AppointmentViewController.m in Sources */,
+				6F48255B1C29571300BCE7F6 /* JSONModelArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

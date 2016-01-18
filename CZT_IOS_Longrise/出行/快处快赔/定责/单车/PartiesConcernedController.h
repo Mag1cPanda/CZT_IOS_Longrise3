@@ -35,6 +35,7 @@
 
 //选择公司的View
 @property (weak, nonatomic) IBOutlet UIView *companyView;
+@property(copy, nonatomic) NSString *recevieCompanyName;
 
 //投保公司代码
 @property (copy, nonatomic) NSString *usCompanyCode;

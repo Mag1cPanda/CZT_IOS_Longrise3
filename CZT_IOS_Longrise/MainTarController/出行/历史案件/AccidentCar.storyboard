@@ -14,11 +14,11 @@
                         <viewControllerLayoutGuide type="bottom" id="anD-e3-fYJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9Sh-eK-gYg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atS-vh-UzW">
-                                <rect key="frame" x="15" y="0.0" width="345" height="667"/>
+                                <rect key="frame" x="15" y="0.0" width="290" height="568"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
@@ -32,7 +32,7 @@
                             <constraint firstItem="atS-vh-UzW" firstAttribute="top" secondItem="9Sh-eK-gYg" secondAttribute="top" id="s23-Gd-Nkt"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="backSrollView" destination="atS-vh-UzW" id="VKF-Om-FDO"/>
                     </connections>

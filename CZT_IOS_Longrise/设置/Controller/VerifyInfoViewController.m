@@ -22,6 +22,7 @@
     NSMutableArray *dataList;
     FVCustomAlertView *alertView;
     NSString *companyName;
+    UIAlertView *warnAlert;
     
 }
 @end
@@ -90,59 +91,61 @@
 #pragma mark - 请求验证车辆信息数据
 -(void)requestCarApprove{
     
-    alertView = [[FVCustomAlertView alloc] init];
-    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
-    [self.view addSubview:alertView];
     
+//    alertView = [[FVCustomAlertView alloc] init];
+//    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+//    [self.view addSubview:alertView];
+//    
     dataList = [NSMutableArray array];
-    companyName = nil;
+    dataList = _dataArray;
+//    companyName = nil;
     
-    NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
-    NSDictionary *userDic = [bigDic objectForKey:@"userinfo"];
-    NSString *token = [bigDic objectForKey:@"token"];
+//    NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
+//    NSDictionary *userDic = [bigDic objectForKey:@"userinfo"];
+//    NSString *token = [bigDic objectForKey:@"token"];
    // NSString *str = @"WDDFH3DB0AJ541602";
+//    
+//    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
+//    [bean setValue:userDic[@"userflag"] forKey:@"userflag"];
+//    [bean setValue:token forKey:@"token"];
+//    [bean setValue:@"420111111111111111" forKey:@"areaid"];
+//    [bean setValue:_carNumber forKey:@"carno"];
+//    [bean setValue:_VINCode forKey:@"carvin"];
+//  //  [bean setValue:_engineNumber forKey:@"enginenumber"];
+//    [bean setValue:_engineNumber forKey:@"enginenumber"];
     
-    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
-    [bean setValue:userDic[@"userflag"] forKey:@"userflag"];
-    [bean setValue:token forKey:@"token"];
-    [bean setValue:@"420111111111111111" forKey:@"areaid"];
-    [bean setValue:_carNumber forKey:@"carno"];
-    [bean setValue:_VINCode forKey:@"carvin"];
-  //  [bean setValue:_engineNumber forKey:@"enginenumber"];
-    [bean setValue:_engineNumber forKey:@"enginenumber"];
-    
-    [[Globle getInstance].service requestWithServiceIP:WXServiceURL ServiceName:[NSString stringWithFormat:@"%@/appcarapprove",businessapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
-        if (nil != result) {
-            NSDictionary *bigDic = result;
-            if ([bigDic[@"restate"]isEqualToString:@"1"]) {
-                NSArray *array = bigDic[@"data"];
-            
-                for (NSDictionary *dic in array) {
-//                    [dataList addObject:dic[@"companyname"]];
-                    NSString *companyname = dic[@"companyname"];
-                    NSString *address = dic[@"address"];
-                    NSString *totalString = [NSString stringWithFormat:@"%@(%@)",companyname,address];
-              //      NSLog(@"%@",totalString);
-                    [dataList addObject:totalString];
-                }
-                [table reloadData];
-                [alertView dismiss];
-            }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
-            }else{
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆信息验证失败！" message:@"没有查询到车辆维修记录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
-                [alertView dismiss];
-            }
-            
-        }else{
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆信息验证失败！" message:@"没有查询到车辆相关数据信息！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alert show];
-            [alertView dismiss];
-        }
-        
-    }];
+//    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxSericeURL ServiceName:[NSString stringWithFormat:@"%@/appcarapprove",businessapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+//        if (nil != result) {
+//            NSDictionary *bigDic = result;
+//            if ([bigDic[@"restate"]isEqualToString:@"1"]) {
+//                NSArray *array = bigDic[@"data"];
+//            
+//                for (NSDictionary *dic in array) {
+////                    [dataList addObject:dic[@"companyname"]];
+//                    NSString *companyname = dic[@"companyname"];
+//                    NSString *address = dic[@"address"];
+//                    NSString *totalString = [NSString stringWithFormat:@"%@(%@)",companyname,address];
+//              //      NSLog(@"%@",totalString);
+//                    [dataList addObject:totalString];
+//                }
+//                [table reloadData];
+//                [alertView dismiss];
+//            }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
+//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alert show];
+//            }else{
+//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆信息验证失败！" message:@"没有查询到车辆维修记录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alert show];
+//                [alertView dismiss];
+//            }
+//            
+//        }else{
+//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆信息验证失败！" message:@"没有查询到车辆相关数据信息！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//            [alert show];
+//            [alertView dismiss];
+//        }
+//        
+//    }];
 }
 
 #pragma mark - 
@@ -226,11 +229,11 @@
     [bean setValue:_engineNumber forKey:@"enginenumber"];
     [bean setValue:companyName forKey:@"companyname"];
     
-    [[Globle getInstance].service requestWithServiceIP:WXServiceURL ServiceName:[NSString stringWithFormat:@"%@/appcarapproveanswer",businessapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxSericeURL ServiceName:[NSString stringWithFormat:@"%@/appcarapproveanswer",businessapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         NSDictionary *bigDic = result;
         if ([bigDic[@"restate"]isEqualToString:@"1"]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"恭喜您，车辆信息验证成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alert show];
+            warnAlert = [[UIAlertView alloc]initWithTitle:nil message:@"恭喜您，车辆信息验证成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [warnAlert show];
         }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"您一个小时之内给出的答案与实际情况不符，不能车辆认证，请过一个小时再进行车辆认证!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [alert show];
@@ -239,7 +242,7 @@
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"验证不通过!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [alert show];
         }
-        NSLog(@"%@",bigDic[@"redes"]);
+      
         [alertView dismiss];
     }];
     
@@ -327,7 +330,7 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    [self.navigationController popViewControllerAnimated:YES];
+   // [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

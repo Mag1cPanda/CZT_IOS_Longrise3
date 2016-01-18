@@ -19,6 +19,8 @@
     NSString *carNumber;
     UIView *views;
     UIImageView *checkImage;
+    NSString *companyName;
+    NSString *companyCode;
 }
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) NSMutableArray *viewData;
@@ -137,7 +139,18 @@
 {
     UILabel *carlabel = recognizer.view.subviews[0];
     carNumber = carlabel.text;
+    
+    for (NSDictionary *str in self.CarDict) {
+        if ([carNumber isEqualToString:str[@"carno"]])
+        {
+            companyCode = str[@"incomcode"];
+            companyName = str[@"incomname"];
+        }
+    }
+    
     NSLog(@"carNumber = %@",carNumber);
+    NSLog(@"companyCode = %@",companyCode);
+    NSLog(@"companyName = %@",companyName);
     for (UIView *viewstatus in self.viewData)
     {
         viewstatus.tag = 0;
@@ -180,6 +193,8 @@
             parties.hidesBottomBarWhenPushed = YES;
             parties.appcaseno = self.appcaseno;
             parties.reciveCarNumber = carNumber;
+            parties.recevieCompanyName = companyName;
+            parties.usCompanyCode = companyCode;
             [self.navigationController pushViewController:parties animated:YES];
         }
         else if(self.carsType == 1)
@@ -189,6 +204,8 @@
             filleVC.hidesBottomBarWhenPushed = YES;
             filleVC.appcaseno = self.appcaseno;
             filleVC.reciveCarNumber = carNumber;
+            filleVC.usCompanyName = companyName;
+            filleVC.usCompanyCode = companyCode;
             filleVC.describeData = self.describeData;
             filleVC.describeString = self.describeString;
             //    filleVC.reciveCarNumber = dic[@"carno"];

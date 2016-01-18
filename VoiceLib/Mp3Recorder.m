@@ -192,7 +192,7 @@
 - (NSString *)mp3Path
 {
     NSString *mp3Path = [NSTemporaryDirectory() stringByAppendingPathComponent:@"mp3.caf"];
-    NSLog(@"%@",mp3Path);
+   // NSLog(@"%@",mp3Path);
     return mp3Path;
 }
 

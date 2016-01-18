@@ -7,9 +7,15 @@
 //
 
 #import "PublicViewController.h"
+#import "ImgCodeView.h"
 
-@interface ForgotPasswordViewController : PublicViewController
+@interface ForgotPasswordViewController : PublicViewController<ImgCodeViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
+//图片验证码
+@property (weak, nonatomic) IBOutlet UITextField *imgCodeText;
+//图片验证码背景view
+@property (weak, nonatomic) IBOutlet UIView *backCodeView;
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextField;
 

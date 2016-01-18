@@ -416,7 +416,8 @@
         [alert show];
         
     }else if (caseState == 4){
-        JudgeViewController *JVC = [[JudgeViewController alloc]init];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"JudgeViewSB" bundle:nil];
+        JudgeViewController *JVC = [storyboard instantiateViewControllerWithIdentifier:@"JudgeViewID"];
         JVC.appcaseno = appcaseno;
         JVC.casecarno = casecarno;
         [self.navigationController pushViewController:JVC animated:YES];

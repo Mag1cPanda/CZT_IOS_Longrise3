@@ -69,7 +69,7 @@ NSString * monitorIP = @"203.86.8.92:82";  //监听IP
     [self deleteMP3File];
     //开始监听
     [self initCurl];
-    [self performSelectorInBackground:@selector(go) withObject:nil];
+    [self performSelectorInBackground:@selector(lookForHistory) withObject:nil];
     [self configUI];
     [self requestData];
     
@@ -165,43 +165,67 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
             NSString *str = [NSString stringWithFormat:@"%@",dic[@"content"]];
             NSData *data1= [str dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary *dic1 = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingMutableContainers error:nil];
-            NSLog(@"%@",dic1);
-            if (dic1[@"msgdata"]) {
-                NSString * type = dic1[@"msgdata"][@"messagetype"];
-                NSLog(@"%@",type);
-                  if ([type isEqualToString:@"0"]) {
-//                  NSLog(@"%@",dic1[@"msgdata"][@"messageurl"]);
-                    //接收到的是语音
-                      NSString *voiceUrl = dic1[@"msgdata"][@"messageurl"];
-                      NSString *voiceLength = dic1[@"msgdata"][@"voicelength"];
-                    //  NSLog(@"%@",voiceUrl);
-                      NSURL *myUrl = [NSURL URLWithString:voiceUrl];
-                      NSData *mydata = [NSData dataWithContentsOfURL:myUrl];
+            if (nil != dic1) {
+                //NSString *msgType = dic1[@"msgtype"];
+                NSString *Id = dic1[@"id"];
 
-                      NSMutableDictionary *voiceDic = [[NSMutableDictionary alloc]init];
-                      [voiceDic setValue:mydata forKey:@"voice"];
-                      [voiceDic setValue:voiceLength forKey:@"voicelength"];
-                      
-                      [vc setTextResult:voiceDic];
-                      
-                   }else if ([type isEqualToString:@"1"]){
-                    //接收到的是图片
-                    NSString *imgUrl = dic1[@"msgdata"][@"messageurl"];
-                    NSLog(@"%@",imgUrl);
-                    NSString *imageWidth = dic1[@"msgdata"][@"imagewide"];
-                    NSString *imageHeight = dic1[@"msgdata"][@"imageheigth"];
-                    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 240, (240/imageWidth.floatValue)*imageHeight.floatValue)];
-                    [imageView sd_setImageWithURL:[NSURL URLWithString:imgUrl]];
-                       NSMutableDictionary *imagedic = [[NSMutableDictionary alloc]init];
-                       [imagedic setValue:imageView.image forKey:@"image"];
-                       [vc setTextResult:imagedic];
-                   }else if ([type isEqualToString:@"2"]){
-                    //接收到的是文本消息
-                    NSMutableDictionary *txtdic = [[NSMutableDictionary alloc]init];
-                    [txtdic setValue:dic1[@"msgdata"][@"messagecontent"] forKey:@"content"];
-                    [vc setTextResult:txtdic];
-                }
+                NSMutableDictionary *bean = [NSMutableDictionary dictionary];
+                [bean setValue:Id forKey:@"id"];
+                [bean setValue:@"0" forKey:@"msgtype"];
+                [bean setValue:[Globle getInstance].loadDataName forKey:@"username"];
+                [bean setValue:[Globle getInstance].loadDataPass forKey:@"password"];
+            
+                [[Globle getInstance].service requestWithServiceIP:ServiceURL ServiceName:[NSString stringWithFormat:@"%@/zdreceivermsgcallback",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+                    NSDictionary *callBackDic = result;
+                    if (nil != callBackDic) {
+                        if ([callBackDic[@"restate"]isEqualToString:@"0"]) {
+                          //  NSLog(@"用户接受消息成功！");
+                            if (![dic1[@"msgdata"]isEqual:@""]) {
+                                NSString * type = dic1[@"msgdata"][@"messagetype"];
+                                // NSLog(@"%@",type);
+                                if ([type isEqualToString:@"0"]) {
+                                    //                  NSLog(@"%@",dic1[@"msgdata"][@"messageurl"]);
+                                    //接收到的是语音
+                                    NSString *voiceUrl = dic1[@"msgdata"][@"messageurl"];
+                                    NSString *voiceLength = dic1[@"msgdata"][@"voicelength"];
+                                    //  NSLog(@"%@",voiceUrl);
+                                    NSURL *myUrl = [NSURL URLWithString:voiceUrl];
+                                    NSData *mydata = [NSData dataWithContentsOfURL:myUrl];
+                                    
+                                    NSMutableDictionary *voiceDic = [[NSMutableDictionary alloc]init];
+                                    [voiceDic setValue:mydata forKey:@"voice"];
+                                    [voiceDic setValue:voiceLength forKey:@"voicelength"];
+                                    
+                                    [vc setTextResult:voiceDic];
+                                    
+                                }else if ([type isEqualToString:@"1"]){
+                                    //接收到的是图片
+                                    NSString *imgUrl = dic1[@"msgdata"][@"messageurl"];
+                                    //  NSLog(@"%@",imgUrl);
+                                    NSString *imageWidth = dic1[@"msgdata"][@"imagewide"];
+                                    NSString *imageHeight = dic1[@"msgdata"][@"imageheigth"];
+                                    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 240, (240/imageWidth.floatValue)*imageHeight.floatValue)];
+                                    [imageView sd_setImageWithURL:[NSURL URLWithString:imgUrl]];
+                                    NSMutableDictionary *imagedic = [[NSMutableDictionary alloc]init];
+                                    [imagedic setValue:imageView.image forKey:@"image"];
+                                    [vc setTextResult:imagedic];
+                                }else if ([type isEqualToString:@"2"]){
+                                    //接收到的是文本消息
+                                    NSMutableDictionary *txtdic = [[NSMutableDictionary alloc]init];
+                                    [txtdic setValue:dic1[@"msgdata"][@"messagecontent"] forKey:@"content"];
+                                    [vc setTextResult:txtdic];
+                                }
+                            }
+                        }else{
+                           // NSLog(@"%@",callBackDic[@"redes"]);
+                        }
+                    }else{
+                       // NSLog(@"未连接网络");
+                    }
+                }];
             }
+            //NSLog(@"%@",dic1);
+            
           
         }
         
@@ -211,6 +235,85 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
     return sizeInBytes;
 }
 
+#pragma mark - 查询
+-(void)lookForHistory{
+    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
+    [bean setValue:_infoRoadName forKey:@"appcaseno"];
+    [bean setValue:[Globle getInstance].loadDataName forKey:@"username"];
+    [bean setValue:[Globle getInstance].loadDataPass forKey:@"password"];
+    [[Globle getInstance].service requestWithServiceIP:ServiceURL ServiceName:[NSString stringWithFormat:@"%@/zdsearchunreadmsgs",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+        NSDictionary *bigDic = result;
+        if (nil != bigDic) {
+            if ([bigDic[@"restate"]isEqualToString:@"0"]) {
+                //语音
+                if (![bigDic[@"data"]isEqual:@""]) {
+                    NSArray *smallDataArray = bigDic[@"data"];
+                    for (NSDictionary *dic in smallDataArray) {
+                        NSString *type = dic[@"messagetype"];
+                        if ([type isEqualToString:@"0"]) {
+                            NSURL *messsageurl = [NSURL URLWithString:dic[@"messageurl"]];
+                            NSData *mydata = [NSData dataWithContentsOfURL:messsageurl];
+                            NSMutableDictionary *voiceDic = [[NSMutableDictionary alloc]init];
+                            [voiceDic setValue:mydata forKey:@"voice"];
+                            [voiceDic setValue:voiceLength forKey:@"voicelength"];
+                            
+                            [self setTextResult:voiceDic];
+                          //图片
+                        }else if ([type isEqualToString:@"1"]){
+                            NSString *imgWide = dic[@"imagewide"];
+                            NSString *imgHeight = dic[@"imageheigth"];
+                            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 240, (240/imgWide.floatValue)*imgHeight.floatValue)];
+                            [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"messageurl"]]];
+                            NSMutableDictionary *imagedic = [[NSMutableDictionary alloc]init];
+                            [imagedic setValue:imageView.image forKey:@"image"];
+                            [self setTextResult:imagedic];
+                         //文本
+                        }else if ([type isEqualToString:@"2"]){
+                            NSMutableDictionary *txtdic = [[NSMutableDictionary alloc]init];
+                            [txtdic setValue:dic[@"messagecontent"] forKey:@"content"];
+                            [self setTextResult:txtdic];
+                        }
+                    }
+                    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
+                    [bean setValue:_infoRoadName forKey:@"appcaseno"];
+                    [bean setValue:[Globle getInstance].loadDataName forKey:@"username"];
+                    [bean setValue:[Globle getInstance].loadDataPass forKey:@"password"];
+                    [[Globle getInstance].service requestWithServiceIP:ServiceURL ServiceName:[NSString stringWithFormat:@"%@/zdsetmsgisread",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+                        NSDictionary *dic = result;
+                        if (nil != dic) {
+                            if ([dic[@"restate"]isEqualToString:@"0"]) {
+                                
+                            }else{
+                                
+                            }
+                        }else{
+                            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"对话未能连接到，请检查网络!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                            [alert show];
+                        }
+                    }];
+                    
+                }else{
+                    
+                    NSLog(@"无未读消息!");
+                }
+                [self performSelectorInBackground:@selector(go) withObject:nil];
+                
+            }else{
+                NSString *str = bigDic[@"redes"];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:str delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+            
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"对话未能连接到，请检查网络!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+        
+    }];
+    
+}
+
+
 - (void)go
 {
     [self performSelectorInBackground:@selector(startStreaming) withObject:nil];
@@ -218,8 +321,8 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
 
 -(void)startStreaming{
     //infoRoadName = @"1100002000201512061538062688490";
-    NSLog(@"开始监听...");
-    NSLog(@"%@",_infoRoadName);
+   // NSLog(@"开始监听...");
+   // NSLog(@"%@",_infoRoadName);
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/pushlet/stream?cname=%@&seq=0&token=null",monitorIP,_infoRoadName]];
     
     curl_easy_setopt(_curl, CURLOPT_URL, url.absoluteString.UTF8String);	// little warning: curl_easy_setopt() doesn't retain the memory passed into it, so if the memory used by calling url.absoluteString.UTF8String is freed before curl_easy_perform() is called, then it will crash. IOW, don't drain the autorelease pool before making the call
@@ -415,16 +518,16 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
     
     [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/kckpAppUploadFile",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         NSDictionary *dic = result;
-        NSLog(@"%@",dic);
+     //   NSLog(@"%@",dic);
         if ([dic[@"restate"] isEqualToString:@"1"]) {
             return ;
         }
-        if (dic[@"data"]){
+        if (nil != dic[@"data"]){
             NSString *strurl = dic[@"data"][@"fileurl"];
              [bean1 setValue:strurl forKey:@"messageurl"];
             [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/zdsubmitvoicemessage",kckpzcslrest] params:bean1 httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
                 NSDictionary *dic1 = result;
-                NSLog(@"%@",dic1[@"redes"]);
+           //     NSLog(@"%@",dic1[@"redes"]);
                 NSString *restate = dic1[@"restate"];
                 for (int i = 0; i < dataArray.count; i++) {
                     if([dataArray[i] isKindOfClass:[VoiceFrame class]]){
@@ -473,7 +576,7 @@ size_t icomet_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
     
     [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].serviceURL ServiceName:[NSString stringWithFormat:@"%@/kckpAppUploadFile",kckpzcslrest] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         NSDictionary *dic = result;
-        NSLog(@"%@",dic);
+       // NSLog(@"%@",dic);
         if ([dic[@"restate"] isEqualToString:@"1"]) {
             return;
         }

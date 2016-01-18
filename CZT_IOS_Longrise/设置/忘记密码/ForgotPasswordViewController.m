@@ -11,11 +11,14 @@
 #import "CZT_IOS_Longrise.pch"
 #import "Globle.h"
 #import "FVCustomAlertView.h"
+#import "AppDelegate.h"
+#import "ImgCodeView.h"
 
 @interface ForgotPasswordViewController ()<UITextFieldDelegate>{
     NSTimer *timer;
     int count;
     FVCustomAlertView *alertView;
+    NSString *imgCodeID;
 }
 
 @end
@@ -28,6 +31,12 @@
     count = 120;
     _findPasswordButton.layer.masksToBounds = YES;
     _findPasswordButton.layer.cornerRadius = 7;
+    
+    ImgCodeView *imgCodeView = [[ImgCodeView alloc]initWithFrame:CGRectMake(0, 0, self.backCodeView.frame.size.width,self.backCodeView.frame.size.height)];
+    imgCodeView.delegate = self;
+    [self.backCodeView addSubview:imgCodeView];
+    
+    [AppDelegate storyBoradAutoLay:self.view];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -40,8 +49,20 @@
         [timer setFireDate:[NSDate distantFuture]];
     }
 }
+#pragma mark - 图片验证码代理
+-(void)requestImgCodeViewID:(NSString *)imgId
+{
+    imgCodeID = imgId;
+}
 
 - (IBAction)getVerifyBtnClicked:(id)sender {
+    
+    if (!self.imgCodeText.text.length)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"图片验证码不能为空" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
 
     if (_phoneNumberTextField.text.length == 11) {
         alertView = [[FVCustomAlertView alloc] init];
@@ -51,6 +72,8 @@
         
         NSMutableDictionary *bean = [NSMutableDictionary dictionary];
         [bean setValue:_phoneNumberTextField.text forKey:@"mobilenumber"];
+        [bean setValue:self.imgCodeText.text forKey:@"imgcode"];
+        [bean setValue:imgCodeID forKey:@"imgid"];
         
         [[Globle getInstance].service requestWithServiceIP:WXBaseServiceURL ServiceName:[NSString stringWithFormat:@"%@/appgetforgetpwdcode",appbase] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
             BOOL isSucess = false;

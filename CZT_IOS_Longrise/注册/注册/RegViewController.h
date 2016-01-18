@@ -9,6 +9,8 @@
 #import "PublicViewController.h"
 #import "FVCustomAlertView.h"
 #import "DESCript.h"
+#import "ImgCodeView.h"
+
 @class RegViewController;
 @protocol RegViewControllerDelegate <NSObject>
 
@@ -18,13 +20,15 @@
 
 @end
 
-@interface RegViewController : PublicViewController<UITextFieldDelegate>
+@interface RegViewController : PublicViewController<UITextFieldDelegate,ImgCodeViewDelegate>
 {
     NSString *userNameStr;
     NSString *phoneNumStr;
     NSString *verificationCodeStr;
     NSString *passWordTextStr;
     NSString *againPasswordTextStr;
+    
+    NSString *imgCodeViewId; //图片验证码id
     
     //是否同意协议
     BOOL isAgree;
@@ -35,6 +39,7 @@
     UITextField *tempField;
     // 是否注册成功
     BOOL isRegSucess;
+    
 }
 
 @property(nonatomic,weak) id<RegViewControllerDelegate> regViewControllerDelegate;
@@ -42,6 +47,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *userName;
 //电话
 @property (weak, nonatomic) IBOutlet UITextField *phoneNum;
+//图片验证码
+@property (weak, nonatomic) IBOutlet UITextField *imgCodeText;
+
+//获取图片验证码背景View
+@property (weak, nonatomic) IBOutlet UIView *backImgCodeView;
+
 //验证码
 @property (weak, nonatomic) IBOutlet UITextField *verificationCode;
 //获取验证码按钮

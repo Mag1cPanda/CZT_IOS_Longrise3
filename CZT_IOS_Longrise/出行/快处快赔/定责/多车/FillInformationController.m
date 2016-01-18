@@ -192,6 +192,7 @@
         [citydata addObject:dic];
     }
     self.carCitiesData = citydata;
+    
 }
 
 
@@ -342,7 +343,13 @@
     //车辆的省市
     [self loadUIInfomationsCompanyData:array];
     
-    
+    if (self.reciveCarNumber) {
+        self.carNumber.text = [self.reciveCarNumber substringFromIndex:1];
+        usCities = [self.reciveCarNumber substringToIndex:1];
+        usCarCitiesSelectIndex = [self judeCarCities:usCities CarCiteiesDataArray:self.carCitiesData];
+        usCompanies = self.usCompanyName;
+        usCompanySelectIndex = [self judeCompanyName:self.usCompanyCode CompanyDataArray:array];
+    }
     
     CGFloat top = 8;
     CGFloat left = 5;
@@ -391,7 +398,7 @@
     usSelectCompany.delegate = self;
     usSelectCompany.titleLabel.font = [UIFont systemFontOfSize:13];
     [usSelectCompany addArray:array forKey:@"inscomname"];
-    if (self.moreHistoryToResponsArray.count) {
+    if (self.moreHistoryToResponsArray.count || self.reciveCarNumber) {
         [usSelectCompany setSelectIndex:usCompanySelectIndex];
     }
     usSelectCompany.backgroundColor = [UIColor whiteColor];
@@ -461,11 +468,7 @@
 - (void)loadUIInfomationsCompanyData:(NSArray *)array
 {
     
-    if (self.reciveCarNumber) {
-        self.carNumber.text = [self.reciveCarNumber substringFromIndex:1];
-        usCities = [self.reciveCarNumber substringToIndex:1];
-        usCarCitiesSelectIndex = [self judeCarCities:usCities CarCiteiesDataArray:self.carCitiesData];
-    }
+    
     
     if (self.moreHistoryToResponsArray != nil)
     {
@@ -523,7 +526,7 @@
         self.carNumber.text = [usInfoDict[@"casecarno"] substringFromIndex:1];
         usHistoryCarName = usInfoDict[@"casecarno"];
         usCarCitiesSelectIndex = [self judeCarCities:[usInfoDict[@"casecarno"] substringToIndex:1] CarCiteiesDataArray:self.carCitiesData];
-        usCompanySelectIndex = [self judeCompanyName:usInfoDict[@"inscomname"] CompanyDataArray:array];
+        usCompanySelectIndex = [self judeCompanyName:usInfoDict[@"inscomcode"] CompanyDataArray:array];
         
         usHistoryCompanyCode = array[usCompanySelectIndex][@"inscomcode"];
         usHistoryCompanyName = usInfoDict[@"inscomname"];
@@ -534,7 +537,7 @@
         otherHistoryCarName = otherDict[@"casecarno"];
         self.otherCarNumber.text = [otherDict[@"casecarno"] substringFromIndex:1];
         otherCarCitiesSelectIndex = [self judeCarCities:[otherDict[@"casecarno"] substringToIndex:1] CarCiteiesDataArray:self.carCitiesData];
-        otherCompanySelectIndex = [self judeCompanyName:otherDict[@"inscomname"] CompanyDataArray:array];
+        otherCompanySelectIndex = [self judeCompanyName:otherDict[@"inscomcode"] CompanyDataArray:array];
         otherHistoryCompanyCode = array[otherCompanySelectIndex][@"inscomcode"];
         otherHistoryCompanyName = otherDict[@"inscomname"];
         self.otherPartyPhoneNumber.text = otherDict[@"carownphone"];
@@ -544,7 +547,7 @@
         thirdHistoryCarName = thirdDict[@"casecarno"];
         self.thirdCarNumber.text = [thirdDict[@"casecarno"] substringFromIndex:1];
         thirdCarCitiesSelectIndex = [self judeCarCities:[thirdDict[@"casecarno"] substringToIndex:1] CarCiteiesDataArray:self.carCitiesData];
-        thirdCompanySelectIndex = [self judeCompanyName:thirdDict[@"inscomname"] CompanyDataArray:array];
+        thirdCompanySelectIndex = [self judeCompanyName:thirdDict[@"inscomcode"] CompanyDataArray:array];
         thirdHistoryCompanyCode = array[thirdCompanySelectIndex][@"inscomcode"];
         thirdHistoryCompanyName = thirdDict[@"inscomname"];
         self.thirdPartyPhoneNumber.text = thirdDict[@"carownphone"];
@@ -564,7 +567,7 @@
     int number = 0;
     for (int i = 0; i < array.count ; i++)
     {
-        if ([companyName isEqualToString:array[i][@"inscomname"]])
+        if ([companyName isEqualToString:array[i][@"inscomcode"]])
         {
             number = i;
             historyCompanyCodeIndex = i;

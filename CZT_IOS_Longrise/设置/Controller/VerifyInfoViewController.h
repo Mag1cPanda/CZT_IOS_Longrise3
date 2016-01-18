@@ -13,5 +13,5 @@
 @property (nonatomic, copy)NSString *carNumber;
 @property (nonatomic, copy)NSString *VINCode;
 @property (nonatomic, copy)NSString *engineNumber;
-
+@property (nonatomic, strong)NSMutableArray *dataArray;
 @end

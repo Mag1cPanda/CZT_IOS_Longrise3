@@ -24,9 +24,11 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *suggestTextView;
 
-@property (weak, nonatomic) IBOutlet UIPickerView *selectPickerView;
+@property (weak, nonatomic) IBOutlet UIScrollView *bacScrollView;
 
-@property (weak, nonatomic) IBOutlet UIButton *pickerBtn;
+//@property (weak, nonatomic) IBOutlet UIPickerView *selectPickerView;
+//
+//@property (weak, nonatomic) IBOutlet UIButton *pickerBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *sureButton;
 

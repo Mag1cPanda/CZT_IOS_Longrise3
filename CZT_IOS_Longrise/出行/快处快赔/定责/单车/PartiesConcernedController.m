@@ -107,6 +107,8 @@
         self.crNumber.text = [self.reciveCarNumber substringFromIndex:1];
         NSString *str = [self.reciveCarNumber substringToIndex:1];
         carSelectIndex = [self judeCarCities:str CarCiteiesDataArray:self.carCitiesData];
+        companies = self.recevieCompanyName;
+        companySeletIndex = [self judeCompanyName:self.usCompanyCode CompanyDataArray:array];
     }
     
     CGFloat top = 8;
@@ -142,6 +144,9 @@
     usSelectCompany.delegate = self;
     usSelectCompany.titleLabel.font = [UIFont systemFontOfSize:13];
     [usSelectCompany addArray:array forKey:@"inscomname"];
+    if (self.reciveCarNumber) {
+        [usSelectCompany setSelectIndex:companySeletIndex];
+    }
     usSelectCompany.backgroundColor = [UIColor whiteColor];
     [usSelectCompany setBackgroundImage:backLine forState:UIControlStateNormal];
     [usSelectCompany setIcon:[UIImage imageNamed:@"select_input"]];
@@ -238,7 +243,21 @@
     return number;
     
 }
-
+#pragma mark - 判断车主信息的保险公司名下标
+- (int)judeCompanyName:(NSString *)companyName CompanyDataArray:(NSArray *)array
+{
+    int number = 0;
+    for (int i = 0; i < array.count ; i++)
+    {
+        if ([companyName isEqualToString:array[i][@"inscomcode"]])
+        {
+            number = i;
+        }
+    }
+    
+    return number;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

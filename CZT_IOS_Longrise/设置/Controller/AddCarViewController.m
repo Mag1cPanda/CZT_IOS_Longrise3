@@ -25,6 +25,7 @@
     NSMutableArray *cityData;
     NSMutableArray *insData;
     NSMutableArray *insCode;
+    NSMutableArray *dataList;
     
     NSString *carType;
     NSString *carNumber;
@@ -33,6 +34,8 @@
     
     FVCustomAlertView *FVAlertView;
     UIAlertView *warnAlertView;
+    
+    
 }
 @end
 
@@ -136,9 +139,9 @@
                 NSArray *codeAry = [bigDic objectForKey:@"data"];
                  //           NSLog(@"appcartype%@",result);
                //             NSLog(@"appcartype%@",[Util objectToJson:result]);
-                NSLog(@"%@",bigDic);
+           //     NSLog(@"%@",bigDic);
                 if (![bigDic[@"data"]isEqual:@""]) {
-                    NSLog(@"%@",codeAry);
+          //          NSLog(@"%@",codeAry);
                     for (int i = 0; i < codeAry.count; i++) {
                         
                         NSDictionary *dic = codeAry[i];
@@ -281,10 +284,10 @@
                 NSDictionary *bigDic = result;
               //  NSLog(@"dic=   %@",bigDic);
                 if ([bigDic[@"restate"]isEqualToString:@"1"]) {
-//                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"车辆添加成功" message:@"是否需要现在验证车辆信息" delegate:self cancelButtonTitle:@"稍后验证" otherButtonTitles: @"立即验证",nil];
-//                    [alert show];
-                    warnAlertView = [[UIAlertView alloc]initWithTitle:nil message:@"车辆添加成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    warnAlertView = [[UIAlertView alloc]initWithTitle:@"车辆添加成功" message:@"是否需要现在验证车辆信息" delegate:self cancelButtonTitle:@"稍后验证" otherButtonTitles: @"立即验证",nil];
                     [warnAlertView show];
+//                    warnAlertView = [[UIAlertView alloc]initWithTitle:nil message:@"车辆添加成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [warnAlertView show];
                 }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                     [alert show];
@@ -350,25 +353,104 @@
     
 }
 
+#pragma mark -
+#pragma mark - 请求验证车辆信息数据
+-(void)requestCarApprove{
+    
+    FVAlertView = [[FVCustomAlertView alloc] init];
+    [FVAlertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:FVAlertView];
+    
+    dataList = [NSMutableArray array];
+    
+    NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
+    NSDictionary *userDic = [bigDic objectForKey:@"userinfo"];
+    NSString *token = [bigDic objectForKey:@"token"];
+    // NSString *str = @"WDDFH3DB0AJ541602";
+    
+    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
+    [bean setValue:userDic[@"userflag"] forKey:@"userflag"];
+    [bean setValue:token forKey:@"token"];
+    [bean setValue:@"420111111111111111" forKey:@"areaid"];
+    [bean setValue:[NSString stringWithFormat:@"%@%@",carNumber,_carNum.text] forKey:@"carno"];
+    [bean setValue:_vinCode.text forKey:@"carvin"];
+    //  [bean setValue:_engineNumber forKey:@"enginenumber"];
+    [bean setValue:_engineNum.text forKey:@"enginenumber"];
+    
+    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxSericeURL ServiceName:[NSString stringWithFormat:@"%@/appcarapprove",businessapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+        if (nil != result) {
+            NSDictionary *bigDic = result;
+            if ([bigDic[@"restate"]isEqualToString:@"1"]) {
+                if (![bigDic[@"data"]isEqual:@""]) {
+                    NSArray *array = bigDic[@"data"];
+                    
+                    for (NSDictionary *dic in array) {
+                        //                    [dataList addObject:dic[@"companyname"]];
+                        NSString *companyname = dic[@"companyname"];
+                        NSString *address = dic[@"address"];
+                        NSString *totalString = [NSString stringWithFormat:@"%@(%@)",companyname,address];
+                        //      NSLog(@"%@",totalString);
+                        [dataList addObject:totalString];
+                    }
+                    VerifyInfoViewController *vc = [VerifyInfoViewController new];
+                    vc.carNumber = [NSString stringWithFormat:@"%@%@",carNumber,_carNum.text];
+                    vc.VINCode = _vinCode.text;
+                    vc.engineNumber = _engineNum.text;
+                    vc.dataArray = [NSMutableArray array];
+                    vc.dataArray = dataList;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else{
+                    
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"没有查询到车辆维修记录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
+               
+//                [table reloadData];
+                [FVAlertView dismiss];
+                
+            }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"没有查询到车辆维修记录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+                [FVAlertView dismiss];
+            }
+            
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"数据请求失败，请检查网络是否连接！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+            [FVAlertView dismiss];
+        }
+        
+    }];
+}
+
 
 #pragma mark - UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 
     if (alertView == warnAlertView) {
-        [self.navigationController popViewControllerAnimated:YES];
-        return;
+        if (buttonIndex == 0) {
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else{
+            [self requestCarApprove];
+//            VerifyInfoViewController *vc = [VerifyInfoViewController new];
+//            vc.carNumber = [NSString stringWithFormat:@"%@%@",carNumber,_carNum.text];
+//            vc.VINCode = _vinCode.text;
+//            vc.engineNumber = _engineNum.text;
+//            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     
-    if (buttonIndex == 0) {
-        NSLog(@"0");
-    }
-    else {
-        VerifyInfoViewController *vc = [VerifyInfoViewController new];
-        vc.carNumber = [NSString stringWithFormat:@"%@%@",carNumber,_carNum.text];
-        vc.VINCode = _vinCode.text;
-        vc.engineNumber = _engineNum.text;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+//    if (buttonIndex == 0) {
+//        NSLog(@"0");
+//    }
+//    else {
+//        
+//    }
 
 }
 

@@ -117,7 +117,6 @@
 
         
         [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxBaseServiceURL ServiceName:[NSString stringWithFormat:@"%@/appsearchcarlist",baseapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
-
             
             NSLog(@"result = %@",result[@"data"]);
             [fvalertView dismiss];
@@ -377,55 +376,55 @@
         
         if ([[self.historyDescribArray firstObject] isEqualToString:@"0"])
         {
-            [self.showView1.subviews lastObject].hidden = NO;
+            ((UIView *)[self.showView1.subviews lastObject]).hidden = NO;
             [self.describeData removeAllObjects];
             [self.describeData addObject:self.dataSource[0]];
         }
         else if ([[self.historyDescribArray firstObject] isEqualToString:@"1"])
         {
-            [self.showView2.subviews lastObject].hidden = NO;
+            ((UIView *)[self.showView2.subviews lastObject]).hidden = NO;
             [self.describeData removeAllObjects];
             [self.describeData addObject:self.dataSource[1]];
         }
         else if ([[self.historyDescribArray firstObject] isEqualToString:@"2"])
         {
-            [self.showView3.subviews lastObject].hidden = NO;
+            ((UIView *)[self.showView3.subviews lastObject]).hidden = NO;
             [self.describeData removeAllObjects];
             [self.describeData addObject:self.dataSource[2]];
         }
         else if ([[self.historyDescribArray firstObject] isEqualToString:@"3"])
         {
-            [self.showView4.subviews lastObject].hidden = NO;
+            ((UIView *)[self.showView4.subviews lastObject]).hidden = NO;
             [self.describeData removeAllObjects];
             [self.describeData addObject:self.dataSource[3]];
         }
         else if ([[self.historyDescribArray firstObject] isEqualToString:@"4"])
         {
-            [self.showView5.subviews lastObject].hidden = NO;
+            ((UIView *)[self.showView5.subviews lastObject]).hidden = NO;
             [self.describeData removeAllObjects];
             [self.describeData addObject:self.dataSource[4]];
         }
         else if ([[self.historyDescribArray firstObject] isEqualToString:@"5"])
         {
-            [self.showView6.subviews lastObject].hidden = NO;
+            ((UIView *)[self.showView6.subviews lastObject]).hidden = NO;
             [self.describeData removeAllObjects];
             [self.describeData addObject:self.dataSource[5]];
         }
         else if ([[self.historyDescribArray firstObject] isEqualToString:@"6"])
         {
-            [self.showView7.subviews lastObject].hidden = NO;
+            ((UIView *)[self.showView7.subviews lastObject]).hidden = NO;
             [self.describeData removeAllObjects];
             [self.describeData addObject:self.dataSource[6]];
         }
         else if ([[self.historyDescribArray firstObject] isEqualToString:@"7"])
         {
-            [self.showView8.subviews lastObject].hidden = NO;
+            ((UIView *)[self.showView8.subviews lastObject]).hidden = NO;
             [self.describeData removeAllObjects];
             [self.describeData addObject:self.dataSource[7]];
         }
         else
         {
-            [self.showView9.subviews lastObject].hidden = NO;
+            ((UIView *)[self.showView9.subviews lastObject]).hidden = NO;
             [self.describeData removeAllObjects];
             [self.describeData addObject:self.dataSource[8]];
             destextView.text = [self.historyDescribArray lastObject];
