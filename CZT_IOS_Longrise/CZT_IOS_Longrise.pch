@@ -60,10 +60,16 @@
 //#define WXServiceURL [NSString stringWithFormat:@"%@",@"http://192.168.4.188:83/LCIP/restservices/"]
 
 //业务服务
-#define WXServiceURL [NSString stringWithFormat:@"%@",@"http://202.43.147.36:71/restservices/"]
+#define WXServiceURL [NSString stringWithFormat:@"%@",@"http://220.231.252.14/restservices/"]
 
 //基础服务
-#define WXBaseServiceURL [NSString stringWithFormat:@"%@",@"http://202.43.147.36:71/restservices/"]
+#define WXBaseServiceURL [NSString stringWithFormat:@"%@",@"http://220.231.252.14/restservices/"]
+
+//业务服务外网
+//#define WXServiceURL [NSString stringWithFormat:@"%@",@"http://202.43.147.36:71/restservices/"]
+
+//基础服务外网
+//#define WXBaseServiceURL [NSString stringWithFormat:@"%@",@"http://202.43.147.36:71/restservices/"]
 
 #define VersionCode @"5"
 
@@ -93,7 +99,8 @@
 
 //=============服务所属类型名称=============
 //基础服务
-#define appbase @"appbase"
+//#define appbase @"appbase"
+#define appbase @"baseapp"
 
 //快处快赔
 #define kckpdecanrest @"kckpdecanrest"
@@ -103,8 +110,8 @@
 
 //维修业务
 #define lciprest @"lciprest"
-//#define baseapp @"baseapp"
-#define baseapp @"appbase"
+#define baseapp @"baseapp"
+//#define baseapp @"appbase"
 #define businessapp @"businessapp"
 #define lcipministryrest @"lcipministryrest"
 #define businessapprests @"businessapprests"

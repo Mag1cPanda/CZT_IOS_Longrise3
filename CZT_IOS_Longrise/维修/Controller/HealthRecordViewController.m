@@ -74,7 +74,7 @@
     [bean setValue:userflag forKey:@"userflag"];
     [bean setValue:token forKey:@"token"];
     [bean setValue:[NSNumber numberWithInteger:page] forKey:@"pagenum"];
-    [bean setValue:@"5" forKey:@"pagesize"];
+    [bean setValue:@"20" forKey:@"pagesize"];
     [bean setValue:_carNo forKey:@"carno"];
     [bean setValue:@"420100000000000000" forKey:@"areaid"];
     

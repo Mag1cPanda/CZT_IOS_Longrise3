@@ -47,7 +47,7 @@
     [rightBtn addTarget:self action:@selector(addCar) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     
-    table = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStyleGrouped];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
@@ -112,11 +112,9 @@
     hud.labelText = @"正在加载";
     
     NSString *url = [NSString stringWithFormat:@"%@%@/",[Globle getInstance].wxBaseServiceURL,baseapp];
-   // NSLog(@"url%@",url);
     [[Globle getInstance].service requestWithServiceIP:url ServiceName:@"appsearchcarlist" params:carBean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
         
         [hud hide:YES afterDelay:0];
-//        NSLog(@"result%@",result);
         if (nil != result) {
             NSDictionary *bigDic = result;
             
@@ -127,7 +125,7 @@
                 if ([bigDic[@"restate"] isEqualToString:@"1"]) {
                     
                     NSString *json = [Util objectToJson:result];
-//                    NSLog(@"CarManage车辆数据%@",json);
+                    NSLog(@"CarManage车辆数据%@",json);
                     wxModel= [[WXModel alloc]initWithString:json error:nil];
                     //    NSLog(@"CarManage车辆模型个数%ld",wxModel.data.count);
                     [carDataArray addObjectsFromArray:wxModel.data];

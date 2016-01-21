@@ -52,7 +52,7 @@
     header.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backg"]];
     [backView addSubview:header];
     
-    self.dataSource = @[@"车辆管理",@"修改密码",@"系统设置",@"退出登录"];
+    self.dataSource = @[@"车辆管理",@"修改密码",@"个人信息",@"退出登录"];
     self.hometabView = [[UITableView alloc]initWithFrame:CGRectMake(0, 120, ScreenWidth, ScreenHeight-120) style:UITableViewStylePlain];
     self.hometabView.backgroundColor = BackColor;
     self.hometabView.delegate = self;

@@ -145,6 +145,12 @@
         NSString *restate = [dic objectForKey:@"restate"];
         if([@"1" isEqualToString:restate])
         {
+            
+            //登录成功发送通知，让维修页面加载数据
+            NSNotification *notification = [NSNotification notificationWithName:@"isLogin" object:nil userInfo:nil];
+            //发送通知
+            [[NSNotificationCenter defaultCenter]postNotification:notification];
+            
             //登陆成功
             [Globle getInstance].loginInfoDic = [dic objectForKey:@"data"];
             if(nil != [Globle getInstance].loginInfoDic)

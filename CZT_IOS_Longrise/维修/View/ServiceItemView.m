@@ -21,6 +21,7 @@
         
         _itemLab = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxY(_icon.frame)+5, frame.size.height/2-10, 200, 21)];
         _itemLab.text = @"Text";
+        _itemLab.textColor = [UIColor darkGrayColor];
         [self addSubview:_itemLab];
     }
     return self;

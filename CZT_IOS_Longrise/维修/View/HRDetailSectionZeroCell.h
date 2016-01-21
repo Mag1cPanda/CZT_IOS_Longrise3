@@ -17,7 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *mileageLab;//里程
 @property (weak, nonatomic) IBOutlet UILabel *faultLab;//故障描述
-@property (weak, nonatomic) IBOutlet UILabel *reasonLab;//故障原因
+@property (weak, nonatomic) IBOutlet UITextView *reasonLab;//故障原因
 @property (weak, nonatomic) IBOutlet UILabel *numberLab;//结算编号
 @property (weak, nonatomic) IBOutlet UILabel *guaranteeLab;//质保日期
 

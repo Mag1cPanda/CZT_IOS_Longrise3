@@ -17,7 +17,6 @@
 
 @property (nonatomic, strong) UIView *foregroundStarView;
 @property (nonatomic, strong) UIView *backgroundStarView;
-
 @property (nonatomic, assign) NSInteger numberOfStars;
 
 @end

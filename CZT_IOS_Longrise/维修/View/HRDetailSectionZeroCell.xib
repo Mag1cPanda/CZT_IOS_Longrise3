@@ -64,13 +64,6 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fCg-ts-hCk">
-                        <rect key="frame" x="16" y="275" width="143" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zDg-G2-6Q7">
                         <rect key="frame" x="16" y="339" width="143" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -89,6 +82,14 @@
                         <rect key="frame" x="16" y="27" width="260" height="84"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </scrollView>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="-" textAlignment="natural" id="xsl-Cx-C00">
+                        <rect key="frame" x="16" y="272" width="288" height="42"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -97,7 +98,7 @@
                 <outlet property="itemScroll" destination="bNW-Fr-sH3" id="X8p-kg-Ryv"/>
                 <outlet property="mileageLab" destination="xdB-BA-VoU" id="P47-Qc-u7w"/>
                 <outlet property="numberLab" destination="zDg-G2-6Q7" id="GBp-Wt-5W4"/>
-                <outlet property="reasonLab" destination="fCg-ts-hCk" id="QuO-rd-4Ty"/>
+                <outlet property="reasonLab" destination="xsl-Cx-C00" id="ay5-dq-qxD"/>
             </connections>
             <point key="canvasLocation" x="400" y="262"/>
         </tableViewCell>

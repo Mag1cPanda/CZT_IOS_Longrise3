@@ -13,8 +13,6 @@
 		4C26CBF11C3FD6B00047850C /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C26CBF01C3FD6B00047850C /* SecondViewController.xib */; };
 		4C26CBF31C3FD75A0047850C /* FirstGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C26CBF21C3FD75A0047850C /* FirstGuideViewController.xib */; };
 		4C3777201C47A3E600E411B7 /* ImgCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C37771F1C47A3E600E411B7 /* ImgCodeView.m */; };
-		4C377CD01C47BB2900E411B7 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C377AC51C47BB2800E411B7 /* RegViewController.m */; };
-		4C377CD11C47BB2900E411B7 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C377AC61C47BB2800E411B7 /* RegViewController.xib */; };
 		4C7371461C3FAFE1009ADF5F /* Parties.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7371401C3FAFE1009ADF5F /* Parties.storyboard */; };
 		4C7371471C3FAFE1009ADF5F /* PartiesConcernedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7371421C3FAFE1009ADF5F /* PartiesConcernedController.m */; };
 		4C7371481C3FAFE1009ADF5F /* Verify.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7371431C3FAFE1009ADF5F /* Verify.storyboard */; };
@@ -263,7 +261,6 @@
 		851540E41C3DFA150007EA8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 851540E31C3DFA150007EA8A /* Main.storyboard */; };
 		8517E05F1C3DF3AC008443AE /* QRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8517E0561C3DF3AC008443AE /* QRadioButton.m */; };
 		8517E0601C3DF3AC008443AE /* radio_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E0571C3DF3AC008443AE /* radio_checked.png */; };
-		8517E0611C3DF3AC008443AE /* radio_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E0581C3DF3AC008443AE /* radio_checked@2x.png */; };
 		8517E0621C3DF3AC008443AE /* radio_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E0591C3DF3AC008443AE /* radio_unchecked.png */; };
 		8517E0631C3DF3AC008443AE /* radio_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E05A1C3DF3AC008443AE /* radio_unchecked@2x.png */; };
 		8517E0641C3DF3AC008443AE /* Select.png in Resources */ = {isa = PBXBuildFile; fileRef = 8517E05B1C3DF3AC008443AE /* Select.png */; };
@@ -304,6 +301,8 @@
 		85B2C60C1C20FF7700C28C03 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B2C60B1C20FF7700C28C03 /* libcurl.a */; };
 		85B2C60E1C20FF7C00C28C03 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B2C60D1C20FF7C00C28C03 /* libmp3lame.a */; };
 		85D1F8751C487AC8009F37C2 /* ServiceItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D1F8741C487AC8009F37C2 /* ServiceItemView.m */; };
+		85FBE06B1C4C7E2D00D247E1 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FBE0691C4C7E2D00D247E1 /* RegViewController.m */; };
+		85FBE06C1C4C7E2D00D247E1 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85FBE06A1C4C7E2D00D247E1 /* RegViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -322,9 +321,6 @@
 		4C26CBF21C3FD75A0047850C /* FirstGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstGuideViewController.xib; sourceTree = "<group>"; };
 		4C37771E1C47A3E600E411B7 /* ImgCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgCodeView.h; sourceTree = "<group>"; };
 		4C37771F1C47A3E600E411B7 /* ImgCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgCodeView.m; sourceTree = "<group>"; };
-		4C377AC41C47BB2800E411B7 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegViewController.h; path = "注册/RegViewController.h"; sourceTree = "<group>"; };
-		4C377AC51C47BB2800E411B7 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegViewController.m; path = "注册/RegViewController.m"; sourceTree = "<group>"; };
-		4C377AC61C47BB2800E411B7 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegViewController.xib; path = "注册/RegViewController.xib"; sourceTree = "<group>"; };
 		4C7371401C3FAFE1009ADF5F /* Parties.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Parties.storyboard; sourceTree = "<group>"; };
 		4C7371411C3FAFE1009ADF5F /* PartiesConcernedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartiesConcernedController.h; sourceTree = "<group>"; };
 		4C7371421C3FAFE1009ADF5F /* PartiesConcernedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartiesConcernedController.m; sourceTree = "<group>"; };
@@ -833,6 +829,9 @@
 		85B2C60D1C20FF7C00C28C03 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		85D1F8731C487AC8009F37C2 /* ServiceItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemView.h; sourceTree = "<group>"; };
 		85D1F8741C487AC8009F37C2 /* ServiceItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemView.m; sourceTree = "<group>"; };
+		85FBE0681C4C7E2D00D247E1 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegViewController.h; path = "注册/RegViewController.h"; sourceTree = "<group>"; };
+		85FBE0691C4C7E2D00D247E1 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegViewController.m; path = "注册/RegViewController.m"; sourceTree = "<group>"; };
+		85FBE06A1C4C7E2D00D247E1 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegViewController.xib; path = "注册/RegViewController.xib"; sourceTree = "<group>"; };
 		9C18996D5EA157E98A718B6F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B05BC011BC21E753840F6EB4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1560,9 +1559,9 @@
 		58FC220C1C0D4B0D006698B5 /* 注册 */ = {
 			isa = PBXGroup;
 			children = (
-				4C377AC41C47BB2800E411B7 /* RegViewController.h */,
-				4C377AC51C47BB2800E411B7 /* RegViewController.m */,
-				4C377AC61C47BB2800E411B7 /* RegViewController.xib */,
+				85FBE0681C4C7E2D00D247E1 /* RegViewController.h */,
+				85FBE0691C4C7E2D00D247E1 /* RegViewController.m */,
+				85FBE06A1C4C7E2D00D247E1 /* RegViewController.xib */,
 			);
 			path = "注册";
 			sourceTree = "<group>";
@@ -1964,6 +1963,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8517E0621C3DF3AC008443AE /* radio_unchecked.png in Resources */,
+				85FBE06C1C4C7E2D00D247E1 /* RegViewController.xib in Resources */,
 				58DC346E1C15456600644E3C /* UserGuideViewController.xib in Resources */,
 				85537A121C3BA5B100B940BE /* ComplainViewController.xib in Resources */,
 				85537A141C3BA5B100B940BE /* EvaluateViewController.xib in Resources */,
@@ -2019,7 +2019,6 @@
 				58DC347C1C15464300644E3C /* TrafficSituationViewController.xib in Resources */,
 				58DC34861C15469800644E3C /* BreakRulesViewController.xib in Resources */,
 				4C7371581C3FB0C7009ADF5F /* SGCLViewController.xib in Resources */,
-				4C377CD11C47BB2900E411B7 /* RegViewController.xib in Resources */,
 				4C73715A1C3FB0C7009ADF5F /* WXTSViewController.xib in Resources */,
 				6F4825931C296BD300BCE7F6 /* AccidentCar.storyboard in Resources */,
 				855127201C2546B9001D2778 /* LoginViewController.xib in Resources */,
@@ -2290,6 +2289,7 @@
 				4C73715B1C3FB0C7009ADF5F /* WXTSViewController2.m in Sources */,
 				58046F4F1C2040AC00F59365 /* SignViewController.m in Sources */,
 				58046F6B1C20420B00F59365 /* Message.m in Sources */,
+				85FBE06B1C4C7E2D00D247E1 /* RegViewController.m in Sources */,
 				58046E9F1C203FA200F59365 /* QYDetailViewController.m in Sources */,
 				6F36CFD71C47855B0047A30B /* CustomPickerView.m in Sources */,
 				58039FD91C09AFD20093079E /* PhoneViewController.m in Sources */,
@@ -2310,9 +2310,7 @@
 				58046FD91C2047BE00F59365 /* NSArray+Sort.m in Sources */,
 				58046FAC1C20456A00F59365 /* MKAnnotationView+WebCache.m in Sources */,
 				58046F4B1C2040AC00F59365 /* PJRSignatureView.m in Sources */,
-				58046E9D1C203FA200F59365 /* HRDetailViewController.m in Sources */,
 				58119FDA1C490029009C8276 /* AppointmentViewController.m in Sources */,
-				6F48255B1C29571300BCE7F6 /* JSONModelArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2465,7 +2463,7 @@
 					"-framework",
 					"\"SystemConfiguration\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.longrise.CZTIOSLongrise;
+				PRODUCT_BUNDLE_IDENTIFIER = com.longrise.JTBBJJT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2503,7 +2501,7 @@
 					"-framework",
 					"\"SystemConfiguration\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.longrise.CZTIOSLongrise;
+				PRODUCT_BUNDLE_IDENTIFIER = com.longrise.JTBBJJT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

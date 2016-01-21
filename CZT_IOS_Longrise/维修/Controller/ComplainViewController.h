@@ -10,7 +10,7 @@
 #import "HRDetailHeaderView.h"
 #import "HRDataModel.h"
 #import "HRDetailDataModel.h"
-
+#import "EvaluateModel.h"
 //定义一个代码块，用来返回健康档案详情后刷新页面数据
 typedef void (^RefreshDataBlock)(BOOL);
 

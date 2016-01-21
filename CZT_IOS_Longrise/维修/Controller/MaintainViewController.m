@@ -63,13 +63,33 @@ LoginControllerClose>
 
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showWarmTip) name:NotificationNameForLogout object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTableAndLoadData) name:@"isLogin" object:nil];
+}
+
+- (void)showTableAndLoadData{
+    
+//    [qyBackView removeFromSuperview];
+//    [wxBackView removeFromSuperview];
+    qyBackView.hidden = YES;
+    wxBackView.hidden = YES;
+    qyTable.hidden = NO;
+    wxTable.hidden = NO;
+//    [self initTableView];
+    [self loadEnterPriseData];
+    [self loadCarData];
+    
 }
 
 - (void)showWarmTip{
 
-    [qyTable removeFromSuperview];
-    [wxTable removeFromSuperview];
-    [self addWarmTip];
+//    [qyTable removeFromSuperview];
+//    [wxTable removeFromSuperview];
+    qyTable.hidden = YES;
+    wxTable.hidden = YES;
+    qyBackView.hidden = NO;
+    wxBackView.hidden = NO;
+//    [self addWarmTip];
 }
 
 - (void)viewDidLoad {
@@ -92,7 +112,6 @@ LoginControllerClose>
     logoView.image = [UIImage imageNamed:@"sub_logo"];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:logoView];
     
-    
     [self initScroll];
     
     [self initSegmentControl];
@@ -104,6 +123,11 @@ LoginControllerClose>
     }
     else{
         [self initTableView];
+        
+        [self addWarmTip];
+        qyBackView.hidden = YES;
+        wxBackView.hidden = YES;
+        
         [self loadEnterPriseData];
         [self loadCarData];
     }
