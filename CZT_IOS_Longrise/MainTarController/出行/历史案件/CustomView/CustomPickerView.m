@@ -65,6 +65,13 @@
     
     if ((_reasonName!=nil) && (_reasonCode!=nil)) {
          [self.delegate getSelectReasonName:_reasonName andReasonCode:_reasonCode];
+    }else{
+        if (self.dataArray.count > 0) {
+            NSDictionary *dic = _dataArray[0];
+            _reasonName = dic[@"reasonname"];
+            _reasonCode = dic[@"reasoncode"];
+            [self.delegate getSelectReasonName:_reasonName andReasonCode:_reasonCode];
+        }
     }
    
     [UIView animateWithDuration:0.3 animations:^{

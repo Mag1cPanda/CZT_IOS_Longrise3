@@ -11,6 +11,10 @@
 
 @protocol WXTableViewCellDelegate <NSObject>
 
+@optional
+
+-(void)pushToNextViewControllerWith:(NSString *)carNo and:(NSString *)VINCode and:(NSString *)engineNumber and:(NSString *)isApprove;
+
 -(void)pushToNextViewControllerWith:(NSString *)carNo;
 
 @end
@@ -25,6 +29,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *carUseage;
 @property (weak, nonatomic) IBOutlet UIButton *checkHealth;
 @property (copy, nonatomic) NSString *CellCarNo;
+@property (copy, nonatomic) NSString *VINCode;
+@property (copy, nonatomic) NSString *engineNumber;
+@property (copy, nonatomic) NSString *isApprove;
+@property (weak, nonatomic) IBOutlet UIButton *carVarifyStateButton;
 @property (assign,nonatomic) id <WXTableViewCellDelegate> delegate;
 
 -(void)setUIWithInfo:(CarModel *)model;

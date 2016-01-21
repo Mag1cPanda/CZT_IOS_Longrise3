@@ -87,12 +87,26 @@
                             <action selector="btnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mHn-d0-p9o"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jfl-TR-ryC">
+                        <rect key="frame" x="186" y="11" width="46" height="20"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="已认证">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="varifyBtnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RSm-fa-ZCQ"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="carModel" destination="ukt-eK-s5o" id="ent-m5-hF2"/>
                 <outlet property="carType" destination="R4e-zk-19I" id="nt6-aS-zTK"/>
                 <outlet property="carUseage" destination="U45-BG-VSD" id="vjC-rG-TPX"/>
+                <outlet property="carVarifyStateButton" destination="jfl-TR-ryC" id="aT6-X1-Lqa"/>
                 <outlet property="checkHealth" destination="YFa-0K-HZt" id="VeP-0H-OG9"/>
                 <outlet property="icon" destination="q4s-1p-0Ho" id="CH4-qf-88b"/>
                 <outlet property="license" destination="i7j-c9-4nf" id="8XI-3V-LWh"/>

@@ -20,7 +20,7 @@
     NSArray *sectionTitle;
     NSArray *cellTitle;
     NSMutableArray *dataList;
-    FVCustomAlertView *alertView;
+    FVCustomAlertView *FVAlertView;
     NSString *companyName;
     UIAlertView *warnAlert;
     
@@ -203,14 +203,14 @@
 #pragma mark - 确认选择
 -(void)confirmSelect{
     
-    alertView = [[FVCustomAlertView alloc] init];
-    [alertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
-    [self.view addSubview:alertView];
+    FVAlertView = [[FVCustomAlertView alloc] init];
+    [FVAlertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:FVAlertView];
     
     if (companyName == nil) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"验证车辆信息失败!" message:@"请选择答案!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
-        [alertView dismiss];
+        [FVAlertView dismiss];
         return;
     }
     
@@ -243,7 +243,7 @@
             [alert show];
         }
       
-        [alertView dismiss];
+        [FVAlertView dismiss];
     }];
     
 }
@@ -330,7 +330,9 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-   // [self.navigationController popViewControllerAnimated:YES];
+    if (warnAlert == alertView) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 /*

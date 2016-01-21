@@ -10,7 +10,7 @@
 #import "PZQZViewController.h"
 #import "AppDelegate.h"
 
-@interface WXTSViewController2 ()
+@interface WXTSViewController2 ()<UIAlertViewDelegate>
 
 @end
 
@@ -59,7 +59,16 @@
     }
     else if(btn == self.repCaseBtn)
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://122"]];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"你要拨打112吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://112"]];
     }
 }
 

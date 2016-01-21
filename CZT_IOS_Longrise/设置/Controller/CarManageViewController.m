@@ -15,6 +15,9 @@
 #import "WXModel.h"
 #import "CarModel.h"
 #import <MJRefresh.h>
+#import "VerifyInfoViewController.h"
+#import "FVCustomAlertView.h"
+
 @interface CarManageViewController ()
 <UITableViewDataSource,UITableViewDelegate,WXTableViewCellDelegate>
 {
@@ -24,6 +27,7 @@
     NSInteger carCount;
     NSMutableDictionary *carBean;
     WXModel *wxModel;
+    FVCustomAlertView *FVAlertView;
 }
 @end
 
@@ -187,10 +191,22 @@
 //    [cell.checkHealth addTarget:self action:@selector(jumpToHealth) forControlEvents:UIControlEventTouchUpInside];
     if (carDataArray.count > indexPath.section) {
         CarModel *model = carDataArray[indexPath.section];
-        NSLog(@"%@",model.cartype);
+        //NSLog(@"------%@",model);
         cell.CellCarNo = model.carno;
+        cell.carVarifyStateButton.hidden = NO;
         cell.carType.text = model.cartype;
+        cell.VINCode = model.identificationnum;
+        cell.engineNumber = model.enginenumber;
+        cell.isApprove = model.isapprove;
         [cell setUIWithInfo:model];
+        if ([model.isapprove isEqualToString:@"1"]) {
+            [cell.carVarifyStateButton setTitle:@"已验证" forState:UIControlStateNormal];
+            cell.carVarifyStateButton.backgroundColor = [UIColor colorWithRed:255/255.0 green:125/255.0 blue:4/255.0 alpha:1];
+            
+        }else{
+            [cell.carVarifyStateButton setTitle:@"未验证" forState:UIControlStateNormal];
+            
+        }
     }
     return cell;
     
@@ -230,6 +246,82 @@
     HealthRecordViewController *vc = [HealthRecordViewController new];
     vc.carNo = carNo;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)pushToNextViewControllerWith:(NSString *)carNo and:(NSString *)VINCode and:(NSString *)engineNumber and:(NSString *)isApprove{
+    
+    if ([isApprove isEqualToString:@"1"]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"车辆已经验证了!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    FVAlertView = [[FVCustomAlertView alloc] init];
+    [FVAlertView showAlertWithonView:self.view Width:100 height:100 contentView:nil cancelOnTouch:false Duration:-1];
+    [self.view addSubview:FVAlertView];
+    
+    NSMutableArray * dataList = [NSMutableArray array];
+    
+    NSDictionary *bigDic = [Globle getInstance].loginInfoDic;
+    NSDictionary *userDic = [bigDic objectForKey:@"userinfo"];
+    NSString *token = [bigDic objectForKey:@"token"];
+    // NSString *str = @"WDDFH3DB0AJ541602";
+    
+    NSMutableDictionary *bean = [NSMutableDictionary dictionary];
+    [bean setValue:userDic[@"userflag"] forKey:@"userflag"];
+    [bean setValue:token forKey:@"token"];
+    [bean setValue:@"420111111111111111" forKey:@"areaid"];
+    [bean setValue:carNo forKey:@"carno"];
+    [bean setValue:VINCode forKey:@"carvin"];
+    //  [bean setValue:_engineNumber forKey:@"enginenumber"];
+    [bean setValue:engineNumber forKey:@"enginenumber"];
+    
+    [[Globle getInstance].service requestWithServiceIP:[Globle getInstance].wxSericeURL ServiceName:[NSString stringWithFormat:@"%@/appcarapprove",businessapp] params:bean httpMethod:@"POST" resultIsDictionary:YES completeBlock:^(id result) {
+        if (nil != result) {
+            NSDictionary *bigDic = result;
+            if ([bigDic[@"restate"]isEqualToString:@"1"]) {
+                if (![bigDic[@"data"]isEqual:@""]) {
+                    NSArray *array = bigDic[@"data"];
+                    
+                    for (NSDictionary *dic in array) {
+
+                        NSString *companyname = dic[@"companyname"];
+                        NSString *address = dic[@"address"];
+                        NSString *totalString = [NSString stringWithFormat:@"%@(%@)",companyname,address];
+                        [dataList addObject:totalString];
+                    }
+                    VerifyInfoViewController *vc = [VerifyInfoViewController new];
+                    vc.carNumber = carNo;
+                    vc.VINCode = VINCode;
+                    vc.engineNumber = engineNumber;
+                    vc.dataArray = [NSMutableArray array];
+                    vc.dataArray = dataList;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else{
+                    
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"没有查询到车辆维修记录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
+                
+                [FVAlertView dismiss];
+                
+            }else if ([bigDic[@"restate"]isEqualToString:@"-4"]){
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"登陆失效，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"没有查询到车辆维修记录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+                [FVAlertView dismiss];
+            }
+            
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"数据请求失败，请检查网络是否连接！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+            [FVAlertView dismiss];
+        }
+        
+    }];
+    
 }
 
 /*

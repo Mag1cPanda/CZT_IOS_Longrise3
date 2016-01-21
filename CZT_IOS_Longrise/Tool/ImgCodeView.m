@@ -7,6 +7,7 @@
 //
 
 #import "ImgCodeView.h"
+#import "UIImageView+WebCache.h"
 
 @implementation ImgCodeView
 
@@ -15,7 +16,10 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        [self loadImgCodeView];
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+           [self loadImgCodeView];
+//        });
+        
         
         [self requestCodeView:0];
     }
@@ -74,7 +78,7 @@
          {
              if ([result[@"restate"]isEqualToString:@"1"])
              {
-                 imgCodeView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",result[@"data"][@"img"]]]]];
+                 [imgCodeView sd_setImageWithURL:[NSURL URLWithString:result[@"data"][@"img"]] placeholderImage:[UIImage imageNamed:@"unload_codeView"]];
                  imgCodeView.hidden = NO;
                  loadCodeView.hidden = YES;
                  

@@ -26,10 +26,15 @@
     [_delegate pushToNextViewControllerWith:_CellCarNo];
 }
 
+- (IBAction)varifyBtnClicked:(id)sender {
+    [_delegate pushToNextViewControllerWith:_CellCarNo and:_VINCode and:_engineNumber and:_isApprove];
+}
 
 - (void)awakeFromNib {
     // Initialization code
     [AppDelegate storyBoradAutoLay:self];
+    self.carVarifyStateButton.layer.masksToBounds = YES;
+    self.carVarifyStateButton.layer.cornerRadius = 5;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

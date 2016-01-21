@@ -211,7 +211,7 @@
 - (IBAction)sureClicked:(id)sender {
     
     if (select == 100) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请评价！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请选择其中一项!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         return;
     }

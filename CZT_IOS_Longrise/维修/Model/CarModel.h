@@ -26,4 +26,5 @@
 @property (nonatomic, copy) NSString *cartype;
 @property (nonatomic, copy) NSString *carno;
 @property (nonatomic, copy) NSString *usertypepre;
+@property (nonatomic, copy) NSString *isapprove;
 @end
