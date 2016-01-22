@@ -13,9 +13,22 @@
 
 -(void)setUIWithInfo:(EvaluateResultModel *)model{
     
+    //头像
     [self.icon sd_setImageWithURL:[NSURL URLWithString:model.userphoto]];
-    self.nameLab.text = model.showname;
+    //名字
+    if (![model.showname isKindOfClass:[NSString class]]) {
+        self.nameLab.text = @"匿名";
+    }
+    else{
+        //隐私保护，隐藏中间字符
+        NSMutableString *mStr = [NSMutableString stringWithString:model.showname];
+        NSRange range = NSMakeRange(1, mStr.length-2);
+        [mStr replaceCharactersInRange:range withString:@"**"];
+        self.nameLab.text = mStr;
+    }
+    //时间
     self.timestamp.text = model.evaluatetime;
+    //总体评价
     if ([model.evaluatetotle integerValue] == 1) {
         self.evaluate.image = [UIImage imageNamed:@"hao"];
     }
@@ -25,6 +38,7 @@
     else{
        self.evaluate.image = [UIImage imageNamed:@"cha"];
     }
+    //评价内容
     self.content.text = model.evaluatetotledetails;
 }
 

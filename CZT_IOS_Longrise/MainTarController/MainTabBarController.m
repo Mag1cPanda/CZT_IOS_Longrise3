@@ -13,7 +13,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    NSArray *names = @[@"出行",@"维修",@"设置"];
+    NSArray *names = @[@"事故处理",@"维修",@"我的"];
     NSArray *imgAry = @[@"nav01@x2",@"nav02@x2",@"nav03@x2"];
     NSArray *selectedImgAry = @[@"nav01_on@x2",@"nav02_on@x2",@"nav03_on@x2"];
     for (int i=0; i<3; i++) {

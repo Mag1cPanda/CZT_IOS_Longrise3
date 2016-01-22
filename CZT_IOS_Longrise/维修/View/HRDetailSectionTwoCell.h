@@ -19,6 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *evaluateLab;
 @property (weak, nonatomic) IBOutlet UITextView *complainLab;
+@property (weak, nonatomic) IBOutlet UITextView *feedBack;
 
 
 -(void)setUIWithInfo:(EvaluateModel *)model;

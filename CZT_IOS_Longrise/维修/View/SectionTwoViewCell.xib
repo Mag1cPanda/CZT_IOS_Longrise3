@@ -28,13 +28,6 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Ml-d6-ixj">
-                        <rect key="frame" x="10" y="64" width="300" height="57.5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon07" id="zKX-yF-dNe">
                         <rect key="frame" x="10" y="14" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -43,10 +36,17 @@
                         <rect key="frame" x="259" y="14" width="43" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="-" textAlignment="natural" id="uRz-JS-uFt">
+                        <rect key="frame" x="10" y="64" width="300" height="58"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="content" destination="5Ml-d6-ixj" id="5kx-qi-cs5"/>
+                <outlet property="content" destination="uRz-JS-uFt" id="dz9-Zz-HYK"/>
                 <outlet property="evaluate" destination="TOq-zx-P9U" id="GJY-fQ-YyL"/>
                 <outlet property="icon" destination="zKX-yF-dNe" id="xaL-s5-ExA"/>
                 <outlet property="nameLab" destination="LmW-bM-2P1" id="GUa-O1-c2g"/>

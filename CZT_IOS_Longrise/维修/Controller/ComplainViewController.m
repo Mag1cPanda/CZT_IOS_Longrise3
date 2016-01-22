@@ -78,10 +78,10 @@
 #pragma mark - 提交投诉
 - (IBAction)submibComplain:(id)sender {
     
-    if ([_comTextView.text isEqual:@"请填写您要投诉的信息"] || _comTextView.text.length < 10) {
+    if ([_comTextView.text isEqual:@"请填写您要投诉的信息"] || _comTextView.text.length < 10 || _comTextView.text.length > 500) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"您输入的字数太少，请重新输入";
+        hud.labelText = @"您输入的字数不在范围内，请重新输入";
         [hud hide:YES afterDelay:3.0];
     }
     else{
@@ -102,10 +102,6 @@
         [bean setValue:@"420115000000000000" forKey:@"areaid"];
         [bean setValue:_dataModel.companycode forKey:@"companycode"];
         
-//        ser *evaModel = _dataModel.serviceitems;
-//        if () {
-//            <#statements#>
-//        }
         
         [bean setValue:@"0" forKey:@"flag2"];
         [bean setValue:_dataModel.Id forKey:@"lciprepairrecordid"];

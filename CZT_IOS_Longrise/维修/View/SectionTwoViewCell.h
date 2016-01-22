@@ -15,9 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UILabel *timestamp;
 @property (weak, nonatomic) IBOutlet UIImageView *evaluate;
+@property (weak, nonatomic) IBOutlet UITextView *content;
 
-@property (weak, nonatomic) IBOutlet UILabel *content;
-
+//评价图片暂时取消
 @property (weak, nonatomic) IBOutlet UIImageView *oneImg;
 @property (weak, nonatomic) IBOutlet UIImageView *twoImg;
 @property (weak, nonatomic) IBOutlet UIImageView *threeImg;

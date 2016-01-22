@@ -115,7 +115,8 @@
     NSDictionary *userdic = [bigDic objectForKey:@"userinfo"];
     NSString *token = [bigDic objectForKey:@"token"];
     NSString *userflag = [userdic objectForKey:@"userflag"];
-    NSString *areaid = [Globle getInstance].areaid;
+//    NSString *areaid = [Globle getInstance].areaid;
+    NSString *areaid = @"420100000000000000";
     
 //    NSLog(@"年份 %@",_year);
 //    NSLog(@"ID %@",_Id);
@@ -124,7 +125,7 @@
     [bean setValue:token forKey:@"token"];
     [bean setValue:areaid forKey:@"areaid"];
     [bean setValue:_Id forKey:@"id"];
-    [bean setValue:_year forKey:@"year"];
+//    [bean setValue:_year forKey:@"year"];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在加载";
@@ -138,7 +139,7 @@
         [hud hide:YES afterDelay:0];
          NSDictionary *dic = result;
         NSString *json = [Util objectToJson:result];
-//        NSLog(@"健康档案详情%@",json);
+        NSLog(@"健康档案详情%@",json);
         if ([dic[@"restate"] isEqualToString:@"1"]) {
             
             HRDetailModel *model = [[HRDetailModel alloc]initWithString:json error:nil];
@@ -291,7 +292,7 @@
     }
     else{
         
-        return 300*SCALE;
+        return 371*SCALE;
         
     }
     

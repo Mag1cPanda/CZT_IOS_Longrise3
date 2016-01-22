@@ -396,9 +396,12 @@
         [citySelectView setSelectIndex:0];
         
         [Globle getInstance].areaid = [area objectForKey:@"areaid"];
-        //为了调试，暂时写成北京的
-//        [Globle getInstance].areaid = @"110101000000000000";
+        
+        
     }
+#warning Beijing
+    //为了调试，暂时写成北京的
+    [Globle getInstance].areaid = @"110101000000000000";
     
     //设置天气和温度
     NSDictionary *weahther = [dataInfo objectForKey:@"weahther"];
@@ -450,7 +453,7 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前城市暂不支持出行业务。" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前城市赞不支持出行业务。" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles: nil];
         [alert show];
     }
     
@@ -733,7 +736,27 @@
             [UserDefaultsUtil saveNSUserDefaultsForObject:showmeg forKey:@"imageaddress"];
             [Globle getInstance].imageaddress = showmeg;
         }
-        
+        else
+        {
+#warning Beijing
+//            北京：保存地址
+            [UserDefaultsUtil saveNSUserDefaultsForObject:@"北京市朝阳区" forKey:@"imageaddress"];
+            [Globle getInstance].imageaddress = @"北京市朝阳区";
+            [Globle getInstance].imagelat = 39.832670;
+            [Globle getInstance].imagelon = 116.46037;
+            
+            
+            //上海
+//            [UserDefaultsUtil saveNSUserDefaultsForObject:@"上海市黄浦区" forKey:@"imageaddress"];
+//            [Globle getInstance].imageaddress = @"上海市黄浦区";
+//            [Globle getInstance].imagelat = 31.23;
+//            [Globle getInstance].imagelon = 121.48;
+            
+            //保存经纬度
+            [UserDefaultsUtil saveNSUserDefaultsForFloat:[Globle getInstance].imagelat forKey:@"lat"];
+            [UserDefaultsUtil saveNSUserDefaultsForFloat:[Globle getInstance].imagelon forKey:@"lon"];
+
+        }
         
         
         //开始加载菜单

@@ -40,6 +40,12 @@
     _starView4.delegate = self;
     _starView5.delegate = self;
     
+    _starView1.scorePercent = 0;
+    _starView2.scorePercent = 0;
+    _starView3.scorePercent = 0;
+    _starView4.scorePercent = 0;
+    _starView5.scorePercent = 0;
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"评价";
     
@@ -108,10 +114,16 @@
 #pragma mark - 提交投评价
 - (IBAction)submibEvaluate:(id)sender {
     
-    if ([_evaTextView.text isEqual:@"请填写您要评价的信息"] || _evaTextView.text.length < 10) {
+    if (_group.selectedIndex == 0) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"您输入的字数太少，请重新输入";
+        hud.labelText = @"请选择总体评价";
+        [hud hide:YES afterDelay:1.5];
+    }
+    else if ([_evaTextView.text isEqual:@"请填写您要评价的信息"] || _evaTextView.text.length < 10 || _evaTextView.text.length > 500) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"您输入的字数不在范围内，请重新输入";
         [hud hide:YES afterDelay:3.0];
     }
     else{
